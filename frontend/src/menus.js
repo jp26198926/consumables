@@ -7,7 +7,7 @@ export const AppMenus = {
   {
     "path": "/home",
     "label": "Home",
-    "icon": "extension",
+    "icon": "home",
     "iconcolor": "",
     "target": "",
     "submenu": []
@@ -15,7 +15,7 @@ export const AppMenus = {
   {
     "path": "/adjustments",
     "label": "Adjustments",
-    "icon": "extension",
+    "icon": "compare_arrows",
     "iconcolor": "",
     "target": "",
     "submenu": []
@@ -23,7 +23,7 @@ export const AppMenus = {
   {
     "path": "/items",
     "label": "Items",
-    "icon": "extension",
+    "icon": "bookmark_border",
     "iconcolor": "",
     "target": "",
     "submenu": []
@@ -31,7 +31,7 @@ export const AppMenus = {
   {
     "path": "/measurements",
     "label": "Measurements",
-    "icon": "extension",
+    "icon": "crop",
     "iconcolor": "",
     "target": "",
     "submenu": []
@@ -39,7 +39,7 @@ export const AppMenus = {
   {
     "path": "/stocks",
     "label": "Stocks",
-    "icon": "extension",
+    "icon": "filter_1",
     "iconcolor": "",
     "target": "",
     "submenu": []
@@ -47,7 +47,7 @@ export const AppMenus = {
   {
     "path": "/types",
     "label": "Types",
-    "icon": "extension",
+    "icon": "fullscreen",
     "iconcolor": "",
     "target": "",
     "submenu": []
@@ -55,7 +55,7 @@ export const AppMenus = {
   {
     "path": "/action_types",
     "label": "Action Types",
-    "icon": "extension",
+    "icon": "check",
     "iconcolor": "",
     "target": "",
     "submenu": []
