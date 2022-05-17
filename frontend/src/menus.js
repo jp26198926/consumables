@@ -13,6 +13,14 @@ export const AppMenus = {
     "submenu": []
   },
   {
+    "path": "/stocks",
+    "label": "Stocks",
+    "icon": "filter_1",
+    "iconcolor": "",
+    "target": "",
+    "submenu": []
+  },
+  {
     "path": "/adjustments",
     "label": "Adjustments",
     "icon": "compare_arrows",
@@ -32,14 +40,6 @@ export const AppMenus = {
     "path": "/measurements",
     "label": "Measurements",
     "icon": "crop",
-    "iconcolor": "",
-    "target": "",
-    "submenu": []
-  },
-  {
-    "path": "/stocks",
-    "label": "Stocks",
-    "icon": "filter_1",
     "iconcolor": "",
     "target": "",
     "submenu": []
