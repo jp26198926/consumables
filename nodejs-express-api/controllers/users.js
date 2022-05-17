@@ -137,7 +137,6 @@ router.get(['/view/:recid'], async (req, res) => {
  */
 router.post('/add/' , 
 	[
-		body('name').not().isEmpty(),
 		body('username').not().isEmpty(),
 		body('email').not().isEmpty().isEmail(),
 		body('password').not().isEmpty(),
@@ -160,6 +159,14 @@ router.post('/add/' ,
 			modeldata.photo = fileInfo.filepath;
 		}
 		modeldata.password = utils.passwordHash(modeldata.password);
+		let usernameCount = await Users.count({ where:{ 'username': modeldata.username } });
+		if(usernameCount > 0){
+			return res.badRequest(`${modeldata.username} already exist.`);
+		}
+		let emailCount = await Users.count({ where:{ 'email': modeldata.email } });
+		if(emailCount > 0){
+			return res.badRequest(`${modeldata.email} already exist.`);
+		}
 		
 		//save Users record
 		let record = await Users.create(modeldata);
@@ -210,7 +217,6 @@ router.post('/edit/:recid' ,
 	[
 		body('name').optional({nullable: true}).not().isEmpty(),
 		body('username').optional({nullable: true}).not().isEmpty(),
-		body('email').optional({nullable: true}).not().isEmpty().isEmail(),
 		body('telelphone').optional(),
 		body('photo').optional(),
 	]
@@ -228,6 +234,10 @@ router.post('/edit/:recid' ,
 		if(modeldata.photo !== undefined) {
 			let fileInfo = utils.moveUploadedFiles(modeldata.photo, "photo");
 			modeldata.photo = fileInfo.filepath;
+		}
+		let usernameCount = await Users.count({where:{'username': modeldata.username, 'id': {[Op.ne]: recid} }});
+		if(usernameCount > 0){
+			return res.badRequest(`${modeldata.username} already exist.`);
 		}
 		let query = {};
 		let where = {};

@@ -1,50 +1,43 @@
 
+	
 <template>
 	<div class="container">
 		<div class="row justify-center">
-			<div class="col-md-5 col-12">
+			<div class="col-md-7 col-12">
 				<div class="text-h5 text-bold q-my-md">Change Password</div>
 				<ValidationObserver ref="observer" v-slot="{ invalid }" tag="form" @submit.prevent="startSaveRecord()">
-					<ValidationProvider :rules="{required:true}" name="Old Password" v-slot="{ errors, invalid, validated }">
+					<ValidationProvider :rules="{required:true}" name="Current Password" v-slot="{ errors, invalid, validated }">
 						<q-input 
-							dense
-							outlined
-							label="Old Password" 
-							placeholder="Your New Password" 
-							v-model="formData.oldPassword" 
-							name="password"
+							outlined dense 
+							label="Current Password" 
+							placeholder="Current Password" 
+							v-model="formData.oldpassword" 
 							type="password" 
 							:error="invalid && validated" 
 							:error-message="errors[0]" />
 					</ValidationProvider>
-				
 					<ValidationProvider :rules="{required:true}" name="New Password" v-slot="{ errors, invalid, validated }">
 						<q-input 
-							dense
-							outlined
-							hint="Hints : Not Less Than 6 Characters" 
+							outlined dense 
 							label="New Password" 
-							placeholder="Your New Password" 
-							v-model="formData.password"
-							name="password"
+							placeholder="New Password" 
+							v-model="formData.newpassword"
 							type="password" 
 							:error="invalid && validated" 
 							:error-message="errors[0]" />
 					</ValidationProvider>
-					<ValidationProvider :rules="{required:true}" name="Password Confirm" v-slot="{ errors, invalid, validated }">
+					<ValidationProvider :rules="{required:true, is: formData.newpassword}" name="Confirm new password" v-slot="{ errors, invalid, validated }">
 						<q-input 
-							dense
-							outlined
+							outlined dense 
 							label="Confirm new password" 
-							placeholder="Confirm Password" 
-							v-model="formData.confirmPassword" 
-							name="cpassword"  
+							placeholder="Confirm new password"
+							v-model="formData.confirmpassword" 
 							type="password" 
 							:error="invalid && validated" 
 							:error-message="errors[0]" />
 					</ValidationProvider>
 					<div class="q-mt-md text-center">
-						<q-btn unelevated type="submit" icon="send" color="primary" large :loading="saving">
+						<q-btn :disabled="invalid" unelevated type="submit" icon="send" color="primary" large :loading="saving">
 							<q-spinner-oval slot="loading" /> Change Password
 						</q-btn>
 					</div>
@@ -53,19 +46,23 @@
 		</div>
 	</div>
 </template>
-
 <script>
+import { PageMixin } from "../../mixins/page.js";
 export default {
 	props:{
-		apiUrl: 'account/change_password/',
+		apiUrl: {
+			type: String,
+			default: 'account/changepassword'
+		},
 	},
+	mixins: [PageMixin],
 	data() {
 		return {
 			saving: false,
 			formData: {
-				oldPassword: '', 
-				password: '', 
-				confirmPassword: '', 
+				oldpassword: '', 
+				newpassword: '', 
+				confirmpassword: '', 
 			},
 		}
 	},
@@ -78,12 +75,19 @@ export default {
 				let url = this.apiUrl;
 				this.$api.post(url, payload).then((response) => {
 					this.saving = false;
-				},
-					(response) => {
+					this.resetForm();
+					this.flashMsg("Password change completed");
+				},(response) => {
 					this.saving = false;
-					this.$root.$emit('requestError' , response);
+					this.showPageRequestError(response);
 				});
 			}
+		},
+		resetForm (){
+			this.formData = {oldpassword: "", newpassword: "", confirmpassword: "", };
+			requestAnimationFrame(() => {
+				this.$refs.observer.reset();
+			});
 		},
 	},
 }

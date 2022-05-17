@@ -1,71 +1,108 @@
 <template>
     <q-layout view="hHh LpR lfr">
-        <!-- App header -->
-        <q-header elevated >
-            <q-toolbar class="  glossy">
-                <q-btn flat @click="toggleLeftDrawer" round dense icon="menu"></q-btn>
-                <!-- App logo and name -->
-                <q-btn no-caps flat stretch to="/home" class="q-mr-lg">
-                    <q-avatar size="36">
-                        <img src="images/logo.png" alt="logo" class="my-5" />
-                    </q-avatar>
-                    <q-toolbar-title>{{ $appName }}</q-toolbar-title>
-                </q-btn>
-                <q-separator inset dark vertical></q-separator>
-                <!-- Top menu left -->
-                <template v-for="(menu, index) in navbarTopLeftItems">
-                    <q-btn no-caps :icon="menu.icon" stretch flat :label="menu.label" :to="menu.path" v-if="!menu.submenu.length" :key="`topleftmenubtn-${index}`"></q-btn>
-                    <q-btn-dropdown  no-caps :icon="menu.icon" stretch flat :label="menu.label" v-else  :key="`topleftmenudrop-${index}`" >
-                        <q-list dense>
-                            <q-item v-for="(submenu, subindex) in menu.submenu" :key="`topleftsubmenu-${subindex}`" clickable v-ripple :to="submenu.path">
-                                <q-item-section avatar v-if="submenu.icon">
-                                    <q-avatar :icon="submenu.icon"></q-avatar>
+        <template v-if="$isLoggedIn">
+            <!-- App header -->
+            <q-header elevated >
+                <q-toolbar class="  glossy">
+                    <q-btn flat @click="toggleLeftDrawer" round dense icon="menu"></q-btn>
+                    <!-- App logo and name -->
+                    <q-btn no-caps flat stretch to="/home" class="q-mr-lg">
+                        <q-avatar size="36">
+                            <img src="images/logo.png" alt="logo" class="my-5" />
+                        </q-avatar>
+                        <q-toolbar-title>{{ $appName }}</q-toolbar-title>
+                    </q-btn>
+                    <q-separator inset dark vertical></q-separator>
+                    <!-- Top menu left -->
+                    <template v-for="(menu, index) in navbarTopLeftItems">
+                        <q-btn no-caps :icon="menu.icon" stretch flat :label="menu.label" :to="menu.path" v-if="!menu.submenu.length" :key="`topleftmenubtn-${index}`"></q-btn>
+                        <q-btn-dropdown  no-caps :icon="menu.icon" stretch flat :label="menu.label" v-else  :key="`topleftmenudrop-${index}`" >
+                            <q-list dense>
+                                <q-item v-for="(submenu, subindex) in menu.submenu" :key="`topleftsubmenu-${subindex}`" clickable v-ripple :to="submenu.path">
+                                    <q-item-section avatar v-if="submenu.icon">
+                                        <q-avatar :icon="submenu.icon"></q-avatar>
+                                    </q-item-section>
+                                    <q-item-section>
+                                        <q-item-label>{{ submenu.label }}</q-item-label>
+                                    </q-item-section>
+                                </q-item>
+                            </q-list>
+                        </q-btn-dropdown>
+                    </template>
+                    <q-space></q-space>
+                    <!-- Top menu right -->
+                    <template v-for="(menu, index) in navbarTopRightItems">
+                        <q-btn  no-caps :icon="menu.icon" stretch flat :label="menu.label" :to="menu.path" v-if="!menu.submenu.length" :key="`toprightmenu-${index}`"></q-btn>
+                        <q-btn-dropdown no-caps :icon="menu.icon" stretch flat :label="menu.label" v-else  :key="`toprightmenudrop-${index}`" >
+                            <q-list dense>
+                                <q-item v-for="(submenu, subindex) in menu.submenu" :key="`toprightsubmenu-${subindex}`" clickable v-ripple :to="submenu.path">
+                                    <q-item-section avatar v-if="submenu.icon">
+                                        <q-avatar :icon="submenu.icon"></q-avatar>
+                                    </q-item-section>
+                                    <q-item-section>
+                                        <q-item-label>{{ submenu.label }}</q-item-label>
+                                    </q-item-section>
+                                </q-item>
+                            </q-list>
+                        </q-btn-dropdown>
+                    </template>
+                    <q-btn-dropdown no-caps stretch unelevated icon="account_circle">
+                        <q-list dense style="min-width:200px">
+                            <q-item  clickable v-ripple to="/account">
+                                <q-item-section avatar>
+                                    <q-avatar icon="account_box"></q-avatar>
                                 </q-item-section>
                                 <q-item-section>
-                                    <q-item-label>{{ submenu.label }}</q-item-label>
+                                    <q-item-label>My Account</q-item-label>
+                                </q-item-section>
+                            </q-item>
+                            <q-item  clickable v-ripple @click="startLogout()">
+                                <q-item-section avatar>
+                                    <q-avatar icon="exit_to_app"></q-avatar>
+                                </q-item-section>
+                                <q-item-section>
+                                    <q-item-label>Logout</q-item-label>
                                 </q-item-section>
                             </q-item>
                         </q-list>
                     </q-btn-dropdown>
-                </template>
-                <q-space></q-space>
-                <!-- Top menu right -->
-                <template v-for="(menu, index) in navbarTopRightItems">
-                    <q-btn  no-caps :icon="menu.icon" stretch flat :label="menu.label" :to="menu.path" v-if="!menu.submenu.length" :key="`toprightmenu-${index}`"></q-btn>
-                    <q-btn-dropdown no-caps :icon="menu.icon" stretch flat :label="menu.label" v-else  :key="`toprightmenudrop-${index}`" >
-                        <q-list dense>
-                            <q-item v-for="(submenu, subindex) in menu.submenu" :key="`toprightsubmenu-${subindex}`" clickable v-ripple :to="submenu.path">
-                                <q-item-section avatar v-if="submenu.icon">
-                                    <q-avatar :icon="submenu.icon"></q-avatar>
+                </q-toolbar>
+            </q-header>
+            <!-- App left drawer -->
+            <q-drawer v-model="leftDrawer" show-if-above  :width="250" :breakpoint="500"    :mini="leftDrawerMini">
+                <q-scroll-area class="fit   ">
+                    <q-img class="img-fluid" :ratio="16/9" :src="$utils.setImgUrl($UserPhoto, 'medium')">
+                    <template v-slot:error>
+                        <div class="absolute-full text-h2 text-bold flex flex-center bg-grey-3 text-grey-8">!</div>
+                    </template>
+                    <q-menu auto-close touch-position>
+                        <q-list dense style="min-width:100px">
+                            <q-item  clickable v-ripple to="/account">
+                                <q-item-section avatar>
+                                    <q-avatar icon="account_box"></q-avatar>
                                 </q-item-section>
                                 <q-item-section>
-                                    <q-item-label>{{ submenu.label }}</q-item-label>
+                                    <q-item-label>My Account</q-item-label>
+                                </q-item-section>
+                            </q-item>
+                            <q-item  clickable v-ripple @click="startLogout()">
+                                <q-item-section avatar>
+                                    <q-avatar icon="exit_to_app"></q-avatar>
+                                </q-item-section>
+                                <q-item-section>
+                                    <q-item-label>Logout</q-item-label>
                                 </q-item-section>
                             </q-item>
                         </q-list>
-                    </q-btn-dropdown>
-                </template>
-            </q-toolbar>
-        </q-header>
-        <!-- App left drawer -->
-        <q-drawer v-model="leftDrawer" show-if-above  :width="250" :breakpoint="500"    :mini="leftDrawerMini">
-            <q-scroll-area class="fit   ">
-                <q-separator></q-separator>
-                <q-list >
-                    <template v-for="(menu, index) in navbarSideLeftItems">
-                        <q-item clickable q-ripple :to="menu.path" v-if="!menu.submenu.length" :key="`sideleftmenu-${index}`">
-                            <q-item-section avatar v-if="menu.icon">
-                                <q-icon :color="menu.iconcolor || 'primary'" :name="menu.icon"></q-icon>
-                                <q-tooltip v-if="leftDrawerMini" transition-show="scale" transition-hide="scale" content-class="bg-accent" anchor="center right" self="center left" :offset="[10, 10]">
-                                {{ menu.label }}
-                                </q-tooltip>
-                            </q-item-section>
-                            <q-item-section>
-                                {{ menu.label }}
-                            </q-item-section>
-                        </q-item>
-                        <q-expansion-item  expand-separator :content-inset-level="0.5" group="leftmenu" v-else :key="`sideleftmenudrop-${index}`">
-                            <template v-slot:header>
+                    </q-menu>
+                    </q-img>
+                    <div v-show="!leftDrawerMini" class="text-bold text-center text-capitalize q-pa-sm">
+                        Hi {{ $UserName }}
+                    </div>
+                    <q-separator></q-separator>
+                    <q-list >
+                        <template v-for="(menu, index) in navbarSideLeftItems">
+                            <q-item clickable q-ripple :to="menu.path" v-if="!menu.submenu.length" :key="`sideleftmenu-${index}`">
                                 <q-item-section avatar v-if="menu.icon">
                                     <q-icon :color="menu.iconcolor || 'primary'" :name="menu.icon"></q-icon>
                                     <q-tooltip v-if="leftDrawerMini" transition-show="scale" transition-hide="scale" content-class="bg-accent" anchor="center right" self="center left" :offset="[10, 10]">
@@ -75,22 +112,47 @@
                                 <q-item-section>
                                     {{ menu.label }}
                                 </q-item-section>
-                            </template>
-                            <q-list dense>  
-                                <q-item :to="submenu.path" clickable q-ripple v-for="(submenu, subindex) in menu.submenu" :key="`sideleftsubmenubtn-${subindex}`">
-                                    <q-item-section avatar v-if="submenu.icon">
-                                        <q-icon :color="submenu.iconcolor || 'primary'" :name="submenu.icon"></q-icon>
+                            </q-item>
+                            <q-expansion-item  expand-separator :content-inset-level="0.5" group="leftmenu" v-else :key="`sideleftmenudrop-${index}`">
+                                <template v-slot:header>
+                                    <q-item-section avatar v-if="menu.icon">
+                                        <q-icon :color="menu.iconcolor || 'primary'" :name="menu.icon"></q-icon>
+                                        <q-tooltip v-if="leftDrawerMini" transition-show="scale" transition-hide="scale" content-class="bg-accent" anchor="center right" self="center left" :offset="[10, 10]">
+                                        {{ menu.label }}
+                                        </q-tooltip>
                                     </q-item-section>
                                     <q-item-section>
-                                        {{ submenu.label }}
+                                        {{ menu.label }}
                                     </q-item-section>
-                                </q-item>
-                            </q-list>
-                        </q-expansion-item>
-                    </template>
-                </q-list>
-            </q-scroll-area>
-        </q-drawer>
+                                </template>
+                                <q-list dense>  
+                                    <q-item :to="submenu.path" clickable q-ripple v-for="(submenu, subindex) in menu.submenu" :key="`sideleftsubmenubtn-${subindex}`">
+                                        <q-item-section avatar v-if="submenu.icon">
+                                            <q-icon :color="submenu.iconcolor || 'primary'" :name="submenu.icon"></q-icon>
+                                        </q-item-section>
+                                        <q-item-section>
+                                            {{ submenu.label }}
+                                        </q-item-section>
+                                    </q-item>
+                                </q-list>
+                            </q-expansion-item>
+                        </template>
+                    </q-list>
+                </q-scroll-area>
+            </q-drawer>
+        </template>
+        <template v-else>
+            <q-header elevated >
+                <q-toolbar class="  glossy">
+                    <q-btn no-caps flat stretch to="/home">
+                        <q-avatar size="36">
+                            <img src="images/logo.png" alt="logo" class="my-5" />
+                        </q-avatar>
+                        <q-toolbar-title>{{ $appName }}</q-toolbar-title>
+                    </q-btn>
+                </q-toolbar>
+            </q-header>
+        </template>
         <!-- App right drawer -->
         <q-drawer :no-swipe-open="!componentFile" side="right" v-model="rightDrawer" :width="rightDrawerWidth" :breakpoint="500" overlay  elevated>
             <component v-if="rightDrawer" is-sub-page :is="componentFile" :api-path="pageUrl" :model-bind="modelBind" :page-data="pageData"></component>

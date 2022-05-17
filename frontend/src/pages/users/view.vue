@@ -62,16 +62,6 @@
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>
-                                                <q-item>
-                                                    <q-item-section>
-                                                        <q-item-label caption>Photo: </q-item-label>
-                                                        <q-item-label class="text-bold">
-                                                            <image-viewer image-size="large" image-preview-size="" :src="item.photo" width="400px" height="400px" :num-display="1">
-                                                            </image-viewer>
-                                                        </q-item-label>
-                                                    </q-item-section>
-                                                </q-item>
-                                                <q-separator></q-separator>
                                                 <q-card-actions class="row q-col-gutter-xs justify-end">
                                                     <q-btn icon="menu" padding="xs" round flat color="grey">
                                                         <q-menu auto-close transition-show="flip-right"  transition-hide="flip-left" self="center middle" anchor="center middle">

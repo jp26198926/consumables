@@ -18,6 +18,8 @@ const cors = require('cors');
 const app = express();
 app.use(cors());
 app.use(express.static(config.app.publicDir));
+const passport = require('passport');
+require('./helpers/passport-auth')(passport);
 app.use(express.json()) // Parses json, multi-part (file), url-encoded
 app.use(express.urlencoded({extended:true, limit:'50mb'}));
 
@@ -27,11 +29,32 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 require('./helpers/response')(app);
 
+//login user and pass user to req.user object
+app.use('/api',
+	async (req, res, next) => {
+		passport.authenticate('jwt', async (err, user, info) => {
+			req.login(user, { session: false }, async (error) => {});
+			return next();
+		}
+		)(req, res, next);
+	}
+);
+
 //bind page route to the controllers
 app.use('/api/home', require('./controllers/home.js'));
 app.use('/api/components_data', require('./controllers/components_data.js'));
 app.use('/api/fileuploader', require('./controllers/fileuploader.js'));
 app.use('/api/s3uploader', require('./controllers/s3uploader.js'));
+app.use('/api/auth', require('./controllers/auth.js'));
+
+//protect all /api endpoints
+app.use('/api', async (req, res, next) => {
+	if(req.user){
+		return next();//user is authenticated
+	}
+	return res.unauthorized();
+});
+app.use('/api/account', require('./controllers/account.js'));
 app.use('/api/action_types', require('./controllers/action_types.js'))
 app.use('/api/items', require('./controllers/items.js'))
 app.use('/api/measurements', require('./controllers/measurements.js'))

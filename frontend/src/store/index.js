@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import { pageComponents } from "./page_components.js"
 import store from "./app_store.js"
+import { auth } from "./auth.js"
 import { action_types } from "./action_types.js"
 import { items } from "./items.js"
 import { measurements } from "./measurements.js"
@@ -19,7 +20,8 @@ export default function (/* { ssrContext } */) {
 		actions,
 		modules: {
 			pageComponents,
-			action_types,
+			auth,
+		action_types,
 		items,
 		measurements,
 		stocks,

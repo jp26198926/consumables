@@ -133,4 +133,46 @@ router.get('/item_id_option_list', async (req, res) => {
 		return res.serverError(err);
 	}
 });
+
+
+ /**
+ * Route to check if field value already exist in a Users table
+ * @route {GET} /components_data/users_username_exist/{fieldvalue}
+ * @param {string} path - Express paths
+ * @param {callback} middleware - Express middleware.
+ */
+router.get('/users_username_exist/:fieldvalue', async (req, res) => {
+	try{
+		let val = req.params.fieldvalue
+		let count = await models.Users.count({ where:{ 'username': val } });
+		if(count > 0){
+			return res.ok("true");
+		}
+		return res.ok("false");
+	}
+	catch(err){
+		return res.serverError(err);
+	}
+});
+
+
+ /**
+ * Route to check if field value already exist in a Users table
+ * @route {GET} /components_data/users_email_exist/{fieldvalue}
+ * @param {string} path - Express paths
+ * @param {callback} middleware - Express middleware.
+ */
+router.get('/users_email_exist/:fieldvalue', async (req, res) => {
+	try{
+		let val = req.params.fieldvalue
+		let count = await models.Users.count({ where:{ 'email': val } });
+		if(count > 0){
+			return res.ok("true");
+		}
+		return res.ok("false");
+	}
+	catch(err){
+		return res.serverError(err);
+	}
+});
 module.exports = router;

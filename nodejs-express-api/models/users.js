@@ -53,8 +53,7 @@ class Users extends BaseModel {
 			'name', 
 			'username', 
 			'email', 
-			'telelphone', 
-			'photo'
+			'telelphone'
 		];
 	}
 
@@ -65,8 +64,40 @@ class Users extends BaseModel {
 			'name', 
 			'username', 
 			'email', 
+			'telelphone'
+		];
+	}
+
+	static accounteditFields() {
+		let sequelize = this.sequelize;
+		return [
+			'id', 
+			'username', 
 			'telelphone', 
-			'photo'
+			'photo', 
+			'name'
+		];
+	}
+
+	static accountviewFields() {
+		let sequelize = this.sequelize;
+		return [
+			'id', 
+			'username', 
+			'email', 
+			'telelphone', 
+			'name'
+		];
+	}
+
+	static exportAccountviewFields() {
+		let sequelize = this.sequelize;
+		return [
+			'id', 
+			'username', 
+			'email', 
+			'telelphone', 
+			'name'
 		];
 	}
 
@@ -76,7 +107,6 @@ class Users extends BaseModel {
 			'id', 
 			'name', 
 			'username', 
-			'email', 
 			'telelphone', 
 			'photo'
 		];
@@ -89,7 +119,6 @@ class Users extends BaseModel {
 			sequelize.literal("name LIKE :search"), 
 			sequelize.literal("username LIKE :search"), 
 			sequelize.literal("email LIKE :search"), 
-			sequelize.literal("password LIKE :search"), 
 			sequelize.literal("telelphone LIKE :search"),
 		];
 	}
