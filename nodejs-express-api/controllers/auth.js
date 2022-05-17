@@ -146,6 +146,7 @@ router.post('/login', [
  */
 router.post('/register', 
 	[
+		body('name').not().isEmpty(),
 		body('username').not().isEmpty(),
 		body('email').not().isEmpty().isEmail(),
 		body('password').not().isEmpty(),

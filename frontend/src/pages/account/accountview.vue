@@ -63,6 +63,13 @@
                                                                             <q-separator></q-separator>
                                                                             <q-item>
                                                                                 <q-item-section>
+                                                                                    <q-item-label caption>Name: </q-item-label>
+                                                                                    <q-item-label class="text-bold">{{ item.name }}</q-item-label>
+                                                                                </q-item-section>
+                                                                            </q-item>
+                                                                            <q-separator></q-separator>
+                                                                            <q-item>
+                                                                                <q-item-section>
                                                                                     <q-item-label caption>Username: </q-item-label>
                                                                                     <q-item-label class="text-bold">{{ item.username }}</q-item-label>
                                                                                 </q-item-section>
@@ -79,13 +86,6 @@
                                                                                 <q-item-section>
                                                                                     <q-item-label caption>Telelphone: </q-item-label>
                                                                                     <q-item-label class="text-bold">{{ item.telelphone }}</q-item-label>
-                                                                                </q-item-section>
-                                                                            </q-item>
-                                                                            <q-separator></q-separator>
-                                                                            <q-item>
-                                                                                <q-item-section>
-                                                                                    <q-item-label caption>Name: </q-item-label>
-                                                                                    <q-item-label class="text-bold">{{ item.name }}</q-item-label>
                                                                                 </q-item-section>
                                                                             </q-item>
                                                                             <q-separator></q-separator>

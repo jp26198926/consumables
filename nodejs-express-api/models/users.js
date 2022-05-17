@@ -83,10 +83,10 @@ class Users extends BaseModel {
 		let sequelize = this.sequelize;
 		return [
 			'id', 
+			'name', 
 			'username', 
 			'email', 
-			'telelphone', 
-			'name'
+			'telelphone'
 		];
 	}
 
@@ -94,10 +94,10 @@ class Users extends BaseModel {
 		let sequelize = this.sequelize;
 		return [
 			'id', 
+			'name', 
 			'username', 
 			'email', 
-			'telelphone', 
-			'name'
+			'telelphone'
 		];
 	}
 

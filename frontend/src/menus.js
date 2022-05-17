@@ -206,13 +206,6 @@ export const AppMenus = {
 ],
 	UsersTableHeaderItems: [
   {
-    "label": "Id",
-    "align": "left",
-    "sortable": false,
-    "name": "id",
-    "field": "id"
-  },
-  {
     "label": "Name",
     "align": "left",
     "sortable": false,

@@ -75,9 +75,6 @@
                                                         <q-td auto-width>
                                                             <q-checkbox dense v-model="props.selected"></q-checkbox>
                                                         </q-td>
-                                                        <q-td  key="id" :props="props">
-                                                            <q-btn padding="xs"   :rounded="false"  color="primary"  no-caps  unelevated   flat :to="`/users/view/${props.row.id}`">{{ props.row.id }}</q-btn>
-                                                        </q-td>
                                                         <q-td  key="name" :props="props">
                                                             {{ props.row.name }}
                                                         </q-td>

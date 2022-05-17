@@ -137,6 +137,7 @@ router.get(['/view/:recid'], async (req, res) => {
  */
 router.post('/add/' , 
 	[
+		body('name').not().isEmpty(),
 		body('username').not().isEmpty(),
 		body('email').not().isEmpty().isEmail(),
 		body('password').not().isEmpty(),

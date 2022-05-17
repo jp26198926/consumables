@@ -36,6 +36,20 @@
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col-sm-3 col-12">
+                                                    Name *
+                                                </div>
+                                                <div class="col-sm-9 col-12">
+                                                    <ValidationProvider :rules="{required:true}" name="Name" v-slot="{ errors, invalid, validated }">
+                                                        <q-input outlined dense  ref="ctrlname" v-model.trim="formData.name"  label="Name" type="text" placeholder="Enter Name"      
+                                                        class="" :error="invalid && validated" :error-message="errors[0]">
+                                                        </q-input>
+                                                    </ValidationProvider>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-sm-3 col-12">
                                                     Username *
                                                 </div>
                                                 <div class="col-sm-9 col-12">
@@ -177,7 +191,7 @@
 		data() {
             return {
 				formData: {
-					username: "", email: "", password: "", confirm_password: "", telelphone: "", photo: "", 
+					name: "", username: "", email: "", password: "", confirm_password: "", telelphone: "", photo: "", 
 				},
 			}
 		},
@@ -222,7 +236,7 @@
 				}
 			},
 			resetForm (){
-				this.formData = {username: "", email: "", password: "", confirm_password: "", telelphone: "", photo: "", };
+				this.formData = {name: "", username: "", email: "", password: "", confirm_password: "", telelphone: "", photo: "", };
 				requestAnimationFrame(() => {
 					this.$refs.observer.reset();
 				});
