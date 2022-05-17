@@ -29,13 +29,6 @@
                                             <div class="col">
                                                 <q-item>
                                                     <q-item-section>
-                                                        <q-item-label caption>Id: </q-item-label>
-                                                        <q-item-label class="text-bold">{{ item.id }}</q-item-label>
-                                                    </q-item-section>
-                                                </q-item>
-                                                <q-separator></q-separator>
-                                                <q-item>
-                                                    <q-item-section>
                                                         <q-item-label caption>Barcode: </q-item-label>
                                                         <q-item-label class="text-bold">{{ item.barcode }}</q-item-label>
                                                     </q-item-section>
@@ -50,15 +43,15 @@
                                                 <q-separator></q-separator>
                                                 <q-item>
                                                     <q-item-section>
-                                                        <q-item-label caption>Type Id: </q-item-label>
-                                                        <q-item-label class="text-bold">{{ item.type_id }}</q-item-label>
+                                                        <q-item-label caption>Types Type: </q-item-label>
+                                                        <q-item-label class="text-bold">{{ item.types_type }}</q-item-label>
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>
                                                 <q-item>
                                                     <q-item-section>
-                                                        <q-item-label caption>Measurement Id: </q-item-label>
-                                                        <q-item-label class="text-bold">{{ item.measurement_id }}</q-item-label>
+                                                        <q-item-label caption>Measurements Name: </q-item-label>
+                                                        <q-item-label class="text-bold">{{ item.measurements_name }}</q-item-label>
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>

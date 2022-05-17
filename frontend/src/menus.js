@@ -130,13 +130,6 @@ export const AppMenus = {
 ],
 	ItemsTableHeaderItems: [
   {
-    "label": "Id",
-    "align": "left",
-    "sortable": false,
-    "name": "id",
-    "field": "id"
-  },
-  {
     "label": "Barcode",
     "align": "left",
     "sortable": false,
@@ -154,15 +147,15 @@ export const AppMenus = {
     "label": "Type",
     "align": "left",
     "sortable": false,
-    "name": "type_id",
-    "field": "type_id"
+    "name": "types_type",
+    "field": "types_type"
   },
   {
     "label": "Measurement",
     "align": "left",
     "sortable": false,
-    "name": "measurement_id",
-    "field": "measurement_id"
+    "name": "measurements_name",
+    "field": "measurements_name"
   },
   {
     "label": "Action",

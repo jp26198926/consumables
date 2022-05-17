@@ -56,6 +56,8 @@ const sequelize = models.sequelize; // sequelize functions and operations
 const Op = models.Op; // sequelize query operators
 
 
+Items.belongsTo(models.Types, {foreignKey: 'type_id', as: 'types' });
+Items.belongsTo(models.Measurements, {foreignKey: 'measurement_id', as: 'measurements' });
 
 
 /**
@@ -78,6 +80,20 @@ router.get(['/', '/index/:fieldname?/:fieldvalue?'], async (req, res) => {
 			];
 			replacements.fieldvalue = fieldvalue;
 		}
+		let joinTables = []; // hold list of join tables
+		joinTables.push({
+			model: models.Types,
+			required: false,
+			as: 'types',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		joinTables.push({
+			model: models.Measurements,
+			required: false,
+			as: 'measurements',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		query['include'] = joinTables;
 		let search = req.query.search;
 		if(search){
 			let searchFields = Items.searchFields();
@@ -113,7 +129,24 @@ router.get(['/view/:recid'], async (req, res) => {
 		let recid = req.params.recid || null;
 		let query = {}
 		let where = {}
-		where['id'] = recid;
+		let joinTables = []; // hold list of join tables
+		joinTables.push({
+			model: models.Types,
+			required: false,
+			as: 'types',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		joinTables.push({
+			model: models.Measurements,
+			required: false,
+			as: 'measurements',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		query['include'] = joinTables;
+		where[Op.and] = sequelize.literal('items.id = :recid');
+		query.replacements = {
+			recid
+		}
 		query.raw = true;
 		query.where = where;
 		query.attributes = Items.viewFields();

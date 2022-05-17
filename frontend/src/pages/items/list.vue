@@ -75,20 +75,17 @@
                                                         <q-td auto-width>
                                                             <q-checkbox dense v-model="props.selected"></q-checkbox>
                                                         </q-td>
-                                                        <q-td  key="id" :props="props">
-                                                            <q-btn padding="xs"   :rounded="false"  color="primary"  no-caps  unelevated   flat :to="`/items/view/${props.row.id}`">{{ props.row.id }}</q-btn>
-                                                        </q-td>
                                                         <q-td  key="barcode" :props="props">
                                                             {{ props.row.barcode }}
                                                         </q-td>
                                                         <q-td  key="name" :props="props">
                                                             {{ props.row.name }}
                                                         </q-td>
-                                                        <q-td  key="type_id" :props="props">
-                                                            {{ props.row.type_id }}
+                                                        <q-td  key="types_type" :props="props">
+                                                            {{ props.row.types_type }}
                                                         </q-td>
-                                                        <q-td  key="measurement_id" :props="props">
-                                                            {{ props.row.measurement_id }}
+                                                        <q-td  key="measurements_name" :props="props">
+                                                            {{ props.row.measurements_name }}
                                                         </q-td>
                                                         <q-td key="btnactions" :props="props">
                                                             <div class="row q-col-gutter-xs justify-end">
