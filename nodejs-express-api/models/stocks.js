@@ -71,8 +71,7 @@ class Stocks extends BaseModel {
 			sequelize.literal("action_types.id AS action_types_id"), 
 			sequelize.literal("items.id AS items_id"), 
 			sequelize.literal('stocks.date_created AS date_created'), 
-			sequelize.literal('stocks.date_updated AS date_updated'), 
-			sequelize.literal('stocks.date_deleted AS date_deleted')
+			sequelize.literal('stocks.date_updated AS date_updated')
 		];
 	}
 
@@ -89,8 +88,7 @@ class Stocks extends BaseModel {
 			sequelize.literal("action_types.id AS action_types_id"), 
 			sequelize.literal("items.id AS items_id"), 
 			sequelize.literal('stocks.date_created AS date_created'), 
-			sequelize.literal('stocks.date_updated AS date_updated'), 
-			sequelize.literal('stocks.date_deleted AS date_deleted')
+			sequelize.literal('stocks.date_updated AS date_updated')
 		];
 	}
 

@@ -103,23 +103,6 @@
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>
-                                                <q-item>
-                                                    <q-item-section>
-                                                        <q-item-label caption>Date Deleted: </q-item-label>
-                                                        <q-item-label class="text-bold">
-                                                            <q-chip v-if="item.date_deleted" dense size="13px" :label="item.date_deleted | relativeDate">
-                                                            <q-tooltip
-                                                            content-class="bg-accent"
-                                                            transition-show="scale"
-                                                            transition-hide="scale"
-                                                            >
-                                                            {{ item.date_deleted | humanDatetime}}
-                                                            </q-tooltip>
-                                                            </q-chip>
-                                                        </q-item-label>
-                                                    </q-item-section>
-                                                </q-item>
-                                                <q-separator></q-separator>
                                                 <q-card-actions class="row q-col-gutter-xs justify-end">
                                                     <q-btn icon="menu" padding="xs" round flat color="grey">
                                                         <q-menu auto-close transition-show="flip-right"  transition-hide="flip-left" self="center middle" anchor="center middle">
