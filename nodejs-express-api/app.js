@@ -33,7 +33,6 @@ app.use('/api/components_data', require('./controllers/components_data.js'));
 app.use('/api/fileuploader', require('./controllers/fileuploader.js'));
 app.use('/api/s3uploader', require('./controllers/s3uploader.js'));
 app.use('/api/action_types', require('./controllers/action_types.js'))
-app.use('/api/adjustments', require('./controllers/adjustments.js'))
 app.use('/api/items', require('./controllers/items.js'))
 app.use('/api/measurements', require('./controllers/measurements.js'))
 app.use('/api/stocks', require('./controllers/stocks.js'))

@@ -55,40 +55,6 @@ let routes = [
 		
 
 //adjustments routes
-			{ 
-				path: '/adjustments/', 
-				name: 'adjustmentslist', 
-				component: () => import('pages/adjustments/list.vue'), 
-				props: true
-			},
-			{ 
-				path: '/adjustments/(list|index)/:fieldName?/:fieldValue?', 
-				name: 'adjustmentslistfilter', 
-				component: () => import('pages/adjustments/list.vue'), 
-				props: true
-			},
-	
-			{ 
-				path: '/adjustments/view/:id', 
-				name: 'adjustmentsview', 
-				component: () => import('pages/adjustments/view.vue'), 
-				props: true
-			},
-	
-			{ 
-				path: '/adjustments/add', 
-				name: 'adjustmentsadd', 
-				component: () => import('pages/adjustments/add.vue'), 
-				props: true
-			},
-	
-			{ 
-				path: '/adjustments/edit/:id', 
-				name: 'adjustmentsedit', 
-				component: () => import('pages/adjustments/edit.vue'), 
-				props: true
-			},
-		
 
 //items routes
 			{ 

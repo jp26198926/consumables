@@ -21,14 +21,6 @@ export const AppMenus = {
     "submenu": []
   },
   {
-    "path": "/adjustments",
-    "label": "Adjustments",
-    "icon": "compare_arrows",
-    "iconcolor": "",
-    "target": "",
-    "submenu": []
-  },
-  {
     "path": "/items",
     "label": "Items",
     "icon": "bookmark_border",
@@ -68,43 +60,6 @@ export const AppMenus = {
     "sortable": false,
     "name": "action_type",
     "field": "action_type"
-  },
-  {
-    "label": "Action",
-    "align": "right",
-    "sortable": false,
-    "name": "btnactions",
-    "field": ""
-  }
-],
-	AdjustmentsTableHeaderItems: [
-  {
-    "label": "Date",
-    "align": "left",
-    "sortable": false,
-    "name": "date",
-    "field": "date"
-  },
-  {
-    "label": "Item Id",
-    "align": "left",
-    "sortable": false,
-    "name": "item_id",
-    "field": "item_id"
-  },
-  {
-    "label": "Old Qty",
-    "align": "left",
-    "sortable": false,
-    "name": "old_qty",
-    "field": "old_qty"
-  },
-  {
-    "label": "New Qty",
-    "align": "left",
-    "sortable": false,
-    "name": "new_qty",
-    "field": "new_qty"
   },
   {
     "label": "Action",

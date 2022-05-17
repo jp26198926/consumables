@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import { pageComponents } from "./page_components.js"
 import store from "./app_store.js"
 import { action_types } from "./action_types.js"
-import { adjustments } from "./adjustments.js"
 import { items } from "./items.js"
 import { measurements } from "./measurements.js"
 import { stocks } from "./stocks.js"
@@ -20,7 +19,6 @@ export default function (/* { ssrContext } */) {
 		modules: {
 			pageComponents,
 			action_types,
-		adjustments,
 		items,
 		measurements,
 		stocks,
