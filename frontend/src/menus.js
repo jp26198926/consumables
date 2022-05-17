@@ -51,6 +51,14 @@ export const AppMenus = {
     "iconcolor": "",
     "target": "",
     "submenu": []
+  },
+  {
+    "path": "/users",
+    "label": "Users",
+    "icon": "extension",
+    "iconcolor": "",
+    "target": "",
+    "submenu": []
   }
 ],
 	Action_TypesTableHeaderItems: [
@@ -187,6 +195,57 @@ export const AppMenus = {
     "sortable": false,
     "name": "type",
     "field": "type"
+  },
+  {
+    "label": "Action",
+    "align": "right",
+    "sortable": false,
+    "name": "btnactions",
+    "field": ""
+  }
+],
+	UsersTableHeaderItems: [
+  {
+    "label": "Id",
+    "align": "left",
+    "sortable": false,
+    "name": "id",
+    "field": "id"
+  },
+  {
+    "label": "Name",
+    "align": "left",
+    "sortable": false,
+    "name": "name",
+    "field": "name"
+  },
+  {
+    "label": "Username",
+    "align": "left",
+    "sortable": false,
+    "name": "username",
+    "field": "username"
+  },
+  {
+    "label": "Email",
+    "align": "left",
+    "sortable": false,
+    "name": "email",
+    "field": "email"
+  },
+  {
+    "label": "Telelphone",
+    "align": "left",
+    "sortable": false,
+    "name": "telelphone",
+    "field": "telelphone"
+  },
+  {
+    "label": "Photo",
+    "align": "left",
+    "sortable": false,
+    "name": "photo",
+    "field": "photo"
   },
   {
     "label": "Action",

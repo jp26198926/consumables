@@ -32,6 +32,7 @@ const Items =  require("./items").init(sequelize, Sequelize);
 const Measurements =  require("./measurements").init(sequelize, Sequelize);
 const Stocks =  require("./stocks").init(sequelize, Sequelize);
 const Types =  require("./types").init(sequelize, Sequelize);
+const Users =  require("./users").init(sequelize, Sequelize);
 
 const Op = Sequelize.Op;
 module.exports = {
@@ -41,5 +42,6 @@ module.exports = {
 	Items,
 	Measurements,
 	Stocks,
-	Types
+	Types,
+	Users
 }

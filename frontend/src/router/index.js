@@ -200,6 +200,42 @@ let routes = [
 			},
 		
 
+//users routes
+			{ 
+				path: '/users/', 
+				name: 'userslist', 
+				component: () => import('pages/users/list.vue'), 
+				props: true
+			},
+			{ 
+				path: '/users/(list|index)/:fieldName?/:fieldValue?', 
+				name: 'userslistfilter', 
+				component: () => import('pages/users/list.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/users/view/:id', 
+				name: 'usersview', 
+				component: () => import('pages/users/view.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/users/add', 
+				name: 'usersadd', 
+				component: () => import('pages/users/add.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/users/edit/:id', 
+				name: 'usersedit', 
+				component: () => import('pages/users/edit.vue'), 
+				props: true
+			},
+		
+
 			
 			
 			

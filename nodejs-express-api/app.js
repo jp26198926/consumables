@@ -37,6 +37,7 @@ app.use('/api/items', require('./controllers/items.js'))
 app.use('/api/measurements', require('./controllers/measurements.js'))
 app.use('/api/stocks', require('./controllers/stocks.js'))
 app.use('/api/types', require('./controllers/types.js'))
+app.use('/api/users', require('./controllers/users.js'))
 app.get('*', function(req, res){
     res.status(404).json("Page not found");
 });

@@ -7,6 +7,7 @@ import { items } from "./items.js"
 import { measurements } from "./measurements.js"
 import { stocks } from "./stocks.js"
 import { types } from "./types.js"
+import { users } from "./users.js"
 Vue.use(Vuex);
 
 const { state, getters, mutations, actions } = store;
@@ -22,7 +23,8 @@ export default function (/* { ssrContext } */) {
 		items,
 		measurements,
 		stocks,
-		types
+		types,
+		users
 		},
 		// enable strict mode (adds overhead!)
 		// for dev mode only
