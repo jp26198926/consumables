@@ -104,7 +104,7 @@
                                                 </div>
                                                 <div class="col-sm-9 col-12">
                                                     <ValidationProvider :rules="{required:true}" name="Qty" v-slot="{ errors, invalid, validated }">
-                                                        <q-input outlined dense  ref="ctrlqty" v-model.trim="formData.qty"  label="Qty" type="number" placeholder="Enter Qty"   step="0.1"    
+                                                        <q-input outlined dense  ref="ctrlqty" v-model.trim="formData.qty"  label="Qty" type="number" placeholder="Enter Qty" hint="[ + ] Add qty to Stocks | [ - ] Subtract qty to Stocks"  step="0.1"    
                                                         class="" :error="invalid && validated" :error-message="errors[0]">
                                                         </q-input>
                                                     </ValidationProvider>

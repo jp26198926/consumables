@@ -75,20 +75,58 @@
                                                         <q-td auto-width>
                                                             <q-checkbox dense v-model="props.selected"></q-checkbox>
                                                         </q-td>
-                                                        <q-td  key="id" :props="props">
-                                                            <q-btn padding="xs"   :rounded="false"  color="primary"  no-caps  unelevated   flat :to="`/adjustments/view/${props.row.id}`">{{ props.row.id }}</q-btn>
-                                                        </q-td>
                                                         <q-td  key="date" :props="props">
-                                                            {{ props.row.date }}
+                                                            <span class="table-inlined-edit">{{ props.row.date }}</span>
+                                                            <inline-edit v-model="props.row.date" save-icon="check_circle" cancel-icon="close" :url="`adjustments/edit/${ props.row.id }`" field-name="date" field-label="Date" title="Enter Date">
+                                                            <api-data-source   api-path="components_data/action_type_option_list"  :query-params="filters" v-slot="req">
+                                                                <q-input outlined dense  v-model.trim="props.row.date"    >
+                                                                <template v-slot:prepend>
+                                                                    <q-icon name="date_range" class="cursor-pointer">
+                                                                    <q-popup-proxy transition-show="scale" transition-hide="scale">
+                                                                    <q-date     mask="YYYY-MM-DD HH:mm" v-model="props.row.date" />
+                                                                    </q-popup-proxy>
+                                                                    </q-icon>
+                                                                </template>
+                                                                <template v-slot:append>
+                                                                    <q-icon name="access_time" class="cursor-pointer">
+                                                                    <q-popup-proxy transition-show="scale" transition-hide="scale">
+                                                                    <q-time v-model="props.row.date" mask="YYYY-MM-DD HH:mm" />
+                                                                    </q-popup-proxy>
+                                                                    </q-icon>
+                                                                </template>
+                                                                </q-input>
+                                                            </api-data-source>
+                                                            </inline-edit>
                                                         </q-td>
                                                         <q-td  key="item_id" :props="props">
-                                                            {{ props.row.item_id }}
+                                                            <span class="table-inlined-edit">{{ props.row.item_id }}</span>
+                                                            <inline-edit v-model="props.row.item_id" save-icon="check_circle" cancel-icon="close" :url="`adjustments/edit/${ props.row.id }`" field-name="item_id" field-label="Item Id" title="Enter Item Id">
+                                                            <api-data-source   api-path="components_data/action_type_option_list"  :query-params="filters" v-slot="req">
+                                                                <q-input outlined dense  ref="listctrlitem_id" v-model.trim="props.row.item_id"  label=""  placeholder=""      
+                                                                class="" >
+                                                                </q-input>
+                                                            </api-data-source>
+                                                            </inline-edit>
                                                         </q-td>
                                                         <q-td  key="old_qty" :props="props">
-                                                            {{ props.row.old_qty }}
+                                                            <span class="table-inlined-edit">{{ props.row.old_qty }}</span>
+                                                            <inline-edit v-model="props.row.old_qty" save-icon="check_circle" cancel-icon="close" :url="`adjustments/edit/${ props.row.id }`" field-name="old_qty" field-label="Old Qty" title="Enter Old Qty">
+                                                            <api-data-source   api-path="components_data/action_type_option_list"  :query-params="filters" v-slot="req">
+                                                                <q-input outlined dense  ref="listctrlold_qty" v-model.trim="props.row.old_qty"  label=""  placeholder=""      
+                                                                class="" >
+                                                                </q-input>
+                                                            </api-data-source>
+                                                            </inline-edit>
                                                         </q-td>
                                                         <q-td  key="new_qty" :props="props">
-                                                            {{ props.row.new_qty }}
+                                                            <span class="table-inlined-edit">{{ props.row.new_qty }}</span>
+                                                            <inline-edit v-model="props.row.new_qty" save-icon="check_circle" cancel-icon="close" :url="`adjustments/edit/${ props.row.id }`" field-name="new_qty" field-label="New Qty" title="Enter New Qty">
+                                                            <api-data-source   api-path="components_data/action_type_option_list"  :query-params="filters" v-slot="req">
+                                                                <q-input outlined dense  ref="listctrlnew_qty" v-model.trim="props.row.new_qty"  label=""  placeholder=""      
+                                                                class="" >
+                                                                </q-input>
+                                                            </api-data-source>
+                                                            </inline-edit>
                                                         </q-td>
                                                         <q-td key="btnactions" :props="props">
                                                             <div class="row q-col-gutter-xs justify-end">

@@ -75,11 +75,15 @@
                                                         <q-td auto-width>
                                                             <q-checkbox dense v-model="props.selected"></q-checkbox>
                                                         </q-td>
-                                                        <q-td  key="id" :props="props">
-                                                            <q-btn padding="xs"   :rounded="false"  color="primary"  no-caps  unelevated   flat :to="`/action_types/view/${props.row.id}`">{{ props.row.id }}</q-btn>
-                                                        </q-td>
                                                         <q-td  key="action_type" :props="props">
-                                                            {{ props.row.action_type }}
+                                                            <span class="table-inlined-edit">{{ props.row.action_type }}</span>
+                                                            <inline-edit v-model="props.row.action_type" save-icon="check_circle" cancel-icon="close" :url="`action_types/edit/${ props.row.id }`" field-name="action_type" field-label="Action Type" title="Enter Action Type">
+                                                            <api-data-source   api-path="components_data/action_type_option_list"  :query-params="filters" v-slot="req">
+                                                                <q-input outlined dense  ref="listctrlaction_type" v-model.trim="props.row.action_type"  label=""  placeholder=""      
+                                                                class="" >
+                                                                </q-input>
+                                                            </api-data-source>
+                                                            </inline-edit>
                                                         </q-td>
                                                         <q-td key="btnactions" :props="props">
                                                             <div class="row q-col-gutter-xs justify-end">

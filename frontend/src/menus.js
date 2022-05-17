@@ -63,13 +63,6 @@ export const AppMenus = {
 ],
 	Action_TypesTableHeaderItems: [
   {
-    "label": "Id",
-    "align": "left",
-    "sortable": false,
-    "name": "id",
-    "field": "id"
-  },
-  {
     "label": "Action Type",
     "align": "left",
     "sortable": false,
@@ -85,13 +78,6 @@ export const AppMenus = {
   }
 ],
 	AdjustmentsTableHeaderItems: [
-  {
-    "label": "Id",
-    "align": "left",
-    "sortable": false,
-    "name": "id",
-    "field": "id"
-  },
   {
     "label": "Date",
     "align": "left",
@@ -167,13 +153,6 @@ export const AppMenus = {
 ],
 	MeasurementsTableHeaderItems: [
   {
-    "label": "Id",
-    "align": "left",
-    "sortable": false,
-    "name": "id",
-    "field": "id"
-  },
-  {
     "label": "Code",
     "align": "left",
     "sortable": false,
@@ -247,13 +226,6 @@ export const AppMenus = {
   }
 ],
 	TypesTableHeaderItems: [
-  {
-    "label": "Id",
-    "align": "left",
-    "sortable": false,
-    "name": "id",
-    "field": "id"
-  },
   {
     "label": "Type",
     "align": "left",

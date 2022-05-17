@@ -56,6 +56,7 @@ const sequelize = models.sequelize; // sequelize functions and operations
 const Op = models.Op; // sequelize query operators
 
 
+const StocksListExport = require('../exports/StocksList')
 Stocks.belongsTo(models.Action_Types, {foreignKey: 'action_id', as: 'action_types' });
 Stocks.belongsTo(models.Items, {foreignKey: 'item_id', as: 'items' });
 
@@ -106,6 +107,11 @@ router.get(['/', '/index/:fieldname?/:fieldvalue?'], async (req, res) => {
 		query.where = where;
 		query.replacements = replacements;
 		query.order = Stocks.getOrderBy(req);
+		if(req.query.export){
+			query.attributes = Stocks.exportListFields(sequelize);
+			let records = await Stocks.findAll(query);
+			return StocksListExport.export(records, req, res)
+		}
 		query.attributes = Stocks.listFields();
 		let page = parseInt(req.query.page) || 1;
 		let limit = parseInt(req.query.limit) || 20;
@@ -184,6 +190,7 @@ router.post('/add/' ,
 			return res.badRequest(errorMsg);
 		}
 		let modeldata = req.body;
+		await beforeAdd(modeldata, req);
 		
 		//save Stocks record
 		let record = await Stocks.create(modeldata);
@@ -195,6 +202,18 @@ router.post('/add/' ,
 		return res.serverError(err);
 	}
 });
+/**
+    * Before create new record
+    * @param {object} postdata // validated form data used to create new record
+    */
+async function beforeAdd(postdata, req){
+    //enter statement here
+    //check if action is release, 1-receive, 2-release, 3-adjustment
+    if (postdata.action_id == 2){
+        //get absolute value of qty then add negative sign
+        postdata.qty = -(Math.abs(Number(postdata.qty)));
+    }
+}
 
 
 /**

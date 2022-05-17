@@ -1,0 +1,26 @@
+
+<div id="report-title"><h1></h1></div>
+<table class="table table-sm table-striped">
+    <thead>
+        <tr>
+            <th>Action</th>
+            <th>Date</th>
+            <th>Qty</th>
+            <th>Barcode</th>
+            <th>Item</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% records.forEach(function(record){ %>
+        <tr>
+            <td><%= record.action_types_action_type %></td>
+            <td><%= record.date %></td>
+            <td><%= record.qty %></td>
+            <td><%= record.items_barcode %></td>
+            <td><%= record.items_name %></td>
+            <td><%= record.remarks %></td>
+        </tr>
+        <% }); %>
+    </tbody>
+</table>

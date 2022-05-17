@@ -41,6 +41,25 @@ const Op = models.Op; // sequelize query operators
 
 
  /**
+ * Route to get action_type_option_list records
+ * @route {GET} /components_data/action_type_option_list
+ * @param {string} path - Express paths
+ * @param {callback} middleware - Express middleware.
+ */
+router.get('/action_type_option_list', async (req, res) => {
+	try{
+		let sqltext = `` ;
+		let records = await sequelize.query(sqltext, { type: sequelize.QueryTypes.SELECT });
+		return res.ok(records);
+	}
+	catch(err){
+		console.error(err)
+		return res.serverError(err);
+	}
+});
+
+
+ /**
  * Route to get type_id_option_list records
  * @route {GET} /components_data/type_id_option_list
  * @param {string} path - Express paths

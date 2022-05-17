@@ -104,12 +104,6 @@
                                                                                 </q-item-section>
                                                                                 <q-item-section>View</q-item-section>
                                                                             </q-item>
-                                                                            <q-item link clickable v-ripple :to="`/stocks/edit/${props.row.id}`">
-                                                                                <q-item-section>
-                                                                                    <q-icon color="positive"  size="sm" name="edit"></q-icon>
-                                                                                </q-item-section>
-                                                                                <q-item-section>Edit</q-item-section>
-                                                                            </q-item>
                                                                             <q-item link clickable v-ripple @click="deleteItem(props.row.id)">
                                                                                 <q-item-section>
                                                                                     <q-icon color="negative"  size="sm" name="clear"></q-icon>
@@ -156,6 +150,10 @@
                                                             <div class="row q-col-gutter-md">
                                                                 <div>
                                                                     <q-btn    :rounded="false"  no-caps  unelevated   color="negative" padding="xs" @click="deleteItem(selectedItems)" v-if="selectedItems.length" icon="delete_sweep" class="q-my-xs" title="Delete Selected"></q-btn>
+                                                                </div>
+                                                                <div>
+                                                                    <q-btn v-if="exportButton"    :rounded="false"  no-caps  unelevated   color="accent" class="q-my-xs" padding="xs" @click="openExportPage()" label="Export"  title="Export" icon="print">
+                                                                    </q-btn>
                                                                 </div>
                                                             </div>
                                                             <div v-if="paginate && totalRecords > 0" class="row q-col-gutter-md justify-center">
@@ -214,6 +212,10 @@
 			msgBeforeDelete: {
 				type: String,
 				default: "Are you sure you want to delete this record?",
+			},
+			exportFormats: {
+				type: Array,
+				default: function () { return ['pdf','excel','csv'] },
 			},
 		},
 		data() {

@@ -75,14 +75,25 @@
                                                         <q-td auto-width>
                                                             <q-checkbox dense v-model="props.selected"></q-checkbox>
                                                         </q-td>
-                                                        <q-td  key="id" :props="props">
-                                                            <q-btn padding="xs"   :rounded="false"  color="primary"  no-caps  unelevated   flat :to="`/measurements/view/${props.row.id}`">{{ props.row.id }}</q-btn>
-                                                        </q-td>
                                                         <q-td  key="code" :props="props">
-                                                            {{ props.row.code }}
+                                                            <span class="table-inlined-edit">{{ props.row.code }}</span>
+                                                            <inline-edit v-model="props.row.code" save-icon="check_circle" cancel-icon="close" :url="`measurements/edit/${ props.row.id }`" field-name="code" field-label="Code" title="Enter Code">
+                                                            <api-data-source   api-path="components_data/action_type_option_list"  :query-params="filters" v-slot="req">
+                                                                <q-input outlined dense  ref="listctrlcode" v-model.trim="props.row.code"  label=""  placeholder=""      
+                                                                class="" >
+                                                                </q-input>
+                                                            </api-data-source>
+                                                            </inline-edit>
                                                         </q-td>
                                                         <q-td  key="name" :props="props">
-                                                            {{ props.row.name }}
+                                                            <span class="table-inlined-edit">{{ props.row.name }}</span>
+                                                            <inline-edit v-model="props.row.name" save-icon="check_circle" cancel-icon="close" :url="`measurements/edit/${ props.row.id }`" field-name="name" field-label="Name" title="Enter Name">
+                                                            <api-data-source   api-path="components_data/action_type_option_list"  :query-params="filters" v-slot="req">
+                                                                <q-input outlined dense  ref="listctrlname" v-model.trim="props.row.name"  label=""  placeholder=""      
+                                                                class="" >
+                                                                </q-input>
+                                                            </api-data-source>
+                                                            </inline-edit>
                                                         </q-td>
                                                         <q-td key="btnactions" :props="props">
                                                             <div class="row q-col-gutter-xs justify-end">

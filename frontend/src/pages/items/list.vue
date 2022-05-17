@@ -76,10 +76,24 @@
                                                             <q-checkbox dense v-model="props.selected"></q-checkbox>
                                                         </q-td>
                                                         <q-td  key="barcode" :props="props">
-                                                            {{ props.row.barcode }}
+                                                            <span class="table-inlined-edit">{{ props.row.barcode }}</span>
+                                                            <inline-edit v-model="props.row.barcode" save-icon="check_circle" cancel-icon="close" :url="`items/edit/${ props.row.id }`" field-name="barcode" field-label="Barcode" title="Enter Barcode">
+                                                            <api-data-source   api-path="components_data/action_type_option_list"  :query-params="filters" v-slot="req">
+                                                                <q-input outlined dense  ref="listctrlbarcode" v-model.trim="props.row.barcode"  label=""  placeholder=""      
+                                                                class="" >
+                                                                </q-input>
+                                                            </api-data-source>
+                                                            </inline-edit>
                                                         </q-td>
                                                         <q-td  key="name" :props="props">
-                                                            {{ props.row.name }}
+                                                            <span class="table-inlined-edit">{{ props.row.name }}</span>
+                                                            <inline-edit v-model="props.row.name" save-icon="check_circle" cancel-icon="close" :url="`items/edit/${ props.row.id }`" field-name="name" field-label="Name" title="Enter Name">
+                                                            <api-data-source   api-path="components_data/action_type_option_list"  :query-params="filters" v-slot="req">
+                                                                <q-input outlined dense  ref="listctrlname" v-model.trim="props.row.name"  label=""  placeholder=""      
+                                                                class="" >
+                                                                </q-input>
+                                                            </api-data-source>
+                                                            </inline-edit>
                                                         </q-td>
                                                         <q-td  key="types_type" :props="props">
                                                             {{ props.row.types_type }}
