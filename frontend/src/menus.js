@@ -151,14 +151,14 @@ export const AppMenus = {
     "field": "name"
   },
   {
-    "label": "Type Id",
+    "label": "Type",
     "align": "left",
     "sortable": false,
     "name": "type_id",
     "field": "type_id"
   },
   {
-    "label": "Measurement Id",
+    "label": "Measurement",
     "align": "left",
     "sortable": false,
     "name": "measurement_id",
