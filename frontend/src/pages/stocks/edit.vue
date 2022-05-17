@@ -32,6 +32,21 @@
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <div class="col-sm-3 col-12">
+                                                                Action 
+                                                            </div>
+                                                            <div class="col-sm-9 col-12">
+                                                                <api-data-source @loaded="response => mapOptionField(response, 'action_id')"  api-path="components_data/action_id_option_list"  :query-params="filters" v-slot="req">
+                                                                    <ValidationProvider :rules="{}" name="Action" v-slot="{ errors, invalid, validated }">
+                                                                        <q-select   :loading="req.loading"  outlined dense  ref="ctrlaction_id" emit-value map-options  v-model="formData.action_id" :options="req.response" label="Action"  :error="invalid && validated" :error-message="errors[0]" >
+                                                                        </q-select> 
+                                                                    </ValidationProvider>
+                                                                </api-data-source>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-12">
                                                                 Date *
                                                             </div>
                                                             <div class="col-sm-9 col-12">
@@ -52,14 +67,37 @@
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <div class="col-sm-3 col-12">
-                                                                Item Id *
+                                                                Item *
                                                             </div>
                                                             <div class="col-sm-9 col-12">
-                                                                <ValidationProvider :rules="{required:true}" name="Item Id" v-slot="{ errors, invalid, validated }">
-                                                                    <q-input outlined dense  ref="ctrlitem_id" v-model.trim="formData.item_id"  label="Item Id" type="number" placeholder="Enter Item Id"   step="any"    
-                                                                    class="" :error="invalid && validated" :error-message="errors[0]">
-                                                                    </q-input>
-                                                                </ValidationProvider>
+                                                                <api-data-source @loaded="response => mapOptionField(response, 'item_id')"  api-path="components_data/item_id_option_list"  :query-params="filters" v-slot="req">
+                                                                    <ValidationProvider :rules="{required:true}" name="Item" v-slot="{ errors, invalid, validated }">
+                                                                        <q-select   :loading="req.loading"  outlined dense  ref="ctrlitem_id" emit-value map-options  v-model="formData.item_id" :options="req.response" label="Item"  :error="invalid && validated" :error-message="errors[0]" >
+                                                                        <template v-slot:option="scope">
+                                                                            <q-item v-bind="scope.itemProps" v-on="scope.itemEvents">
+                                                                                <q-item-section v-if="scope.opt.image" avatar>
+                                                                                    <image-viewer :src="scope.opt.image" image-size="small"></image-viewer>
+                                                                                </q-item-section>
+                                                                                <q-item-section>
+                                                                                    <q-item-label>{{ scope.opt.label }}</q-item-label>
+                                                                                    <q-item-label v-if="scope.opt.caption" caption>{{ scope.opt.caption }}</q-item-label>
+                                                                                </q-item-section>
+                                                                            </q-item>
+                                                                        </template>
+                                                                        <template v-slot:selected-item="scope">
+                                                                            <q-item  v-if="scope.opt">
+                                                                                <q-item-section v-if="scope.opt.image" avatar>
+                                                                                    <image-viewer :src="scope.opt.image" image-size="small"></image-viewer>
+                                                                                </q-item-section>
+                                                                                <q-item-section>
+                                                                                    <q-item-label>{{ scope.opt.label }}</q-item-label>
+                                                                                    <q-item-label v-if="scope.opt.caption" caption>{{ scope.opt.caption }}</q-item-label>
+                                                                                </q-item-section>
+                                                                            </q-item>
+                                                                        </template>
+                                                                        </q-select> 
+                                                                    </ValidationProvider>
+                                                                </api-data-source>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -85,20 +123,6 @@
                                                             <div class="col-sm-9 col-12">
                                                                 <ValidationProvider :rules="{}" name="Remarks" v-slot="{ errors, invalid, validated }">
                                                                     <q-input outlined dense  ref="ctrlremarks" rows="5"  v-model="formData.remarks" placeholder="Enter Remarks"    type="textarea"  :error="invalid && validated" :error-message="errors[0]">
-                                                                    </q-input>
-                                                                </ValidationProvider>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="row">
-                                                            <div class="col-sm-3 col-12">
-                                                                Action Id 
-                                                            </div>
-                                                            <div class="col-sm-9 col-12">
-                                                                <ValidationProvider :rules="{}" name="Action Id" v-slot="{ errors, invalid, validated }">
-                                                                    <q-input outlined dense  ref="ctrlaction_id" v-model.trim="formData.action_id"  label="Action Id" type="number" placeholder="Enter Action Id"   step="any"    
-                                                                    class="" :error="invalid && validated" :error-message="errors[0]">
                                                                     </q-input>
                                                                 </ValidationProvider>
                                                             </div>
@@ -163,7 +187,7 @@
 		data() {
             return {
 				formData: {
-					date: "", item_id: "", qty: "", remarks: "", action_id: "", 
+					action_id: "", date: "", item_id: "", qty: "", remarks: "", 
 				},
 				datePicker:false,
         	}
@@ -219,7 +243,7 @@
             },
 			resetForm (){
 				//reset form fields value
-				this.formData = {date: "", item_id: "", qty: "", remarks: "", action_id: "", };
+				this.formData = {action_id: "", date: "", item_id: "", qty: "", remarks: "", };
 				requestAnimationFrame(() => {
 					this.$refs.observer.reset();
 				});

@@ -56,6 +56,8 @@ const sequelize = models.sequelize; // sequelize functions and operations
 const Op = models.Op; // sequelize query operators
 
 
+Stocks.belongsTo(models.Action_Types, {foreignKey: 'action_id', as: 'action_types' });
+Stocks.belongsTo(models.Items, {foreignKey: 'item_id', as: 'items' });
 
 
 /**
@@ -78,6 +80,20 @@ router.get(['/', '/index/:fieldname?/:fieldvalue?'], async (req, res) => {
 			];
 			replacements.fieldvalue = fieldvalue;
 		}
+		let joinTables = []; // hold list of join tables
+		joinTables.push({
+			model: models.Action_Types,
+			required: false,
+			as: 'action_types',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		joinTables.push({
+			model: models.Items,
+			required: false,
+			as: 'items',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		query['include'] = joinTables;
 		let search = req.query.search;
 		if(search){
 			let searchFields = Stocks.searchFields();
@@ -113,7 +129,24 @@ router.get(['/view/:recid'], async (req, res) => {
 		let recid = req.params.recid || null;
 		let query = {}
 		let where = {}
-		where['id'] = recid;
+		let joinTables = []; // hold list of join tables
+		joinTables.push({
+			model: models.Action_Types,
+			required: false,
+			as: 'action_types',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		joinTables.push({
+			model: models.Items,
+			required: false,
+			as: 'items',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		query['include'] = joinTables;
+		where[Op.and] = sequelize.literal('stocks.id = :recid');
+		query.replacements = {
+			recid
+		}
 		query.raw = true;
 		query.where = where;
 		query.attributes = Stocks.viewFields();
@@ -137,11 +170,11 @@ router.get(['/view/:recid'], async (req, res) => {
  */
 router.post('/add/' , 
 	[
+		body('action_id').optional().isNumeric(),
 		body('date').not().isEmpty(),
 		body('item_id').not().isEmpty().isNumeric(),
 		body('qty').not().isEmpty().isNumeric(),
 		body('remarks').optional(),
-		body('action_id').optional().isNumeric(),
 	]
 , async function (req, res) {
 	try{
@@ -199,11 +232,11 @@ router.get('/edit/:recid', async (req, res) => {
  */
 router.post('/edit/:recid' , 
 	[
+		body('action_id').optional().isNumeric(),
 		body('date').optional({nullable: true}).not().isEmpty(),
 		body('item_id').optional({nullable: true}).not().isEmpty().isNumeric(),
 		body('qty').optional({nullable: true}).not().isEmpty().isNumeric(),
 		body('remarks').optional(),
-		body('action_id').optional().isNumeric(),
 	]
 , async (req, res) => {
 	try{

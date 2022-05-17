@@ -75,31 +75,23 @@
                                                         <q-td auto-width>
                                                             <q-checkbox dense v-model="props.selected"></q-checkbox>
                                                         </q-td>
-                                                        <q-td  key="id" :props="props">
-                                                            <q-btn padding="xs"   :rounded="false"  color="primary"  no-caps  unelevated   flat :to="`/stocks/view/${props.row.id}`">{{ props.row.id }}</q-btn>
+                                                        <q-td  key="action_types_action_type" :props="props">
+                                                            {{ props.row.action_types_action_type }}
                                                         </q-td>
                                                         <q-td  key="date" :props="props">
-                                                            <q-chip v-if="props.row.date" dense size="13px" :label="props.row.date | relativeDate">
-                                                            <q-tooltip
-                                                            content-class="bg-accent"
-                                                            transition-show="scale"
-                                                            transition-hide="scale"
-                                                            >
-                                                            {{ props.row.date | humanDatetime}}
-                                                            </q-tooltip>
-                                                            </q-chip>
-                                                        </q-td>
-                                                        <q-td  key="item_id" :props="props">
-                                                            {{ props.row.item_id }}
+                                                            {{ props.row.date }}
                                                         </q-td>
                                                         <q-td  key="qty" :props="props">
                                                             {{ props.row.qty }}
                                                         </q-td>
+                                                        <q-td  key="items_barcode" :props="props">
+                                                            {{ props.row.items_barcode }}
+                                                        </q-td>
+                                                        <q-td  key="items_name" :props="props">
+                                                            {{ props.row.items_name }}
+                                                        </q-td>
                                                         <q-td  key="remarks" :props="props">
                                                             {{ props.row.remarks }}
-                                                        </q-td>
-                                                        <q-td  key="action_id" :props="props">
-                                                            {{ props.row.action_id }}
                                                         </q-td>
                                                         <q-td key="btnactions" :props="props">
                                                             <div class="row q-col-gutter-xs justify-end">
@@ -132,6 +124,11 @@
                                                     </q-tr>
                                                 </template>
                                                 <!-- End of Table Layout-->
+                                                <template v-slot:bottom-row>
+                                                    <q-tr>
+                                                        <q-td></q-td><q-td></q-td><q-td>Total Qty : <q-chip square class="text-bold">{{totalQty}}</q-chip></q-td><q-td></q-td><q-td></q-td><q-td></q-td><q-td></q-td>
+                                                    </q-tr>
+                                                </template>
                                                 </q-table>
                                             </template>
                                             <!-- page loading indicator template -->
@@ -245,6 +242,9 @@
 				set: function (value) {
 					this.$store.commit("stocks/setCurrentRecord", value);
 				},
+			},
+			totalQty: function(){
+				return this.records.sum("qty"); 
 			},
 		},
 		meta () {
