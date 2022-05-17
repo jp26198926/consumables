@@ -70,11 +70,11 @@ export const AppMenus = {
     "field": "id"
   },
   {
-    "label": "Adjustment Type",
+    "label": "Action Type",
     "align": "left",
     "sortable": false,
-    "name": "adjustment_type",
-    "field": "adjustment_type"
+    "name": "action_type",
+    "field": "action_type"
   },
   {
     "label": "Action",

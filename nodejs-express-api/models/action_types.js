@@ -6,7 +6,7 @@ class Action_Types extends BaseModel {
 			{
 				
 				id: { type: Sequelize.INTEGER, primaryKey: true , autoIncrement: true },
-				adjustment_type: {name: 'adjustment_type', type:Sequelize.STRING}
+				action_type: {name: 'action_type', type:Sequelize.STRING}
 			}, 
 			{ 
 				sequelize,
@@ -21,7 +21,7 @@ class Action_Types extends BaseModel {
 		let sequelize = this.sequelize;
 		return [
 			'id', 
-			'adjustment_type'
+			'action_type'
 		];
 	}
 
@@ -29,7 +29,7 @@ class Action_Types extends BaseModel {
 		let sequelize = this.sequelize;
 		return [
 			'id', 
-			'adjustment_type'
+			'action_type'
 		];
 	}
 
@@ -37,7 +37,7 @@ class Action_Types extends BaseModel {
 		let sequelize = this.sequelize;
 		return [
 			'id', 
-			'adjustment_type'
+			'action_type'
 		];
 	}
 
@@ -45,7 +45,7 @@ class Action_Types extends BaseModel {
 		let sequelize = this.sequelize;
 		return [
 			'id', 
-			'adjustment_type'
+			'action_type'
 		];
 	}
 
@@ -53,7 +53,7 @@ class Action_Types extends BaseModel {
 		let sequelize = this.sequelize;
 		return [
 			'id', 
-			'adjustment_type'
+			'action_type'
 		];
 	}
 
@@ -61,7 +61,7 @@ class Action_Types extends BaseModel {
 	static searchFields(){
 		let sequelize = this.sequelize;
 		return [
-			sequelize.literal("adjustment_type LIKE :search"),
+			sequelize.literal("action_type LIKE :search"),
 		];
 	}
 

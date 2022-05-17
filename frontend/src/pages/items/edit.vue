@@ -63,11 +63,12 @@
                                                                 Type Id 
                                                             </div>
                                                             <div class="col-sm-9 col-12">
-                                                                <ValidationProvider :rules="{}" name="Type Id" v-slot="{ errors, invalid, validated }">
-                                                                    <q-input outlined dense  ref="ctrltype_id" v-model.trim="formData.type_id"  label="Type Id" type="number" placeholder="Enter Type Id"   step="any"    
-                                                                    class="" :error="invalid && validated" :error-message="errors[0]">
-                                                                    </q-input>
-                                                                </ValidationProvider>
+                                                                <api-data-source @loaded="response => mapOptionField(response, 'type_id')"  api-path="components_data/type_id_option_list"  :query-params="filters" v-slot="req">
+                                                                    <ValidationProvider :rules="{}" name="Type Id" v-slot="{ errors, invalid, validated }">
+                                                                        <q-select   :loading="req.loading"  outlined dense  ref="ctrltype_id" emit-value map-options  v-model="formData.type_id" :options="req.response" label="Type Id"  :error="invalid && validated" :error-message="errors[0]" >
+                                                                        </q-select> 
+                                                                    </ValidationProvider>
+                                                                </api-data-source>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -77,11 +78,12 @@
                                                                 Measurement Id 
                                                             </div>
                                                             <div class="col-sm-9 col-12">
-                                                                <ValidationProvider :rules="{}" name="Measurement Id" v-slot="{ errors, invalid, validated }">
-                                                                    <q-input outlined dense  ref="ctrlmeasurement_id" v-model.trim="formData.measurement_id"  label="Measurement Id" type="number" placeholder="Enter Measurement Id"   step="any"    
-                                                                    class="" :error="invalid && validated" :error-message="errors[0]">
-                                                                    </q-input>
-                                                                </ValidationProvider>
+                                                                <api-data-source @loaded="response => mapOptionField(response, 'measurement_id')"  api-path="components_data/measurement_id_option_list"  :query-params="filters" v-slot="req">
+                                                                    <ValidationProvider :rules="{}" name="Measurement Id" v-slot="{ errors, invalid, validated }">
+                                                                        <q-select   :loading="req.loading"  outlined dense  ref="ctrlmeasurement_id" emit-value map-options  v-model="formData.measurement_id" :options="req.response" label="Measurement Id"  :error="invalid && validated" :error-message="errors[0]" >
+                                                                        </q-select> 
+                                                                    </ValidationProvider>
+                                                                </api-data-source>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -144,7 +146,7 @@
 		data() {
             return {
 				formData: {
-					barcode: "", name: "", type_id: "", measurement_id: "", 
+					barcode: this.$utils.randomNum(6), name: "", type_id: "", measurement_id: "", 
 				},
         	}
 		},
@@ -199,7 +201,7 @@
             },
 			resetForm (){
 				//reset form fields value
-				this.formData = {barcode: "", name: "", type_id: "", measurement_id: "", };
+				this.formData = {barcode: this.$utils.randomNum(6), name: "", type_id: "", measurement_id: "", };
 				requestAnimationFrame(() => {
 					this.$refs.observer.reset();
 				});

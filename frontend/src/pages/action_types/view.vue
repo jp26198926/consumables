@@ -36,8 +36,8 @@
                                                 <q-separator></q-separator>
                                                 <q-item>
                                                     <q-item-section>
-                                                        <q-item-label caption>Adjustment Type: </q-item-label>
-                                                        <q-item-label class="text-bold">{{ item.adjustment_type }}</q-item-label>
+                                                        <q-item-label caption>Action Type: </q-item-label>
+                                                        <q-item-label class="text-bold">{{ item.action_type }}</q-item-label>
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>

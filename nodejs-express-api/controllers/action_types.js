@@ -137,7 +137,7 @@ router.get(['/view/:recid'], async (req, res) => {
  */
 router.post('/add/' , 
 	[
-		body('adjustment_type').not().isEmpty(),
+		body('action_type').optional(),
 	]
 , async function (req, res) {
 	try{
@@ -195,7 +195,7 @@ router.get('/edit/:recid', async (req, res) => {
  */
 router.post('/edit/:recid' , 
 	[
-		body('adjustment_type').optional({nullable: true}).not().isEmpty(),
+		body('action_type').optional(),
 	]
 , async (req, res) => {
 	try{

@@ -32,11 +32,11 @@
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <div class="col-sm-3 col-12">
-                                                                Adjustment Type *
+                                                                Action Type 
                                                             </div>
                                                             <div class="col-sm-9 col-12">
-                                                                <ValidationProvider :rules="{required:true}" name="Adjustment Type" v-slot="{ errors, invalid, validated }">
-                                                                    <q-input outlined dense  ref="ctrladjustment_type" v-model.trim="formData.adjustment_type"  label="Adjustment Type" type="text" placeholder="Enter Adjustment Type"      
+                                                                <ValidationProvider :rules="{}" name="Action Type" v-slot="{ errors, invalid, validated }">
+                                                                    <q-input outlined dense  ref="ctrlaction_type" v-model.trim="formData.action_type"  label="Action Type" type="text" placeholder="Enter Action Type"      
                                                                     class="" :error="invalid && validated" :error-message="errors[0]">
                                                                     </q-input>
                                                                 </ValidationProvider>
@@ -102,7 +102,7 @@
 		data() {
             return {
 				formData: {
-					adjustment_type: "", 
+					action_type: "", 
 				},
         	}
 		},
@@ -157,7 +157,7 @@
             },
 			resetForm (){
 				//reset form fields value
-				this.formData = {adjustment_type: "", };
+				this.formData = {action_type: "", };
 				requestAnimationFrame(() => {
 					this.$refs.observer.reset();
 				});

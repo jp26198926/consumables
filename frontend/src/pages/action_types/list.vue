@@ -78,8 +78,8 @@
                                                         <q-td  key="id" :props="props">
                                                             <q-btn padding="xs"   :rounded="false"  color="primary"  no-caps  unelevated   flat :to="`/action_types/view/${props.row.id}`">{{ props.row.id }}</q-btn>
                                                         </q-td>
-                                                        <q-td  key="adjustment_type" :props="props">
-                                                            {{ props.row.adjustment_type }}
+                                                        <q-td  key="action_type" :props="props">
+                                                            {{ props.row.action_type }}
                                                         </q-td>
                                                         <q-td key="btnactions" :props="props">
                                                             <div class="row q-col-gutter-xs justify-end">
