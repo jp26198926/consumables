@@ -6,13 +6,19 @@ class Types extends BaseModel {
 			{
 				
 				id: { type: Sequelize.INTEGER, primaryKey: true , autoIncrement: true },
-				type: {name: 'type', type:Sequelize.STRING}
+				type: {name: 'type', type:Sequelize.STRING},
+				date_created: {name: 'date_created', type:Sequelize.DATE},
+				date_updated: {name: 'date_updated', type:Sequelize.DATE}
 			}, 
 			{ 
 				sequelize,
 				
 				tableName: "types",
-				modelName: "types",
+				modelName: "types",timestamps:true,
+				createdAt: 'date_created',
+				updatedAt: 'date_updated',
+				
+				
 			}
 		);
 	}
@@ -37,7 +43,9 @@ class Types extends BaseModel {
 		let sequelize = this.sequelize;
 		return [
 			'id', 
-			'type'
+			'type', 
+			'date_created', 
+			'date_updated'
 		];
 	}
 
@@ -45,7 +53,9 @@ class Types extends BaseModel {
 		let sequelize = this.sequelize;
 		return [
 			'id', 
-			'type'
+			'type', 
+			'date_created', 
+			'date_updated'
 		];
 	}
 

@@ -10,13 +10,20 @@ class Stocks extends BaseModel {
 				item_id: {name: 'item_id', type:Sequelize.INTEGER},
 				qty: {name: 'qty', type:Sequelize.DECIMAL},
 				remarks: {name: 'remarks', type:Sequelize.STRING},
-				action_id: {name: 'action_id', type:Sequelize.INTEGER}
+				action_id: {name: 'action_id', type:Sequelize.INTEGER},
+				date_created: {name: 'date_created', type:Sequelize.DATE},
+				date_updated: {name: 'date_updated', type:Sequelize.DATE},
+				date_deleted: {name: 'date_deleted', type:Sequelize.DATE}
 			}, 
 			{ 
 				sequelize,
 				
 				tableName: "stocks",
-				modelName: "stocks",
+				modelName: "stocks",timestamps:true,
+				createdAt: 'date_created',
+				updatedAt: 'date_updated',
+				
+					paranoid: true, deletedAt: 'date_deleted'
 			}
 		);
 	}
@@ -62,7 +69,10 @@ class Stocks extends BaseModel {
 			sequelize.literal("items.name AS items_name"), 
 			sequelize.literal('stocks.remarks AS remarks'), 
 			sequelize.literal("action_types.id AS action_types_id"), 
-			sequelize.literal("items.id AS items_id")
+			sequelize.literal("items.id AS items_id"), 
+			sequelize.literal('stocks.date_created AS date_created'), 
+			sequelize.literal('stocks.date_updated AS date_updated'), 
+			sequelize.literal('stocks.date_deleted AS date_deleted')
 		];
 	}
 
@@ -77,7 +87,10 @@ class Stocks extends BaseModel {
 			sequelize.literal("items.name AS items_name"), 
 			sequelize.literal('stocks.remarks AS remarks'), 
 			sequelize.literal("action_types.id AS action_types_id"), 
-			sequelize.literal("items.id AS items_id")
+			sequelize.literal("items.id AS items_id"), 
+			sequelize.literal('stocks.date_created AS date_created'), 
+			sequelize.literal('stocks.date_updated AS date_updated'), 
+			sequelize.literal('stocks.date_deleted AS date_deleted')
 		];
 	}
 

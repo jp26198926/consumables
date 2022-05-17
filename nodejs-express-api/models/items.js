@@ -9,13 +9,20 @@ class Items extends BaseModel {
 				barcode: {name: 'barcode', type:Sequelize.STRING},
 				name: {name: 'name', type:Sequelize.STRING},
 				type_id: {name: 'type_id', type:Sequelize.INTEGER},
-				measurement_id: {name: 'measurement_id', type:Sequelize.INTEGER}
+				measurement_id: {name: 'measurement_id', type:Sequelize.INTEGER},
+				date_created: {name: 'date_created', type:Sequelize.DATE},
+				date_updated: {name: 'date_updated', type:Sequelize.DATE},
+				date_deleted: {name: 'date_deleted', type:Sequelize.DATE}
 			}, 
 			{ 
 				sequelize,
 				
 				tableName: "items",
-				modelName: "items",
+				modelName: "items",timestamps:true,
+				createdAt: 'date_created',
+				updatedAt: 'date_updated',
+				
+					paranoid: true, deletedAt: 'date_deleted'
 			}
 		);
 	}
@@ -55,7 +62,9 @@ class Items extends BaseModel {
 			sequelize.literal("types.id AS types_id"), 
 			sequelize.literal("types.type AS types_type"), 
 			sequelize.literal("measurements.id AS measurements_id"), 
-			sequelize.literal("measurements.name AS measurements_name")
+			sequelize.literal("measurements.name AS measurements_name"), 
+			sequelize.literal('items.date_created AS date_created'), 
+			sequelize.literal('items.date_updated AS date_updated')
 		];
 	}
 
@@ -68,7 +77,9 @@ class Items extends BaseModel {
 			sequelize.literal("types.id AS types_id"), 
 			sequelize.literal("types.type AS types_type"), 
 			sequelize.literal("measurements.id AS measurements_id"), 
-			sequelize.literal("measurements.name AS measurements_name")
+			sequelize.literal("measurements.name AS measurements_name"), 
+			sequelize.literal('items.date_created AS date_created'), 
+			sequelize.literal('items.date_updated AS date_updated')
 		];
 	}
 

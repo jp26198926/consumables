@@ -29,13 +29,6 @@
                                             <div class="col">
                                                 <q-item>
                                                     <q-item-section>
-                                                        <q-item-label caption>Id: </q-item-label>
-                                                        <q-item-label class="text-bold">{{ item.id }}</q-item-label>
-                                                    </q-item-section>
-                                                </q-item>
-                                                <q-separator></q-separator>
-                                                <q-item>
-                                                    <q-item-section>
                                                         <q-item-label caption>Code: </q-item-label>
                                                         <q-item-label class="text-bold">{{ item.code }}</q-item-label>
                                                     </q-item-section>
@@ -45,6 +38,40 @@
                                                     <q-item-section>
                                                         <q-item-label caption>Name: </q-item-label>
                                                         <q-item-label class="text-bold">{{ item.name }}</q-item-label>
+                                                    </q-item-section>
+                                                </q-item>
+                                                <q-separator></q-separator>
+                                                <q-item>
+                                                    <q-item-section>
+                                                        <q-item-label caption>Date Created: </q-item-label>
+                                                        <q-item-label class="text-bold">
+                                                            <q-chip v-if="item.date_created" dense size="13px" :label="item.date_created | relativeDate">
+                                                            <q-tooltip
+                                                            content-class="bg-accent"
+                                                            transition-show="scale"
+                                                            transition-hide="scale"
+                                                            >
+                                                            {{ item.date_created | humanDatetime}}
+                                                            </q-tooltip>
+                                                            </q-chip>
+                                                        </q-item-label>
+                                                    </q-item-section>
+                                                </q-item>
+                                                <q-separator></q-separator>
+                                                <q-item>
+                                                    <q-item-section>
+                                                        <q-item-label caption>Date Updated: </q-item-label>
+                                                        <q-item-label class="text-bold">
+                                                            <q-chip v-if="item.date_updated" dense size="13px" :label="item.date_updated | relativeDate">
+                                                            <q-tooltip
+                                                            content-class="bg-accent"
+                                                            transition-show="scale"
+                                                            transition-hide="scale"
+                                                            >
+                                                            {{ item.date_updated | humanDatetime}}
+                                                            </q-tooltip>
+                                                            </q-chip>
+                                                        </q-item-label>
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>

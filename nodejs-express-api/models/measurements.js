@@ -7,13 +7,19 @@ class Measurements extends BaseModel {
 				
 				id: { type: Sequelize.INTEGER, primaryKey: true , autoIncrement: true },
 				code: {name: 'code', type:Sequelize.STRING},
-				name: {name: 'name', type:Sequelize.STRING}
+				name: {name: 'name', type:Sequelize.STRING},
+				date_created: {name: 'date_created', type:Sequelize.DATE},
+				date_updated: {name: 'date_updated', type:Sequelize.DATE}
 			}, 
 			{ 
 				sequelize,
 				
 				tableName: "measurements",
-				modelName: "measurements",
+				modelName: "measurements",timestamps:true,
+				createdAt: 'date_created',
+				updatedAt: 'date_updated',
+				
+				
 			}
 		);
 	}
@@ -41,7 +47,9 @@ class Measurements extends BaseModel {
 		return [
 			'id', 
 			'code', 
-			'name'
+			'name', 
+			'date_created', 
+			'date_updated'
 		];
 	}
 
@@ -50,7 +58,9 @@ class Measurements extends BaseModel {
 		return [
 			'id', 
 			'code', 
-			'name'
+			'name', 
+			'date_created', 
+			'date_updated'
 		];
 	}
 

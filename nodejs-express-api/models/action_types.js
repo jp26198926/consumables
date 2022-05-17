@@ -6,13 +6,19 @@ class Action_Types extends BaseModel {
 			{
 				
 				id: { type: Sequelize.INTEGER, primaryKey: true , autoIncrement: true },
-				action_type: {name: 'action_type', type:Sequelize.STRING}
+				action_type: {name: 'action_type', type:Sequelize.STRING},
+				date_created: {name: 'date_created', type:Sequelize.DATE},
+				date_updated: {name: 'date_updated', type:Sequelize.DATE}
 			}, 
 			{ 
 				sequelize,
 				
 				tableName: "action_types",
-				modelName: "action_types",
+				modelName: "action_types",timestamps:true,
+				createdAt: 'date_created',
+				updatedAt: 'date_updated',
+				
+				
 			}
 		);
 	}
@@ -37,7 +43,9 @@ class Action_Types extends BaseModel {
 		let sequelize = this.sequelize;
 		return [
 			'id', 
-			'action_type'
+			'action_type', 
+			'date_created', 
+			'date_updated'
 		];
 	}
 
@@ -45,7 +53,9 @@ class Action_Types extends BaseModel {
 		let sequelize = this.sequelize;
 		return [
 			'id', 
-			'action_type'
+			'action_type', 
+			'date_created', 
+			'date_updated'
 		];
 	}
 
