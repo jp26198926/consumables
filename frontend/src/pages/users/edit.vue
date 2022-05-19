@@ -62,6 +62,22 @@
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <div class="col-sm-3 col-12">
+                                                                Email *
+                                                            </div>
+                                                            <div class="col-sm-9 col-12">
+                                                                <check-duplicate v-model="formData.email" check-path="components_data/users_email_exist/" v-slot="checker">
+                                                                <ValidationProvider :rules="{required:true, email:true}" name="Email" v-slot="{ errors, invalid, validated }">
+                                                                    <q-input outlined dense  ref="ctrlemail" @blur="checker.check" :loading="checker.loading" v-model.trim="formData.email"  label="Email" type="email" placeholder="Enter Email"      
+                                                                    class="" :error="(invalid && validated) || checker.exist" :error-message="errors[0] || 'Not available'">
+                                                                    </q-input>
+                                                                </ValidationProvider>
+                                                                </check-duplicate>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-12">
                                                                 Telelphone 
                                                             </div>
                                                             <div class="col-sm-9 col-12">
@@ -148,7 +164,7 @@
 		data() {
             return {
 				formData: {
-					name: "", username: "", telelphone: "", photo: "", 
+					name: "", username: "", email: "", telelphone: "", photo: "", 
 				},
         	}
 		},
@@ -203,7 +219,7 @@
             },
 			resetForm (){
 				//reset form fields value
-				this.formData = {name: "", username: "", telelphone: "", photo: "", };
+				this.formData = {name: "", username: "", email: "", telelphone: "", photo: "", };
 				requestAnimationFrame(() => {
 					this.$refs.observer.reset();
 				});

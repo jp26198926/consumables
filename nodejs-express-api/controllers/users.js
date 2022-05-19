@@ -218,6 +218,7 @@ router.post('/edit/:recid' ,
 	[
 		body('name').optional({nullable: true}).not().isEmpty(),
 		body('username').optional({nullable: true}).not().isEmpty(),
+		body('email').optional({nullable: true}).not().isEmpty().isEmail(),
 		body('telelphone').optional(),
 		body('photo').optional(),
 	]
@@ -239,6 +240,10 @@ router.post('/edit/:recid' ,
 		let usernameCount = await Users.count({where:{'username': modeldata.username, 'id': {[Op.ne]: recid} }});
 		if(usernameCount > 0){
 			return res.badRequest(`${modeldata.username} already exist.`);
+		}
+		let emailCount = await Users.count({where:{'email': modeldata.email, 'id': {[Op.ne]: recid} }});
+		if(emailCount > 0){
+			return res.badRequest(`${modeldata.email} already exist.`);
 		}
 		let query = {};
 		let where = {};

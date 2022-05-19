@@ -107,6 +107,7 @@ class Users extends BaseModel {
 			'id', 
 			'name', 
 			'username', 
+			'email', 
 			'telelphone', 
 			'photo'
 		];
