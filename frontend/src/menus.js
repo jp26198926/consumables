@@ -75,6 +75,14 @@ export const AppMenus = {
     "iconcolor": "",
     "target": "",
     "submenu": []
+  },
+  {
+    "path": "/audits",
+    "label": "Audits",
+    "icon": "playlist_add_check",
+    "iconcolor": "",
+    "target": "",
+    "submenu": []
   }
 ],
 	Action_TypesTableHeaderItems: [
@@ -84,6 +92,71 @@ export const AppMenus = {
     "sortable": false,
     "name": "action_type",
     "field": "action_type"
+  },
+  {
+    "label": "Action",
+    "align": "right",
+    "sortable": false,
+    "name": "btnactions",
+    "field": ""
+  }
+],
+	AuditsTableHeaderItems: [
+  {
+    "label": "Log Id",
+    "align": "left",
+    "sortable": false,
+    "name": "log_id",
+    "field": "log_id"
+  },
+  {
+    "label": "Action",
+    "align": "left",
+    "sortable": false,
+    "name": "action",
+    "field": "action"
+  },
+  {
+    "label": "Page",
+    "align": "left",
+    "sortable": false,
+    "name": "page",
+    "field": "page"
+  },
+  {
+    "label": "Record Id",
+    "align": "left",
+    "sortable": false,
+    "name": "record_id",
+    "field": "record_id"
+  },
+  {
+    "label": "User Ip",
+    "align": "left",
+    "sortable": false,
+    "name": "user_ip",
+    "field": "user_ip"
+  },
+  {
+    "label": "Request Url",
+    "align": "left",
+    "sortable": false,
+    "name": "request_url",
+    "field": "request_url"
+  },
+  {
+    "label": "Timestamp",
+    "align": "left",
+    "sortable": false,
+    "name": "timestamp",
+    "field": "timestamp"
+  },
+  {
+    "label": "User",
+    "align": "left",
+    "sortable": false,
+    "name": "users_name",
+    "field": "users_name"
   },
   {
     "label": "Action",

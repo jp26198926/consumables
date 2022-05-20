@@ -42,6 +42,9 @@ const config = require('../config.js');
  * @const
  */
 const { body, validationResult } = require('express-validator');
+const AuditLog = require('../helpers/auditlog.js');
+let oldValues = null;
+let newValues = null;
 const Rbac = require('../helpers/rbac.js');
 
 
@@ -150,7 +153,11 @@ router.post('/edit' ,
 		if(!record){
 			return res.notFound();
 		}
+		oldValues = JSON.stringify(record); //for audit trail
 		await Users.update(modeldata, {where: where});
+		record = await Users.findOne(query);//for audit trail
+		newValues = JSON.stringify(record); 
+		AuditLog.writeToLog(req, {recid, oldValues, newValues});
 		return res.ok(modeldata);
 	}
 	catch(err){

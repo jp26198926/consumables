@@ -28,6 +28,7 @@ Sequelize.DATE.prototype._stringify = function _stringify(date, options) {
 };
 
 const Action_Types =  require("./action_types").init(sequelize, Sequelize);
+const Audits =  require("./audits").init(sequelize, Sequelize);
 const Items =  require("./items").init(sequelize, Sequelize);
 const Measurements =  require("./measurements").init(sequelize, Sequelize);
 const Permissions =  require("./permissions").init(sequelize, Sequelize);
@@ -41,6 +42,7 @@ module.exports = {
 	sequelize,
 	Op,
 	Action_Types,
+	Audits,
 	Items,
 	Measurements,
 	Permissions,

@@ -56,6 +56,9 @@ const sequelize = models.sequelize; // sequelize functions and operations
 const Op = models.Op; // sequelize query operators
 
 
+const AuditLog = require('../helpers/auditlog.js');
+let oldValues = null;
+let newValues = null;
 Items.belongsTo(models.Types, {foreignKey: 'type_id', as: 'types' });
 Items.belongsTo(models.Measurements, {foreignKey: 'measurement_id', as: 'measurements' });
 
@@ -188,6 +191,8 @@ router.post('/add/' ,
 		let record = await Items.create(modeldata);
 		//await record.reload(); //reload the record from database
 		let recid =  record['id'];
+		newValues = JSON.stringify(record); 
+		AuditLog.writeToLog(req, {recid, oldValues, newValues});
 		
 		return res.ok(record);
 	} catch(err){
@@ -255,7 +260,11 @@ router.post('/edit/:recid' ,
 		if(!record){
 			return res.notFound();
 		}
+		oldValues = JSON.stringify(record); //for audit trail
 		await Items.update(modeldata, {where: where});
+		record = await Items.findOne(query);//for audit trail
+		newValues = JSON.stringify(record); 
+		AuditLog.writeToLog(req, {recid, oldValues, newValues});
 		return res.ok(modeldata);
 	}
 	catch(err){
@@ -283,6 +292,8 @@ router.get('/delete/:recid', async (req, res) => {
 		let records = await Items.findAll(query);
 		records.forEach(async (record) => { 
 			//perform action on each record before delete
+			oldValues = JSON.stringify(record); //for audit trail
+			AuditLog.writeToLog(req, { recid: record['id'], oldValues });
 		});
 		await Items.destroy(query);
 		return res.ok(recid);

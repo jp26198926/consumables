@@ -56,6 +56,9 @@ const jwt = require('jsonwebtoken');
  * @const
  */
 const { body, validationResult } = require('express-validator');
+const AuditLog = require('../helpers/auditlog.js');
+let oldValues = null;
+let newValues = null;
 
 
 const models = require('../models/index.js');
@@ -129,6 +132,7 @@ router.post('/login', [
 		if(!utils.passwordVerify(password, user.password)){
 			return res.unauthorized("Username or password not correct");
 		}
+		AuditLog.writeToLog(req, { recid: user['id'] });
 		let loginData = await getUserLoginData(user);
 		return res.ok(loginData);
 	}
@@ -170,7 +174,7 @@ router.post('/register',
 			modeldata.photo = fileInfo.filepath;
 		}
 		modeldata.password = utils.passwordHash(modeldata.password);
-		modeldata['user_role_id'] = "4";
+		modeldata['user_role_id'] = "6";
 		let usernameCount = await Users.count({ where:{ 'username': modeldata.username } });
 		if(usernameCount > 0){
 			return res.badRequest(`${modeldata.username} already exist.`);
@@ -182,6 +186,8 @@ router.post('/register',
 		let record = user = await Users.create(modeldata); // user record
 		await user.reload();
 		let recid =  record['id'];
+		newValues = JSON.stringify(record); 
+		AuditLog.writeToLog(req, {recid, oldValues, newValues});
 		
 		let loginData = await getUserLoginData(user);
 		return res.ok(loginData);
@@ -213,6 +219,7 @@ router.post('/forgotpassword', [
 			return res.notFound("Email not registered");
 		}
 		await sendPasswordResetLink(user);
+		AuditLog.writeToLog(req, { recid: user['id'] });
 		
 		return res.ok("We have emailed your password reset link!");
 	}
@@ -254,6 +261,7 @@ router.post('/resetpassword', [
 		var newPassword = bcrypt.hashSync(password, 10);
 		var modeldata = {password: newPassword}
 		await Users.update(modeldata, {where: where});
+		AuditLog.writeToLog(req, { recid: user['id'] });
 		
 		return res.ok("Password changed");
 	}

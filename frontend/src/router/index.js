@@ -49,6 +49,28 @@ let routes = [
 
 //adjustments routes
 
+//audits routes
+			{ 
+				path: '/audits/', 
+				name: 'auditslist', 
+				component: () => import('pages/audits/list.vue'), 
+				props: true
+			},
+			{ 
+				path: '/audits/(list|index)/:fieldName?/:fieldValue?', 
+				name: 'auditslistfilter', 
+				component: () => import('pages/audits/list.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/audits/view/:id', 
+				name: 'auditsview', 
+				component: () => import('pages/audits/view.vue'), 
+				props: true
+			},
+	
+
 //items routes
 			{ 
 				path: '/items/', 

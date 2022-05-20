@@ -4,6 +4,7 @@ import { pageComponents } from "./page_components.js"
 import store from "./app_store.js"
 import { auth } from "./auth.js"
 import { action_types } from "./action_types.js"
+import { audits } from "./audits.js"
 import { items } from "./items.js"
 import { measurements } from "./measurements.js"
 import { permissions } from "./permissions.js"
@@ -24,6 +25,7 @@ export default function (/* { ssrContext } */) {
 			pageComponents,
 			auth,
 		action_types,
+		audits,
 		items,
 		measurements,
 		permissions,
