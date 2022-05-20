@@ -155,7 +155,7 @@ export const AppMenus = {
 ],
 	PermissionsTableHeaderItems: [
   {
-    "label": "Permission Id",
+    "label": "Permission ID",
     "align": "left",
     "sortable": false,
     "name": "permission_id",
@@ -185,7 +185,7 @@ export const AppMenus = {
 ],
 	RolesTableHeaderItems: [
   {
-    "label": "Role Id",
+    "label": "Role ID",
     "align": "left",
     "sortable": false,
     "name": "role_id",

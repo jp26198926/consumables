@@ -29,7 +29,7 @@
                                             <div class="col">
                                                 <q-item>
                                                     <q-item-section>
-                                                        <q-item-label caption>Role Id: </q-item-label>
+                                                        <q-item-label caption>Role ID: </q-item-label>
                                                         <q-item-label class="text-bold">{{ item.role_id }}</q-item-label>
                                                     </q-item-section>
                                                 </q-item>

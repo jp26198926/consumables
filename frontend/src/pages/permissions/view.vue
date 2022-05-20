@@ -29,7 +29,7 @@
                                             <div class="col">
                                                 <q-item>
                                                     <q-item-section>
-                                                        <q-item-label caption>Permission Id: </q-item-label>
+                                                        <q-item-label caption>Permission ID: </q-item-label>
                                                         <q-item-label class="text-bold">{{ item.permission_id }}</q-item-label>
                                                     </q-item-section>
                                                 </q-item>
