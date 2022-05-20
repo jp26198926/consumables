@@ -57,10 +57,16 @@ export default async({ Vue, store, router }) => {
 		if(publicPages.includes(pagePath) || excludedRoutes.includes(routePath)){
 			authRequired = false;
 		}
-
 		//authenticate user
-		if (authRequired && !user) {
-			return next({ path: '/',  query: { nexturl: to.fullPath } });
+		if (authRequired) {
+			if(!user){
+				return next({ path: '/',  query: { nexturl: to.fullPath } });
+			}
+
+			//authorize user
+			if (!canView(path)) {
+				return next({path: "/error/forbidden"});
+			}
 		}
 
 		//navigate to redirect url if available

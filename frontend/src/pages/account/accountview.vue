@@ -36,6 +36,7 @@
                                                             <div class="col">
                                                                 <div class="text-h4 text-primary"> {{ $UserName }} </div>
                                                                 <div class="text-caption"> {{ $UserEmail }} </div>
+                                                                <div v-if="$UserRoleNames.length"><q-chip class="text-capitalize" dense>{{ $UserRoleNames.toString() }}</q-chip></div>
                                                             </div>
                                                         </div>
                                                     </q-card>
@@ -84,8 +85,19 @@
                                                                             <q-separator></q-separator>
                                                                             <q-item>
                                                                                 <q-item-section>
-                                                                                    <q-item-label caption>Telelphone: </q-item-label>
+                                                                                    <q-item-label caption>Telephone: </q-item-label>
                                                                                     <q-item-label class="text-bold">{{ item.telelphone }}</q-item-label>
+                                                                                </q-item-section>
+                                                                            </q-item>
+                                                                            <q-separator></q-separator>
+                                                                            <q-item>
+                                                                                <q-item-section>
+                                                                                    <q-item-label caption>Role: </q-item-label>
+                                                                                    <q-item-label class="text-bold">
+                                                                                        <q-btn v-if="item.user_role_id" @click="openPageDialog({ page: 'roles/view', url: `/roles/view/${item.user_role_id}` }, { closeBtn: true })" padding="xs" flat color="primary" no-caps >
+                                                                                            <q-icon name="visibility" size="xs"  class="q-mr-xs"></q-icon>  Roles
+                                                                                        </q-btn>
+                                                                                    </q-item-label>
                                                                                 </q-item-section>
                                                                             </q-item>
                                                                             <q-separator></q-separator>

@@ -121,6 +121,78 @@ let routes = [
 			},
 		
 
+//permissions routes
+			{ 
+				path: '/permissions/', 
+				name: 'permissionslist', 
+				component: () => import('pages/permissions/list.vue'), 
+				props: true
+			},
+			{ 
+				path: '/permissions/(list|index)/:fieldName?/:fieldValue?', 
+				name: 'permissionslistfilter', 
+				component: () => import('pages/permissions/list.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/permissions/view/:id', 
+				name: 'permissionsview', 
+				component: () => import('pages/permissions/view.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/permissions/add', 
+				name: 'permissionsadd', 
+				component: () => import('pages/permissions/add.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/permissions/edit/:id', 
+				name: 'permissionsedit', 
+				component: () => import('pages/permissions/edit.vue'), 
+				props: true
+			},
+		
+
+//roles routes
+			{ 
+				path: '/roles/', 
+				name: 'roleslist', 
+				component: () => import('pages/roles/list.vue'), 
+				props: true
+			},
+			{ 
+				path: '/roles/(list|index)/:fieldName?/:fieldValue?', 
+				name: 'roleslistfilter', 
+				component: () => import('pages/roles/list.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/roles/view/:id', 
+				name: 'rolesview', 
+				component: () => import('pages/roles/view.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/roles/add', 
+				name: 'rolesadd', 
+				component: () => import('pages/roles/add.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/roles/edit/:id', 
+				name: 'rolesedit', 
+				component: () => import('pages/roles/edit.vue'), 
+				props: true
+			},
+		
+
 //stocks routes
 			{ 
 				path: '/stocks/', 

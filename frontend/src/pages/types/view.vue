@@ -72,18 +72,22 @@
                                                     <q-btn icon="menu" padding="xs" round flat color="grey">
                                                         <q-menu auto-close transition-show="flip-right"  transition-hide="flip-left" self="center middle" anchor="center middle">
                                                             <q-list dense rounded nav>
-                                                                <q-item link clickable v-ripple :to="`/types/edit/${item.id}`">
-                                                                    <q-item-section>
-                                                                        <q-icon color="positive"  size="sm" name="edit"></q-icon>
-                                                                    </q-item-section>
-                                                                    <q-item-section>Edit</q-item-section>
-                                                                </q-item>
-                                                                <q-item link clickable v-ripple @click="deleteItem(item.id)">
-                                                                    <q-item-section>
-                                                                        <q-icon color="negative"  size="sm" name="clear"></q-icon>
-                                                                    </q-item-section>
-                                                                    <q-item-section>Delete</q-item-section>
-                                                                </q-item>
+                                                                <template v-if="$can.view('types/edit')">
+                                                                    <q-item link clickable v-ripple :to="`/types/edit/${item.id}`">
+                                                                        <q-item-section>
+                                                                            <q-icon color="positive"  size="sm" name="edit"></q-icon>
+                                                                        </q-item-section>
+                                                                        <q-item-section>Edit</q-item-section>
+                                                                    </q-item>
+                                                                </template>
+                                                                <template v-if="$can.view('types/delete')">
+                                                                    <q-item link clickable v-ripple @click="deleteItem(item.id)">
+                                                                        <q-item-section>
+                                                                            <q-icon color="negative"  size="sm" name="clear"></q-icon>
+                                                                        </q-item-section>
+                                                                        <q-item-section>Delete</q-item-section>
+                                                                    </q-item>
+                                                                </template>
                                                             </q-list>
                                                         </q-menu>
                                                     </q-btn>

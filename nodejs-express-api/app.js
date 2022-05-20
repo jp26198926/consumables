@@ -54,10 +54,38 @@ app.use('/api', async (req, res, next) => {
 	}
 	return res.unauthorized();
 });
+
+
+const Rbac = require('./helpers/rbac.js');
+app.use('/api', async (req, res, next) => {
+	try{
+		let rbac = new Rbac(req.user.user_role_id);
+		await rbac.getUserPages();
+		let pageAccess = rbac.getPageAccess(req.path);
+		if (pageAccess == rbac.AUTHORIZED) {
+			let userRoleNames = await rbac.getRoleNames(); //get default role name
+			if(userRoleNames.length){
+				req.user.roleName = userRoleNames[0].toLowerCase();
+			}
+			return next();
+		}
+		else if(pageAccess == rbac.FORBIDDEN){
+			return res.forbidden();
+		}
+		else if(pageAccess == rbac.UNKNOWN_ROLE){
+			return res.forbidden("Unknown Role");
+		}
+	}
+	catch(err){
+		return res.serverError();
+	}
+});
 app.use('/api/account', require('./controllers/account.js'));
 app.use('/api/action_types', require('./controllers/action_types.js'))
 app.use('/api/items', require('./controllers/items.js'))
 app.use('/api/measurements', require('./controllers/measurements.js'))
+app.use('/api/permissions', require('./controllers/permissions.js'))
+app.use('/api/roles', require('./controllers/roles.js'))
 app.use('/api/stocks', require('./controllers/stocks.js'))
 app.use('/api/types', require('./controllers/types.js'))
 app.use('/api/users', require('./controllers/users.js'))

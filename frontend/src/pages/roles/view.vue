@@ -8,7 +8,7 @@
                             <div class="" >
                                 <div class="row  items-center q-col-gutter-sm q-px-sm">
                                     <div class="col">
-                                        <div class="text-h6 text-primary">Action Types Details</div>
+                                        <div class="text-h6 text-primary">Roles Details</div>
                                     </div>
                                 </div>
                             </div>
@@ -29,42 +29,15 @@
                                             <div class="col">
                                                 <q-item>
                                                     <q-item-section>
-                                                        <q-item-label caption>Action Type: </q-item-label>
-                                                        <q-item-label class="text-bold">{{ item.action_type }}</q-item-label>
+                                                        <q-item-label caption>Role Id: </q-item-label>
+                                                        <q-item-label class="text-bold">{{ item.role_id }}</q-item-label>
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>
                                                 <q-item>
                                                     <q-item-section>
-                                                        <q-item-label caption>Date Created: </q-item-label>
-                                                        <q-item-label class="text-bold">
-                                                            <q-chip v-if="item.date_created" dense size="13px" :label="item.date_created | relativeDate">
-                                                            <q-tooltip
-                                                            content-class="bg-accent"
-                                                            transition-show="scale"
-                                                            transition-hide="scale"
-                                                            >
-                                                            {{ item.date_created | humanDatetime}}
-                                                            </q-tooltip>
-                                                            </q-chip>
-                                                        </q-item-label>
-                                                    </q-item-section>
-                                                </q-item>
-                                                <q-separator></q-separator>
-                                                <q-item>
-                                                    <q-item-section>
-                                                        <q-item-label caption>Date Updated: </q-item-label>
-                                                        <q-item-label class="text-bold">
-                                                            <q-chip v-if="item.date_updated" dense size="13px" :label="item.date_updated | relativeDate">
-                                                            <q-tooltip
-                                                            content-class="bg-accent"
-                                                            transition-show="scale"
-                                                            transition-hide="scale"
-                                                            >
-                                                            {{ item.date_updated | humanDatetime}}
-                                                            </q-tooltip>
-                                                            </q-chip>
-                                                        </q-item-label>
+                                                        <q-item-label caption>Role Name: </q-item-label>
+                                                        <q-item-label class="text-bold">{{ item.role_name }}</q-item-label>
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>
@@ -72,16 +45,16 @@
                                                     <q-btn icon="menu" padding="xs" round flat color="grey">
                                                         <q-menu auto-close transition-show="flip-right"  transition-hide="flip-left" self="center middle" anchor="center middle">
                                                             <q-list dense rounded nav>
-                                                                <template v-if="$can.view('action_types/edit')">
-                                                                    <q-item link clickable v-ripple :to="`/action_types/edit/${item.id}`">
+                                                                <template v-if="$can.view('roles/edit')">
+                                                                    <q-item link clickable v-ripple :to="`/roles/edit/${item.role_id}`">
                                                                         <q-item-section>
                                                                             <q-icon color="positive"  size="sm" name="edit"></q-icon>
                                                                         </q-item-section>
                                                                         <q-item-section>Edit</q-item-section>
                                                                     </q-item>
                                                                 </template>
-                                                                <template v-if="$can.view('action_types/delete')">
-                                                                    <q-item link clickable v-ripple @click="deleteItem(item.id)">
+                                                                <template v-if="$can.view('roles/delete')">
+                                                                    <q-item link clickable v-ripple @click="deleteItem(item.role_id)">
                                                                         <q-item-section>
                                                                             <q-icon color="negative"  size="sm" name="clear"></q-icon>
                                                                         </q-item-section>
@@ -116,30 +89,30 @@
 	import { ViewPageMixin } from "../../mixins/viewpage.js";
 	import { mapActions, mapGetters, mapState } from "vuex";
 	export default {
-		name: 'viewActiontypesPage',
+		name: 'viewRolesPage',
 		components: {
 		},
 		mixins: [PageMixin, ViewPageMixin ],
 		props: {
 			pageName: {
 				type : String,
-				default : 'action_types',
+				default : 'roles',
 			},
 			idName: {
 				type: String,
-				default: 'id',
+				default: 'role_id',
 			},
 			routeName : {
 				type : String,
-				default : 'action_typesview',
+				default : 'rolesview',
 			},
 			pagePath: {
 				type : String,
-				default : 'action_types/view',
+				default : 'roles/view',
 			},
 			apiPath: {
 				type : String,
-				default : 'action_types/view',
+				default : 'roles/view',
 			},
 		},
 		data() {
@@ -153,15 +126,15 @@
 		computed: {
 			pageTitle:{
 				get: function () {
-					return "Action Types Details"
+					return "Roles Details"
 				}
 			},
 			currentRecord: {
 				get: function () {
-					return this.$store.getters["action_types/currentRecord"];
+					return this.$store.getters["roles/currentRecord"];
 				},
 				set: function (value) {
-					this.$store.commit("action_types/setCurrentRecord", value);
+					this.$store.commit("roles/setCurrentRecord", value);
 				},
 			},
 		},
@@ -171,7 +144,7 @@
 			}
 		},
 		methods: {
-			...mapActions("action_types", [ "fetchRecord", "deleteRecord"]),
+			...mapActions("roles", [ "fetchRecord", "deleteRecord"]),
 		},
 		watch: {
 			$route (to, from){

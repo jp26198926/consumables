@@ -8,16 +8,16 @@
                             <div class="" >
                                 <div class="row  items-center q-col-gutter-sm q-px-sm">
                                     <div class="col">
-                                        <div class="text-h6 text-primary">Measurements</div>
+                                        <div class="text-h6 text-primary">Permissions</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-auto col-12 " >
-                            <template v-if="$can.view('/measurements/add')">
-                                <q-btn       :rounded="false"  size=""  color="primary" no-caps  unelevated   :to="`/measurements/add`" class="full-width" >
+                            <template v-if="$can.view('/permissions/add')">
+                                <q-btn       :rounded="false"  size=""  color="primary" no-caps  unelevated   :to="`/permissions/add`" class="full-width" >
                                     <q-icon name="add"></q-icon>                                
-                                    Add New Measurements 
+                                    Add New Permissions 
                                 </q-btn>
                             </template>
                         </div>
@@ -45,7 +45,7 @@
                             <div >
                                 <template v-if="showBreadcrumbs && $route.query.tag">
                                     <q-breadcrumbs class="q-pa-md">
-                                        <q-breadcrumbs-el icon="arrow_back" class="text-capitalize" :label="$route.query.tag" to="/measurements"></q-breadcrumbs-el>
+                                        <q-breadcrumbs-el icon="arrow_back" class="text-capitalize" :label="$route.query.tag" to="/permissions"></q-breadcrumbs-el>
                                         <q-breadcrumbs-el :label="$route.query.label"></q-breadcrumbs-el>
                                     </q-breadcrumbs>
                                 </template>
@@ -59,14 +59,14 @@
                                                 :flat="true"
                                                 table-header-class="text-h4 "
                                                 :bordered="false"
-                                                :columns="$menus.MeasurementsTableHeaderItems" 
+                                                :columns="$menus.PermissionsTableHeaderItems" 
                                                 :data="records"
                                                 binary-state-sort
                                                 separator="horizontal"
                                                 :dense="true"
                                                 :selected.sync="selectedItems"
                                                 selection="multiple"
-                                                row-key="id" 
+                                                row-key="permission_id" 
                                                 :pagination.sync="pagination"
                                                 hide-bottom
                                                 @request="setPagination"
@@ -77,49 +77,40 @@
                                                         <q-td auto-width>
                                                             <q-checkbox dense v-model="props.selected"></q-checkbox>
                                                         </q-td>
-                                                        <q-td  key="code" :props="props">
-                                                            <span class="table-inlined-edit">{{ props.row.code }}</span>
-                                                            <inline-edit v-model="props.row.code" save-icon="check_circle" cancel-icon="close" :url="`measurements/edit/${ props.row.id }`" field-name="code" field-label="Code" title="Enter Code">
-                                                            <api-data-source   api-path="components_data/action_type_option_list"  :query-params="filters" v-slot="req">
-                                                                <q-input outlined dense  ref="listctrlcode" v-model.trim="props.row.code"  label=""  placeholder=""      
-                                                                class="" >
-                                                                </q-input>
-                                                            </api-data-source>
-                                                            </inline-edit>
+                                                        <q-td  key="permission_id" :props="props">
+                                                            <q-btn padding="xs"   :rounded="false"  color="primary"  no-caps  unelevated   flat :to="`/permissions/view/${props.row.permission_id}`">{{ props.row.permission_id }}</q-btn>
                                                         </q-td>
-                                                        <q-td  key="name" :props="props">
-                                                            <span class="table-inlined-edit">{{ props.row.name }}</span>
-                                                            <inline-edit v-model="props.row.name" save-icon="check_circle" cancel-icon="close" :url="`measurements/edit/${ props.row.id }`" field-name="name" field-label="Name" title="Enter Name">
-                                                            <api-data-source   api-path="components_data/action_type_option_list"  :query-params="filters" v-slot="req">
-                                                                <q-input outlined dense  ref="listctrlname" v-model.trim="props.row.name"  label=""  placeholder=""      
-                                                                class="" >
-                                                                </q-input>
-                                                            </api-data-source>
-                                                            </inline-edit>
+                                                        <q-td  key="permission" :props="props">
+                                                            {{ props.row.permission }}
+                                                        </q-td>
+                                                        <q-td  key="role_id" :props="props">
+                                                            <q-btn v-if="props.row.role_id" @click="openPageDialog({ page: 'roles/view', url: `/roles/view/${props.row.role_id}` }, { closeBtn: true })" padding="xs" flat color="primary" no-caps >
+                                                                <q-icon name="visibility" size="xs"  class="q-mr-xs"></q-icon>  {{ props.row.roles_role_name }}
+                                                            </q-btn>
                                                         </q-td>
                                                         <q-td key="btnactions" :props="props">
                                                             <div class="row q-col-gutter-xs justify-end">
                                                                 <q-btn icon="menu" padding="xs" round flat color="grey">
                                                                     <q-menu auto-close transition-show="flip-right"  transition-hide="flip-left" self="center middle" anchor="center middle">
                                                                         <q-list dense rounded nav>
-                                                                            <template v-if="$can.view('measurements/view')">
-                                                                                <q-item link clickable v-ripple :to="`/measurements/view/${props.row.id}`">
+                                                                            <template v-if="$can.view('permissions/view')">
+                                                                                <q-item link clickable v-ripple :to="`/permissions/view/${props.row.permission_id}`">
                                                                                     <q-item-section>
                                                                                         <q-icon color="primary"  size="sm" name="visibility"></q-icon>
                                                                                     </q-item-section>
                                                                                     <q-item-section>View</q-item-section>
                                                                                 </q-item>
                                                                             </template>
-                                                                            <template v-if="$can.view('measurements/edit')">
-                                                                                <q-item link clickable v-ripple :to="`/measurements/edit/${props.row.id}`">
+                                                                            <template v-if="$can.view('permissions/edit')">
+                                                                                <q-item link clickable v-ripple :to="`/permissions/edit/${props.row.permission_id}`">
                                                                                     <q-item-section>
                                                                                         <q-icon color="positive"  size="sm" name="edit"></q-icon>
                                                                                     </q-item-section>
                                                                                     <q-item-section>Edit</q-item-section>
                                                                                 </q-item>
                                                                             </template>
-                                                                            <template v-if="$can.view('measurements/delete')">
-                                                                                <q-item link clickable v-ripple @click="deleteItem(props.row.id)">
+                                                                            <template v-if="$can.view('permissions/delete')">
+                                                                                <q-item link clickable v-ripple @click="deleteItem(props.row.permission_id)">
                                                                                     <q-item-section>
                                                                                         <q-icon color="negative"  size="sm" name="clear"></q-icon>
                                                                                     </q-item-section>
@@ -159,7 +150,7 @@
                                                     <div class="q-pa-sm" v-show="!loading">
                                                         <div class="row justify-between">
                                                             <div class="row q-col-gutter-md">
-                                                                <template v-if="$can.view('measurements/delete')">
+                                                                <template v-if="$can.view('permissions/delete')">
                                                                     <div>
                                                                         <q-btn    :rounded="false"  no-caps  unelevated   color="negative" padding="xs" @click="deleteItem(selectedItems)" v-if="selectedItems.length" icon="delete_sweep" class="q-my-xs" title="Delete Selected"></q-btn>
                                                                     </div>
@@ -193,26 +184,26 @@
 	import { ListPageMixin } from "../../mixins/listpage.js";
 	import { mapActions, mapGetters, mapState } from "vuex";
 	export default {
-		name: 'listMeasurementsPage',
+		name: 'listPermissionsPage',
 		components: {
         },
 		mixins: [PageMixin, ListPageMixin ],
 		props: {
 			primaryKey : {
 				type : String,
-				default : 'id',
+				default : 'permission_id',
 			},
 			pageName : {
 				type : String,
-				default : 'measurements',
+				default : 'permissions',
 			},
 			routeName : {
 				type : String,
-				default : 'measurementslist',
+				default : 'permissionslist',
 			},
 			apiPath : {
 				type : String,
-				default : 'measurements/index',
+				default : 'permissions/index',
 			},
 			multiCheckbox: {
 				type: Boolean,
@@ -231,23 +222,23 @@
 			pageTitle:{
 				get: function () {
 					//set browser page title
-					return "Measurements"
+					return "Permissions"
 				}
 			},
 			records: {
 				get: function () {
-					return this.$store.getters["measurements/records"];
+					return this.$store.getters["permissions/records"];
 				},
 				set: function (value) {
-					this.$store.commit("measurements/setRecords", value);
+					this.$store.commit("permissions/setRecords", value);
 				},
 			},
 			currentRecord: {
 				get: function () {
-					return this.$store.getters["measurements/currentRecord"];
+					return this.$store.getters["permissions/currentRecord"];
 				},
 				set: function (value) {
-					this.$store.commit("measurements/setCurrentRecord", value);
+					this.$store.commit("permissions/setCurrentRecord", value);
 				},
 			},
 		},
@@ -268,7 +259,7 @@
 			},
 		},
 		methods: {
-			...mapActions("measurements", ["fetchRecords", "deleteRecord"]),
+			...mapActions("permissions", ["fetchRecords", "deleteRecord"]),
 			load: function() {
 				if (!this.loading) {
 					this.loading = true;

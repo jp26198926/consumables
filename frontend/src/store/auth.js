@@ -15,9 +15,13 @@ export const auth = {
 		}
 	},
 	mutations: {
-		setUserData(state, user) {
-			state.user = user
+		
+		setUserData(state, userData) {
+			state.user = userData.user
+			state.userPages = userData.pages
+			state.userRoles = userData.roles
 		},
+
 	},
 	actions: {
 		getUserData: async ({ commit }, payload) => {

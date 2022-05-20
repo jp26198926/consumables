@@ -98,6 +98,7 @@
                     </q-img>
                     <div v-show="!leftDrawerMini" class="text-bold text-center text-capitalize q-pa-sm">
                         Hi {{ $UserName }}
+                        <div v-if="$UserRoleNames.length"><q-chip class="text-capitalize" dense>{{ $UserRoleNames.toString() }}</q-chip></div>
                     </div>
                     <q-separator></q-separator>
                     <q-list >
@@ -298,13 +299,22 @@
 				return null;
 			},
 			navbarSideLeftItems(){
-				return this.$menus.navbarSideLeftItems;
+				let menus = this.$menus.navbarSideLeftItems.filter((menu) => {
+					return this.$can.view(menu.path);
+				});
+				return menus;
 			},
 			navbarTopLeftItems(){
-				return this.$menus.navbarTopLeftItems;
+				let menus = this.$menus.navbarTopLeftItems.filter((menu) => {
+					return this.$can.view(menu.path);
+				});
+				return menus;
 			},
 			navbarTopRightItems(){
-				return this.$menus.navbarTopRightItems;
+				let menus = this.$menus.navbarTopRightItems.filter((menu) => {
+					return this.$can.view(menu.path);
+				});
+				return menus;
 			},
 		},
 		created: function() {

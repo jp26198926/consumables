@@ -78,11 +78,11 @@
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <div class="col-sm-3 col-12">
-                                                                Telelphone 
+                                                                Telephone 
                                                             </div>
                                                             <div class="col-sm-9 col-12">
-                                                                <ValidationProvider :rules="{}" name="Telelphone" v-slot="{ errors, invalid, validated }">
-                                                                    <q-input outlined dense  ref="ctrltelelphone" v-model.trim="formData.telelphone"  label="Telelphone" type="text" placeholder="Enter Telelphone"      
+                                                                <ValidationProvider :rules="{}" name="Telephone" v-slot="{ errors, invalid, validated }">
+                                                                    <q-input outlined dense  ref="ctrltelelphone" v-model.trim="formData.telelphone"  label="Telephone" type="text" placeholder="Enter Telephone"      
                                                                     class="" :error="invalid && validated" :error-message="errors[0]">
                                                                     </q-input>
                                                                 </ValidationProvider>
@@ -102,6 +102,21 @@
                                                                         <div class="q-pa-xs"><file-viewer removable v-model="formData.photo"></file-viewer></div>
                                                                     </div>
                                                                 </ValidationProvider>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-12">
+                                                                Role 
+                                                            </div>
+                                                            <div class="col-sm-9 col-12">
+                                                                <api-data-source @loaded="response => mapOptionField(response, 'user_role_id')"  api-path="components_data/role_id_option_list"  :query-params="filters" v-slot="req">
+                                                                    <ValidationProvider :rules="{}" name="Role" v-slot="{ errors, invalid, validated }">
+                                                                        <q-select   :loading="req.loading"  outlined dense  ref="ctrluser_role_id" emit-value map-options  v-model="formData.user_role_id" :options="req.response" label="Role"  :error="invalid && validated" :error-message="errors[0]" >
+                                                                        </q-select> 
+                                                                    </ValidationProvider>
+                                                                </api-data-source>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -164,7 +179,7 @@
 		data() {
             return {
 				formData: {
-					name: "", username: "", email: "", telelphone: "", photo: "", 
+					name: "", username: "", email: "", telelphone: "", photo: "", user_role_id: "", 
 				},
         	}
 		},
@@ -219,7 +234,7 @@
             },
 			resetForm (){
 				//reset form fields value
-				this.formData = {name: "", username: "", email: "", telelphone: "", photo: "", };
+				this.formData = {name: "", username: "", email: "", telelphone: "", photo: "", user_role_id: "", };
 				requestAnimationFrame(() => {
 					this.$refs.observer.reset();
 				});

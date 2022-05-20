@@ -57,8 +57,19 @@
                                                 <q-separator></q-separator>
                                                 <q-item>
                                                     <q-item-section>
-                                                        <q-item-label caption>Telelphone: </q-item-label>
+                                                        <q-item-label caption>Telephone: </q-item-label>
                                                         <q-item-label class="text-bold">{{ item.telelphone }}</q-item-label>
+                                                    </q-item-section>
+                                                </q-item>
+                                                <q-separator></q-separator>
+                                                <q-item>
+                                                    <q-item-section>
+                                                        <q-item-label caption>User Role Id: </q-item-label>
+                                                        <q-item-label class="text-bold">
+                                                            <q-btn v-if="item.user_role_id" @click="openPageDialog({ page: 'roles/view', url: `/roles/view/${item.user_role_id}` }, { closeBtn: true })" padding="xs" flat color="primary" no-caps >
+                                                                <q-icon name="visibility" size="xs"  class="q-mr-xs"></q-icon>  {{ item.roles_role_name }}
+                                                            </q-btn>
+                                                        </q-item-label>
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>
@@ -66,18 +77,22 @@
                                                     <q-btn icon="menu" padding="xs" round flat color="grey">
                                                         <q-menu auto-close transition-show="flip-right"  transition-hide="flip-left" self="center middle" anchor="center middle">
                                                             <q-list dense rounded nav>
-                                                                <q-item link clickable v-ripple :to="`/users/edit/${item.id}`">
-                                                                    <q-item-section>
-                                                                        <q-icon color="positive"  size="sm" name="edit"></q-icon>
-                                                                    </q-item-section>
-                                                                    <q-item-section>Edit</q-item-section>
-                                                                </q-item>
-                                                                <q-item link clickable v-ripple @click="deleteItem(item.id)">
-                                                                    <q-item-section>
-                                                                        <q-icon color="negative"  size="sm" name="clear"></q-icon>
-                                                                    </q-item-section>
-                                                                    <q-item-section>Delete</q-item-section>
-                                                                </q-item>
+                                                                <template v-if="$can.view('users/edit')">
+                                                                    <q-item link clickable v-ripple :to="`/users/edit/${item.id}`">
+                                                                        <q-item-section>
+                                                                            <q-icon color="positive"  size="sm" name="edit"></q-icon>
+                                                                        </q-item-section>
+                                                                        <q-item-section>Edit</q-item-section>
+                                                                    </q-item>
+                                                                </template>
+                                                                <template v-if="$can.view('users/delete')">
+                                                                    <q-item link clickable v-ripple @click="deleteItem(item.id)">
+                                                                        <q-item-section>
+                                                                            <q-icon color="negative"  size="sm" name="clear"></q-icon>
+                                                                        </q-item-section>
+                                                                        <q-item-section>Delete</q-item-section>
+                                                                    </q-item>
+                                                                </template>
                                                             </q-list>
                                                         </q-menu>
                                                     </q-btn>

@@ -98,6 +98,25 @@ router.get('/measurement_id_option_list', async (req, res) => {
 
 
  /**
+ * Route to get role_id_option_list records
+ * @route {GET} /components_data/role_id_option_list
+ * @param {string} path - Express paths
+ * @param {callback} middleware - Express middleware.
+ */
+router.get('/role_id_option_list', async (req, res) => {
+	try{
+		let sqltext = `SELECT role_id as value, role_name as label FROM roles` ;
+		let records = await sequelize.query(sqltext, { type: sequelize.QueryTypes.SELECT });
+		return res.ok(records);
+	}
+	catch(err){
+		console.error(err)
+		return res.serverError(err);
+	}
+});
+
+
+ /**
  * Route to get action_id_option_list records
  * @route {GET} /components_data/action_id_option_list
  * @param {string} path - Express paths

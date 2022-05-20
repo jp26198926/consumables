@@ -123,11 +123,11 @@
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col-sm-3 col-12">
-                                                    Telelphone 
+                                                    Telephone 
                                                 </div>
                                                 <div class="col-sm-9 col-12">
-                                                    <ValidationProvider :rules="{}" name="Telelphone" v-slot="{ errors, invalid, validated }">
-                                                        <q-input outlined dense  ref="ctrltelelphone" v-model.trim="formData.telelphone"  label="Telelphone" type="text" placeholder="Enter Telelphone"      
+                                                    <ValidationProvider :rules="{}" name="Telephone" v-slot="{ errors, invalid, validated }">
+                                                        <q-input outlined dense  ref="ctrltelelphone" v-model.trim="formData.telelphone"  label="Telephone" type="text" placeholder="Enter Telephone"      
                                                         class="" :error="invalid && validated" :error-message="errors[0]">
                                                         </q-input>
                                                     </ValidationProvider>

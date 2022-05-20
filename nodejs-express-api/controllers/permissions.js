@@ -1,5 +1,5 @@
-/** Express router providing Users related routes
- * @module routers/Users
+/** Express router providing Permissions related routes
+ * @module routers/Permissions
  * @requires express
  * @requires config - app config
  * @requires utils - app utils functions
@@ -45,23 +45,23 @@ const { body, validationResult } = require('express-validator');
 
 
 /**
- * Users models
+ * Permissions models
  * @const
  */
 const models = require('../models/index.js');
-const Users = models.Users;
+const Permissions = models.Permissions;
 
 
 const sequelize = models.sequelize; // sequelize functions and operations
 const Op = models.Op; // sequelize query operators
 
 
-Users.belongsTo(models.Roles, {foreignKey: 'user_role_id', as: 'roles' });
+Permissions.belongsTo(models.Roles, {foreignKey: 'role_id', as: 'roles' });
 
 
 /**
- * Route to list users records
- * @route {GET} /users/index/{fieldname}/{fieldvalue}
+ * Route to list permissions records
+ * @route {GET} /permissions/index/{fieldname}/{fieldvalue}
  * @param {array} path - Array of express paths
  * @param {callback} middleware - Express middleware.
  */
@@ -89,7 +89,7 @@ router.get(['/', '/index/:fieldname?/:fieldvalue?'], async (req, res) => {
 		query['include'] = joinTables;
 		let search = req.query.search;
 		if(search){
-			let searchFields = Users.searchFields();
+			let searchFields = Permissions.searchFields();
 			where[Op.or] = searchFields;
 			replacements.search = `%${search}%`;
 		}
@@ -98,11 +98,11 @@ router.get(['/', '/index/:fieldname?/:fieldvalue?'], async (req, res) => {
 		query.raw = true;
 		query.where = where;
 		query.replacements = replacements;
-		query.order = Users.getOrderBy(req);
-		query.attributes = Users.listFields();
+		query.order = Permissions.getOrderBy(req);
+		query.attributes = Permissions.listFields();
 		let page = parseInt(req.query.page) || 1;
 		let limit = parseInt(req.query.limit) || 20;
-		let result = await Users.paginate(query, page, limit);
+		let result = await Permissions.paginate(query, page, limit);
 		return res.ok(result);
 	}
 	catch(err) {
@@ -112,8 +112,8 @@ router.get(['/', '/index/:fieldname?/:fieldvalue?'], async (req, res) => {
 
 
 /**
- * Route to view Users record
- * @route {GET} /users/view/{recid}
+ * Route to view Permissions record
+ * @route {GET} /permissions/view/{recid}
  * @param {array} path - Array of express paths
  * @param {callback} middleware - Express middleware.
  */
@@ -130,11 +130,11 @@ router.get(['/view/:recid'], async (req, res) => {
 			attributes: [], //already set on the query attributes using sequelize literal
 		})
 		query['include'] = joinTables;
-		where['id'] = recid;
+		where['permission_id'] = recid;
 		query.raw = true;
 		query.where = where;
-		query.attributes = Users.viewFields();
-		let record = await Users.findOne(query);
+		query.attributes = Permissions.viewFields();
+		let record = await Permissions.findOne(query);
 		if(!record){
 			return res.notFound();
 		}
@@ -147,21 +147,15 @@ router.get(['/view/:recid'], async (req, res) => {
 
 
 /**
- * Route to insert Users record
- * @route {POST} /users/add
+ * Route to insert Permissions record
+ * @route {POST} /permissions/add
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware.
  */
 router.post('/add/' , 
 	[
-		body('name').not().isEmpty(),
-		body('username').not().isEmpty(),
-		body('email').not().isEmpty().isEmail(),
-		body('password').not().isEmpty(),
-		body('confirm_password', 'Passwords do not match').custom((value, {req}) => (value === req.body.password)),
-		body('telelphone').optional(),
-		body('photo').optional(),
-		body('user_role_id').optional().isNumeric(),
+		body('permission').not().isEmpty(),
+		body('role_id').optional().isNumeric(),
 	]
 , async function (req, res) {
 	try{
@@ -172,25 +166,10 @@ router.post('/add/' ,
 		}
 		let modeldata = req.body;
 		
-        // move uploaded file from temp directory to destination directory
-		if(modeldata.photo !== undefined) {
-			let fileInfo = utils.moveUploadedFiles(modeldata.photo, "photo");
-			modeldata.photo = fileInfo.filepath;
-		}
-		modeldata.password = utils.passwordHash(modeldata.password);
-		let usernameCount = await Users.count({ where:{ 'username': modeldata.username } });
-		if(usernameCount > 0){
-			return res.badRequest(`${modeldata.username} already exist.`);
-		}
-		let emailCount = await Users.count({ where:{ 'email': modeldata.email } });
-		if(emailCount > 0){
-			return res.badRequest(`${modeldata.email} already exist.`);
-		}
-		
-		//save Users record
-		let record = await Users.create(modeldata);
+		//save Permissions record
+		let record = await Permissions.create(modeldata);
 		//await record.reload(); //reload the record from database
-		let recid =  record['id'];
+		let recid =  record['permission_id'];
 		
 		return res.ok(record);
 	} catch(err){
@@ -200,8 +179,8 @@ router.post('/add/' ,
 
 
 /**
- * Route to get  Users record for edit
- * @route {GET} /users/edit/{recid}
+ * Route to get  Permissions record for edit
+ * @route {GET} /permissions/edit/{recid}
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware.
  */
@@ -210,11 +189,11 @@ router.get('/edit/:recid', async (req, res) => {
 		let recid = req.params.recid;
 		let query = {};
 		let where = {};
-		where['id'] = recid;
+		where['permission_id'] = recid;
 		query.raw = true;
 		query.where = where;
-		query.attributes = Users.editFields();
-		let record = await Users.findOne(query);
+		query.attributes = Permissions.editFields();
+		let record = await Permissions.findOne(query);
 		if(!record){
 			return res.notFound();
 		}
@@ -227,19 +206,15 @@ router.get('/edit/:recid', async (req, res) => {
 
 
 /**
- * Route to update  Users record
- * @route {POST} /users/edit/{recid}
+ * Route to update  Permissions record
+ * @route {POST} /permissions/edit/{recid}
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware.
  */
 router.post('/edit/:recid' , 
 	[
-		body('name').optional({nullable: true}).not().isEmpty(),
-		body('username').optional({nullable: true}).not().isEmpty(),
-		body('email').optional({nullable: true}).not().isEmpty().isEmail(),
-		body('telelphone').optional(),
-		body('photo').optional(),
-		body('user_role_id').optional().isNumeric(),
+		body('permission').optional({nullable: true}).not().isEmpty(),
+		body('role_id').optional().isNumeric(),
 	]
 , async (req, res) => {
 	try{
@@ -250,31 +225,17 @@ router.post('/edit/:recid' ,
 		}
 		let recid = req.params.recid;
 		let modeldata = req.body;
-		
-        // move uploaded file from temp directory to destination directory
-		if(modeldata.photo !== undefined) {
-			let fileInfo = utils.moveUploadedFiles(modeldata.photo, "photo");
-			modeldata.photo = fileInfo.filepath;
-		}
-		let usernameCount = await Users.count({where:{'username': modeldata.username, 'id': {[Op.ne]: recid} }});
-		if(usernameCount > 0){
-			return res.badRequest(`${modeldata.username} already exist.`);
-		}
-		let emailCount = await Users.count({where:{'email': modeldata.email, 'id': {[Op.ne]: recid} }});
-		if(emailCount > 0){
-			return res.badRequest(`${modeldata.email} already exist.`);
-		}
 		let query = {};
 		let where = {};
-		where['id'] = recid;
+		where['permission_id'] = recid;
 		query.raw = true;
 		query.where = where;
-		query.attributes = Users.editFields();
-		let record = await Users.findOne(query);
+		query.attributes = Permissions.editFields();
+		let record = await Permissions.findOne(query);
 		if(!record){
 			return res.notFound();
 		}
-		await Users.update(modeldata, {where: where});
+		await Permissions.update(modeldata, {where: where});
 		return res.ok(modeldata);
 	}
 	catch(err){
@@ -284,9 +245,9 @@ router.post('/edit/:recid' ,
 
 
 /**
- * Route to delete Users record by table primary key
+ * Route to delete Permissions record by table primary key
  * Multi delete supported by recid separated by comma(,)
- * @route {GET} /users/delete/{recid}
+ * @route {GET} /permissions/delete/{recid}
  * @param {array} path - Array of express paths
  * @param {callback} middleware - Express middleware.
  */
@@ -296,14 +257,14 @@ router.get('/delete/:recid', async (req, res) => {
 		recid = recid.split(',');
 		let query = {};
 		let where = {};
-		where['id'] = recid;
+		where['permission_id'] = recid;
 		query.raw = true;
 		query.where = where;
-		let records = await Users.findAll(query);
+		let records = await Permissions.findAll(query);
 		records.forEach(async (record) => { 
 			//perform action on each record before delete
 		});
-		await Users.destroy(query);
+		await Permissions.destroy(query);
 		return res.ok(recid);
 	}
 	catch(err){

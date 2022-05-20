@@ -42,6 +42,7 @@ const config = require('../config.js');
  * @const
  */
 const { body, validationResult } = require('express-validator');
+const Rbac = require('../helpers/rbac.js');
 
 
 /**
@@ -159,7 +160,16 @@ router.post('/edit' ,
 router.get('/currentuserdata', async function (req, res)
 {
 	let user = req.user;
-    return res.ok(user);
+	let userRole = user.user_role_id;
+	let rbac = new Rbac(userRole);
+	let userPages = await rbac.getUserPages();
+	let userRoleNames = await rbac.getRoleNames();
+	let data = {
+		user: user,
+		pages: userPages,
+		roles: userRoleNames
+	}
+    return res.ok(data);
 });
 
 

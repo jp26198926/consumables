@@ -6,6 +6,8 @@ import { auth } from "./auth.js"
 import { action_types } from "./action_types.js"
 import { items } from "./items.js"
 import { measurements } from "./measurements.js"
+import { permissions } from "./permissions.js"
+import { roles } from "./roles.js"
 import { stocks } from "./stocks.js"
 import { types } from "./types.js"
 import { users } from "./users.js"
@@ -24,6 +26,8 @@ export default function (/* { ssrContext } */) {
 		action_types,
 		items,
 		measurements,
+		permissions,
+		roles,
 		stocks,
 		types,
 		users

@@ -170,6 +170,7 @@ router.post('/register',
 			modeldata.photo = fileInfo.filepath;
 		}
 		modeldata.password = utils.passwordHash(modeldata.password);
+		modeldata['user_role_id'] = "4";
 		let usernameCount = await Users.count({ where:{ 'username': modeldata.username } });
 		if(usernameCount > 0){
 			return res.badRequest(`${modeldata.username} already exist.`);

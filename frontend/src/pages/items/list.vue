@@ -14,10 +14,12 @@
                             </div>
                         </div>
                         <div class="col-md-auto col-12 " >
-                            <q-btn       :rounded="false"  size=""  color="primary" no-caps  unelevated   :to="`/items/add`" class="full-width" >
-                                <q-icon name="add"></q-icon>                                
-                                Add New Items 
-                            </q-btn>
+                            <template v-if="$can.view('/items/add')">
+                                <q-btn       :rounded="false"  size=""  color="primary" no-caps  unelevated   :to="`/items/add`" class="full-width" >
+                                    <q-icon name="add"></q-icon>                                
+                                    Add New Items 
+                                </q-btn>
+                            </template>
                         </div>
                         <div class="col-md-auto col-12 " >
                             <q-input debounce="1000" outlined dense  placeholder="Search" v-model="searchText" >
@@ -106,24 +108,30 @@
                                                                 <q-btn icon="menu" padding="xs" round flat color="grey">
                                                                     <q-menu auto-close transition-show="flip-right"  transition-hide="flip-left" self="center middle" anchor="center middle">
                                                                         <q-list dense rounded nav>
-                                                                            <q-item link clickable v-ripple :to="`/items/view/${props.row.id}`">
-                                                                                <q-item-section>
-                                                                                    <q-icon color="primary"  size="sm" name="visibility"></q-icon>
-                                                                                </q-item-section>
-                                                                                <q-item-section>View</q-item-section>
-                                                                            </q-item>
-                                                                            <q-item link clickable v-ripple :to="`/items/edit/${props.row.id}`">
-                                                                                <q-item-section>
-                                                                                    <q-icon color="positive"  size="sm" name="edit"></q-icon>
-                                                                                </q-item-section>
-                                                                                <q-item-section>Edit</q-item-section>
-                                                                            </q-item>
-                                                                            <q-item link clickable v-ripple @click="deleteItem(props.row.id)">
-                                                                                <q-item-section>
-                                                                                    <q-icon color="negative"  size="sm" name="clear"></q-icon>
-                                                                                </q-item-section>
-                                                                                <q-item-section>Delete</q-item-section>
-                                                                            </q-item>
+                                                                            <template v-if="$can.view('items/view')">
+                                                                                <q-item link clickable v-ripple :to="`/items/view/${props.row.id}`">
+                                                                                    <q-item-section>
+                                                                                        <q-icon color="primary"  size="sm" name="visibility"></q-icon>
+                                                                                    </q-item-section>
+                                                                                    <q-item-section>View</q-item-section>
+                                                                                </q-item>
+                                                                            </template>
+                                                                            <template v-if="$can.view('items/edit')">
+                                                                                <q-item link clickable v-ripple :to="`/items/edit/${props.row.id}`">
+                                                                                    <q-item-section>
+                                                                                        <q-icon color="positive"  size="sm" name="edit"></q-icon>
+                                                                                    </q-item-section>
+                                                                                    <q-item-section>Edit</q-item-section>
+                                                                                </q-item>
+                                                                            </template>
+                                                                            <template v-if="$can.view('items/delete')">
+                                                                                <q-item link clickable v-ripple @click="deleteItem(props.row.id)">
+                                                                                    <q-item-section>
+                                                                                        <q-icon color="negative"  size="sm" name="clear"></q-icon>
+                                                                                    </q-item-section>
+                                                                                    <q-item-section>Delete</q-item-section>
+                                                                                </q-item>
+                                                                            </template>
                                                                         </q-list>
                                                                     </q-menu>
                                                                 </q-btn>
@@ -157,9 +165,11 @@
                                                     <div class="q-pa-sm" v-show="!loading">
                                                         <div class="row justify-between">
                                                             <div class="row q-col-gutter-md">
-                                                                <div>
-                                                                    <q-btn    :rounded="false"  no-caps  unelevated   color="negative" padding="xs" @click="deleteItem(selectedItems)" v-if="selectedItems.length" icon="delete_sweep" class="q-my-xs" title="Delete Selected"></q-btn>
-                                                                </div>
+                                                                <template v-if="$can.view('items/delete')">
+                                                                    <div>
+                                                                        <q-btn    :rounded="false"  no-caps  unelevated   color="negative" padding="xs" @click="deleteItem(selectedItems)" v-if="selectedItems.length" icon="delete_sweep" class="q-my-xs" title="Delete Selected"></q-btn>
+                                                                    </div>
+                                                                </template>
                                                             </div>
                                                             <div v-if="paginate && totalRecords > 0" class="row q-col-gutter-md justify-center">
                                                                 <div class="col-auto">

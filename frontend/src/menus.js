@@ -59,6 +59,22 @@ export const AppMenus = {
     "iconcolor": "",
     "target": "",
     "submenu": []
+  },
+  {
+    "path": "/permissions",
+    "label": "Permissions",
+    "icon": "extension",
+    "iconcolor": "",
+    "target": "",
+    "submenu": []
+  },
+  {
+    "path": "/roles",
+    "label": "Roles",
+    "icon": "extension",
+    "iconcolor": "",
+    "target": "",
+    "submenu": []
   }
 ],
 	Action_TypesTableHeaderItems: [
@@ -128,6 +144,59 @@ export const AppMenus = {
     "sortable": false,
     "name": "name",
     "field": "name"
+  },
+  {
+    "label": "Action",
+    "align": "right",
+    "sortable": false,
+    "name": "btnactions",
+    "field": ""
+  }
+],
+	PermissionsTableHeaderItems: [
+  {
+    "label": "Permission Id",
+    "align": "left",
+    "sortable": false,
+    "name": "permission_id",
+    "field": "permission_id"
+  },
+  {
+    "label": "Permission",
+    "align": "left",
+    "sortable": false,
+    "name": "permission",
+    "field": "permission"
+  },
+  {
+    "label": "Role",
+    "align": "left",
+    "sortable": false,
+    "name": "role_id",
+    "field": "role_id"
+  },
+  {
+    "label": "Action",
+    "align": "right",
+    "sortable": false,
+    "name": "btnactions",
+    "field": ""
+  }
+],
+	RolesTableHeaderItems: [
+  {
+    "label": "Role Id",
+    "align": "left",
+    "sortable": false,
+    "name": "role_id",
+    "field": "role_id"
+  },
+  {
+    "label": "Role Name",
+    "align": "left",
+    "sortable": false,
+    "name": "role_name",
+    "field": "role_name"
   },
   {
     "label": "Action",
@@ -227,7 +296,7 @@ export const AppMenus = {
     "field": "email"
   },
   {
-    "label": "Telelphone",
+    "label": "Telephone",
     "align": "left",
     "sortable": false,
     "name": "telelphone",
@@ -239,6 +308,13 @@ export const AppMenus = {
     "sortable": false,
     "name": "photo",
     "field": "photo"
+  },
+  {
+    "label": "User Role Id",
+    "align": "left",
+    "sortable": false,
+    "name": "user_role_id",
+    "field": "user_role_id"
   },
   {
     "label": "Action",

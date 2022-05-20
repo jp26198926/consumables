@@ -11,7 +11,8 @@ class Users extends BaseModel {
 				password: {name: 'password', type:Sequelize.STRING},
 				telelphone: {name: 'telelphone', type:Sequelize.STRING},
 				photo: {name: 'photo', type:Sequelize.STRING},
-				name: {name: 'name', type:Sequelize.STRING}
+				name: {name: 'name', type:Sequelize.STRING},
+				user_role_id: {name: 'user_role_id', type:Sequelize.INTEGER}
 			}, 
 			{ 
 				sequelize,
@@ -30,7 +31,9 @@ class Users extends BaseModel {
 			'username', 
 			'email', 
 			'telelphone', 
-			'photo'
+			'photo', 
+			sequelize.literal('`roles`.`role_name` AS `roles_role_name`'), 
+			'user_role_id'
 		];
 	}
 
@@ -42,7 +45,9 @@ class Users extends BaseModel {
 			'username', 
 			'email', 
 			'telelphone', 
-			'photo'
+			'photo', 
+			sequelize.literal('`roles`.`role_name` AS `roles_role_name`'), 
+			'user_role_id'
 		];
 	}
 
@@ -53,7 +58,9 @@ class Users extends BaseModel {
 			'name', 
 			'username', 
 			'email', 
-			'telelphone'
+			'telelphone', 
+			sequelize.literal('`roles`.`role_name` AS `roles_role_name`'), 
+			'user_role_id'
 		];
 	}
 
@@ -64,7 +71,9 @@ class Users extends BaseModel {
 			'name', 
 			'username', 
 			'email', 
-			'telelphone'
+			'telelphone', 
+			sequelize.literal('`roles`.`role_name` AS `roles_role_name`'), 
+			'user_role_id'
 		];
 	}
 
@@ -86,7 +95,8 @@ class Users extends BaseModel {
 			'name', 
 			'username', 
 			'email', 
-			'telelphone'
+			'telelphone', 
+			'user_role_id'
 		];
 	}
 
@@ -97,7 +107,8 @@ class Users extends BaseModel {
 			'name', 
 			'username', 
 			'email', 
-			'telelphone'
+			'telelphone', 
+			'user_role_id'
 		];
 	}
 
@@ -109,7 +120,8 @@ class Users extends BaseModel {
 			'username', 
 			'email', 
 			'telelphone', 
-			'photo'
+			'photo', 
+			'user_role_id'
 		];
 	}
 
