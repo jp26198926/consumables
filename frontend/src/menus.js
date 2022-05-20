@@ -55,7 +55,7 @@ export const AppMenus = {
   {
     "path": "/users",
     "label": "Users",
-    "icon": "extension",
+    "icon": "account_circle",
     "iconcolor": "",
     "target": "",
     "submenu": []
@@ -63,7 +63,7 @@ export const AppMenus = {
   {
     "path": "/permissions",
     "label": "Permissions",
-    "icon": "extension",
+    "icon": "vpn_key",
     "iconcolor": "",
     "target": "",
     "submenu": []
@@ -71,7 +71,7 @@ export const AppMenus = {
   {
     "path": "/roles",
     "label": "Roles",
-    "icon": "extension",
+    "icon": "lock_open",
     "iconcolor": "",
     "target": "",
     "submenu": []
