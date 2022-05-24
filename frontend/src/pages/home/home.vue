@@ -20,7 +20,7 @@
             <div class="container-fluid">
                 <div class="row q-col-gutter-x-md">
                     <div class="col-sm-12 col-md-3 comp-grid" >
-                        <record-count api-path="components_data/getcount_received" max="" v-slot="record">
+                        <record-count api-path="components_data/action_type_option_list" max="" v-slot="record">
                         <q-btn align="left"  unelevated    :rounded="false"  block no-caps text-color="blue" color="blue-1" :to="`stocks`" padding="md" class="full-width animated zoomIn" >
                             <q-icon class=" q-mr-md" color="blue" style="opacity:1" size="40px" name="file_download"></q-icon>
                             <div class="flex-column text-left">
@@ -35,7 +35,7 @@
                         </record-count>
                     </div>
                     <div class="col-sm-12 col-md-3 comp-grid" >
-                        <record-count api-path="components_data/getcount_released" max="" v-slot="record">
+                        <record-count api-path="components_data/action_type_option_list" max="" v-slot="record">
                         <q-btn align="left"  unelevated    :rounded="false"  block no-caps text-color="orange" color="orange-1" :to="`stocks`" padding="md" class="full-width animated zoomIn" >
                             <q-icon class=" q-mr-md" color="orange" style="opacity:1" size="40px" name="file_upload"></q-icon>
                             <div class="flex-column text-left">
@@ -50,7 +50,7 @@
                         </record-count>
                     </div>
                     <div class="col-sm-12 col-md-3 comp-grid" >
-                        <record-count api-path="components_data/getcount_loweststocks" max="" v-slot="record">
+                        <record-count api-path="components_data/action_type_option_list" max="" v-slot="record">
                         <q-btn align="left"  unelevated    :rounded="false"  block no-caps text-color="red" color="red-1" :to="`stocks`" padding="md" class="full-width animated zoomIn" >
                             <q-icon class=" q-mr-md" color="red" style="opacity:1" size="40px" name="filter_1"></q-icon>
                             <div class="flex-column text-left">
@@ -65,7 +65,7 @@
                         </record-count>
                     </div>
                     <div class="col-sm-12 col-md-3 comp-grid" >
-                        <record-count api-path="components_data/getcount_items" max="" v-slot="record">
+                        <record-count api-path="components_data/action_type_option_list" max="" v-slot="record">
                         <q-btn align="left"  unelevated    :rounded="false"  block no-caps text-color="green" color="green-1" :to="`items`" padding="md" class="full-width animated zoomIn" >
                             <q-icon class=" q-mr-md" color="green" style="opacity:1" size="40px" name="bookmark_border"></q-icon>
                             <div class="flex-column text-left">
@@ -87,7 +87,7 @@
                 <div class="row q-col-gutter-x-md">
                     <div class="col comp-grid" >
                         <div class="">
-                            <api-data-source   api-path="components_data/home_data_repeater"  :query-params="filters" v-slot="req">
+                            <api-data-source   api-path="components_data/action_type_option_list"  :query-params="filters" v-slot="req">
                                 <div >
                                     <div class="" >
                                         <div class="row  items-center q-col-gutter-sm q-px-sm">
@@ -150,7 +150,7 @@
                     <div class="row q-col-gutter-x-md">
                         <div class="col comp-grid" >
                             <div class="">
-                                <api-data-source   api-path="components_data/home_data_repeater2"  :query-params="filters" v-slot="req">
+                                <api-data-source   api-path="components_data/action_type_option_list"  :query-params="filters" v-slot="req">
                                     <div >
                                         <div class="" >
                                             <div class="row  items-center q-col-gutter-sm q-px-sm">

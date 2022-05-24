@@ -134,25 +134,26 @@
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col-sm-3 col-12">
-                                                    Remarks 
+                                                    Department *
                                                 </div>
                                                 <div class="col-sm-9 col-12">
-                                                    <ValidationProvider :rules="{}" name="Remarks" v-slot="{ errors, invalid, validated }">
-                                                        <q-input outlined dense  ref="ctrlremarks" rows="5"  v-model="formData.remarks" placeholder="Enter Remarks"    type="textarea"  :error="invalid && validated" :error-message="errors[0]">
-                                                        </q-input>
-                                                    </ValidationProvider>
+                                                    <api-data-source @loaded="response => mapOptionField(response, 'department_id')"  api-path="components_data/department_id_option_list"  :query-params="filters" v-slot="req">
+                                                        <ValidationProvider :rules="{required:true}" name="Department" v-slot="{ errors, invalid, validated }">
+                                                            <q-select   :loading="req.loading"  outlined dense  ref="ctrldepartment_id" emit-value map-options  v-model="formData.department_id" :options="req.response" label="Department"  :error="invalid && validated" :error-message="errors[0]" hint="Received From or Release To Department">
+                                                            </q-select> 
+                                                        </ValidationProvider>
+                                                    </api-data-source>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col-sm-3 col-12">
-                                                    Department Id *
+                                                    Remarks 
                                                 </div>
                                                 <div class="col-sm-9 col-12">
-                                                    <ValidationProvider :rules="{required:true}" name="Department Id" v-slot="{ errors, invalid, validated }">
-                                                        <q-input outlined dense  ref="ctrldepartment_id" v-model.trim="formData.department_id"  label="Department Id" type="number" placeholder="Enter Department Id"   step="any"    
-                                                        class="" :error="invalid && validated" :error-message="errors[0]">
+                                                    <ValidationProvider :rules="{}" name="Remarks" v-slot="{ errors, invalid, validated }">
+                                                        <q-input outlined dense  ref="ctrlremarks" rows="5"  v-model="formData.remarks" placeholder="Enter Remarks"    type="textarea"  :error="invalid && validated" :error-message="errors[0]">
                                                         </q-input>
                                                     </ValidationProvider>
                                                 </div>
@@ -200,7 +201,7 @@
 		data() {
             return {
 				formData: {
-					action_id: "", date: "", item_id: "", qty: "", expiry: "", remarks: "", department_id: "0", 
+					action_id: "", date: "", item_id: "", qty: "", expiry: "", department_id: "", remarks: "", 
 				},
 				datePicker:false,expiryPicker:false,
 			}
@@ -243,7 +244,7 @@
 				}
 			},
 			resetForm (){
-				this.formData = {action_id: "", date: "", item_id: "", qty: "", expiry: "", remarks: "", department_id: "0", };
+				this.formData = {action_id: "", date: "", item_id: "", qty: "", expiry: "", department_id: "", remarks: "", };
 				requestAnimationFrame(() => {
 					this.$refs.observer.reset();
 				});

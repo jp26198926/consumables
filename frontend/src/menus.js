@@ -305,13 +305,6 @@ export const AppMenus = {
 ],
 	StocksTableHeaderItems: [
   {
-    "label": "Action",
-    "align": "left",
-    "sortable": false,
-    "name": "action_types_action_type",
-    "field": "action_types_action_type"
-  },
-  {
     "label": "Date",
     "align": "left",
     "sortable": false,
@@ -326,20 +319,6 @@ export const AppMenus = {
     "field": "qty"
   },
   {
-    "label": "Barcode",
-    "align": "left",
-    "sortable": false,
-    "name": "items_barcode",
-    "field": "items_barcode"
-  },
-  {
-    "label": "Item",
-    "align": "left",
-    "sortable": false,
-    "name": "items_name",
-    "field": "items_name"
-  },
-  {
     "label": "Expiry",
     "align": "left",
     "sortable": false,
@@ -352,13 +331,6 @@ export const AppMenus = {
     "sortable": false,
     "name": "remarks",
     "field": "remarks"
-  },
-  {
-    "label": "Department Id",
-    "align": "left",
-    "sortable": false,
-    "name": "department_id",
-    "field": "department_id"
   },
   {
     "label": "Action",

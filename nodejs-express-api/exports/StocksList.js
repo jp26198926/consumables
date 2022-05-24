@@ -9,11 +9,8 @@ module.exports =  {
 		try{
 			let format = req.query.export.toLowerCase();
 			let columns =  [
-				{header: "Action", key: "action_types_action_type"},
 				{header: "Date", key: "date"},
 				{header: "Qty", key: "qty"},
-				{header: "Barcode", key: "items_barcode"},
-				{header: "Item", key: "items_name"},
 				{header: "Remarks", key: "remarks"},
 				{header: "Expiry", key: "expiry"},
 				{header: "Created By", key: "created_by"},

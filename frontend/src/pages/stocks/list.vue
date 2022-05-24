@@ -77,29 +77,17 @@
                                                         <q-td auto-width>
                                                             <q-checkbox dense v-model="props.selected"></q-checkbox>
                                                         </q-td>
-                                                        <q-td  key="action_types_action_type" :props="props">
-                                                            {{ props.row.action_types_action_type }}
-                                                        </q-td>
                                                         <q-td  key="date" :props="props">
                                                             {{ props.row.date }}
                                                         </q-td>
                                                         <q-td  key="qty" :props="props">
                                                             {{ props.row.qty }}
                                                         </q-td>
-                                                        <q-td  key="items_barcode" :props="props">
-                                                            {{ props.row.items_barcode }}
-                                                        </q-td>
-                                                        <q-td  key="items_name" :props="props">
-                                                            {{ props.row.items_name }}
-                                                        </q-td>
                                                         <q-td  key="expiry" :props="props">
                                                             {{ props.row.expiry }}
                                                         </q-td>
                                                         <q-td  key="remarks" :props="props">
                                                             {{ props.row.remarks }}
-                                                        </q-td>
-                                                        <q-td  key="department_id" :props="props">
-                                                            {{ props.row.department_id }}
                                                         </q-td>
                                                         <q-td key="btnactions" :props="props">
                                                             <div class="row q-col-gutter-xs justify-end">
@@ -132,7 +120,7 @@
                                                 <!-- End of Table Layout-->
                                                 <template v-slot:bottom-row>
                                                     <q-tr>
-                                                        <q-td></q-td><q-td></q-td><q-td>Total Qty : <q-chip square class="text-bold">{{totalQty}}</q-chip></q-td><q-td></q-td><q-td></q-td><q-td></q-td><q-td></q-td><q-td></q-td><q-td></q-td>
+                                                        <q-td></q-td><q-td>Total Qty : <q-chip square class="text-bold">{{totalQty}}</q-chip></q-td><q-td></q-td><q-td></q-td><q-td></q-td>
                                                     </q-tr>
                                                 </template>
                                                 </q-table>

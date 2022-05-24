@@ -35,76 +35,50 @@ class Stocks extends BaseModel {
 	static listFields() {
 		let sequelize = this.sequelize;
 		return [
-			sequelize.literal('stocks.id AS id'), 
-			sequelize.literal("action_types.action_type AS action_types_action_type"), 
-			sequelize.literal('stocks.date AS date'), 
-			sequelize.literal('stocks.qty AS qty'), 
-			sequelize.literal("items.barcode AS items_barcode"), 
-			sequelize.literal("items.name AS items_name"), 
-			sequelize.literal('stocks.expiry AS expiry'), 
-			sequelize.literal('stocks.remarks AS remarks'), 
-			sequelize.literal("action_types.id AS action_types_id"), 
-			sequelize.literal("items.id AS items_id"), 
-			sequelize.literal('stocks.department_id AS department_id')
+			'id', 
+			'date', 
+			'qty', 
+			'expiry', 
+			'remarks'
 		];
 	}
 
 	static exportListFields() {
 		let sequelize = this.sequelize;
 		return [
-			sequelize.literal('stocks.id AS id'), 
-			sequelize.literal("action_types.action_type AS action_types_action_type"), 
-			sequelize.literal('stocks.date AS date'), 
-			sequelize.literal('stocks.qty AS qty'), 
-			sequelize.literal("items.barcode AS items_barcode"), 
-			sequelize.literal("items.name AS items_name"), 
-			sequelize.literal('stocks.expiry AS expiry'), 
-			sequelize.literal('stocks.remarks AS remarks'), 
-			sequelize.literal("action_types.id AS action_types_id"), 
-			sequelize.literal("items.id AS items_id"), 
-			sequelize.literal('stocks.department_id AS department_id')
+			'id', 
+			'date', 
+			'qty', 
+			'expiry', 
+			'remarks'
 		];
 	}
 
 	static viewFields() {
 		let sequelize = this.sequelize;
 		return [
-			sequelize.literal('stocks.id AS id'), 
-			sequelize.literal("action_types.action_type AS action_types_action_type"), 
-			sequelize.literal('stocks.date AS date'), 
-			sequelize.literal('stocks.qty AS qty'), 
-			sequelize.literal("items.barcode AS items_barcode"), 
-			sequelize.literal("items.name AS items_name"), 
-			sequelize.literal('stocks.expiry AS expiry'), 
-			sequelize.literal('stocks.remarks AS remarks'), 
-			sequelize.literal("action_types.id AS action_types_id"), 
-			sequelize.literal("items.id AS items_id"), 
-			sequelize.literal('stocks.date_created AS date_created'), 
-			sequelize.literal('stocks.date_updated AS date_updated'), 
-			sequelize.literal('stocks.created_by AS created_by'), 
-			sequelize.literal('stocks.updated_by AS updated_by'), 
-			sequelize.literal('stocks.department_id AS department_id')
+			'id', 
+			'date', 
+			'qty', 
+			'expiry', 
+			'remarks', 
+			'date_created', 
+			'date_updated', 
+			'date_deleted'
 		];
 	}
 
 	static exportViewFields() {
 		let sequelize = this.sequelize;
 		return [
-			sequelize.literal('stocks.id AS id'), 
-			sequelize.literal("action_types.action_type AS action_types_action_type"), 
-			sequelize.literal('stocks.date AS date'), 
-			sequelize.literal('stocks.qty AS qty'), 
-			sequelize.literal("items.barcode AS items_barcode"), 
-			sequelize.literal("items.name AS items_name"), 
-			sequelize.literal('stocks.expiry AS expiry'), 
-			sequelize.literal('stocks.remarks AS remarks'), 
-			sequelize.literal("action_types.id AS action_types_id"), 
-			sequelize.literal("items.id AS items_id"), 
-			sequelize.literal('stocks.date_created AS date_created'), 
-			sequelize.literal('stocks.date_updated AS date_updated'), 
-			sequelize.literal('stocks.created_by AS created_by'), 
-			sequelize.literal('stocks.updated_by AS updated_by'), 
-			sequelize.literal('stocks.department_id AS department_id')
+			'id', 
+			'date', 
+			'qty', 
+			'expiry', 
+			'remarks', 
+			'date_created', 
+			'date_updated', 
+			'date_deleted'
 		];
 	}
 
@@ -117,9 +91,9 @@ class Stocks extends BaseModel {
 			'item_id', 
 			'qty', 
 			'expiry', 
+			'department_id', 
 			'remarks', 
-			'updated_by', 
-			'department_id'
+			'updated_by'
 		];
 	}
 
@@ -127,12 +101,10 @@ class Stocks extends BaseModel {
 	static searchFields(){
 		let sequelize = this.sequelize;
 		return [
-			sequelize.literal("Action_Types.action_type LIKE :search"), 
-			sequelize.literal("Stocks.date LIKE :search"), 
-			sequelize.literal("Stocks.qty LIKE :search"), 
-			sequelize.literal("Items.barcode LIKE :search"), 
-			sequelize.literal("Items.name LIKE :search"), 
-			sequelize.literal("Stocks.remarks LIKE :search"),
+			sequelize.literal("date LIKE :search"), 
+			sequelize.literal("qty LIKE :search"), 
+			sequelize.literal("expiry LIKE :search"), 
+			sequelize.literal("remarks LIKE :search"),
 		];
 	}
 

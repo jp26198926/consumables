@@ -29,13 +29,6 @@
                                             <div class="col">
                                                 <q-item>
                                                     <q-item-section>
-                                                        <q-item-label caption>Action: </q-item-label>
-                                                        <q-item-label class="text-bold">{{ item.action_types_action_type }}</q-item-label>
-                                                    </q-item-section>
-                                                </q-item>
-                                                <q-separator></q-separator>
-                                                <q-item>
-                                                    <q-item-section>
                                                         <q-item-label caption>Date: </q-item-label>
                                                         <q-item-label class="text-bold">{{ item.date }}</q-item-label>
                                                     </q-item-section>
@@ -45,20 +38,6 @@
                                                     <q-item-section>
                                                         <q-item-label caption>Qty: </q-item-label>
                                                         <q-item-label class="text-bold">{{ item.qty }}</q-item-label>
-                                                    </q-item-section>
-                                                </q-item>
-                                                <q-separator></q-separator>
-                                                <q-item>
-                                                    <q-item-section>
-                                                        <q-item-label caption>Barcode: </q-item-label>
-                                                        <q-item-label class="text-bold">{{ item.items_barcode }}</q-item-label>
-                                                    </q-item-section>
-                                                </q-item>
-                                                <q-separator></q-separator>
-                                                <q-item>
-                                                    <q-item-section>
-                                                        <q-item-label caption>Item: </q-item-label>
-                                                        <q-item-label class="text-bold">{{ item.items_name }}</q-item-label>
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>
@@ -112,22 +91,18 @@
                                                 <q-separator></q-separator>
                                                 <q-item>
                                                     <q-item-section>
-                                                        <q-item-label caption>Created By: </q-item-label>
-                                                        <q-item-label class="text-bold">{{ item.created_by }}</q-item-label>
-                                                    </q-item-section>
-                                                </q-item>
-                                                <q-separator></q-separator>
-                                                <q-item>
-                                                    <q-item-section>
-                                                        <q-item-label caption>Updated By: </q-item-label>
-                                                        <q-item-label class="text-bold">{{ item.updated_by }}</q-item-label>
-                                                    </q-item-section>
-                                                </q-item>
-                                                <q-separator></q-separator>
-                                                <q-item>
-                                                    <q-item-section>
-                                                        <q-item-label caption>Department Id: </q-item-label>
-                                                        <q-item-label class="text-bold">{{ item.department_id }}</q-item-label>
+                                                        <q-item-label caption>Date Deleted: </q-item-label>
+                                                        <q-item-label class="text-bold">
+                                                            <q-chip v-if="item.date_deleted" dense size="13px" :label="item.date_deleted | relativeDate">
+                                                            <q-tooltip
+                                                            content-class="bg-accent"
+                                                            transition-show="scale"
+                                                            transition-hide="scale"
+                                                            >
+                                                            {{ item.date_deleted | humanDatetime}}
+                                                            </q-tooltip>
+                                                            </q-chip>
+                                                        </q-item-label>
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>

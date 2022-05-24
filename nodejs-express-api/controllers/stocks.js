@@ -60,8 +60,6 @@ const AuditLog = require('../helpers/auditlog.js');
 let oldValues = null;
 let newValues = null;
 const StocksListExport = require('../exports/StocksList')
-Stocks.belongsTo(models.Action_Types, {foreignKey: 'action_id', as: 'action_types' });
-Stocks.belongsTo(models.Items, {foreignKey: 'item_id', as: 'items' });
 
 
 /**
@@ -84,20 +82,6 @@ router.get(['/', '/index/:fieldname?/:fieldvalue?'], async (req, res) => {
 			];
 			replacements.fieldvalue = fieldvalue;
 		}
-		let joinTables = []; // hold list of join tables
-		joinTables.push({
-			model: models.Action_Types,
-			required: false,
-			as: 'action_types',
-			attributes: [], //already set on the query attributes using sequelize literal
-		})
-		joinTables.push({
-			model: models.Items,
-			required: false,
-			as: 'items',
-			attributes: [], //already set on the query attributes using sequelize literal
-		})
-		query['include'] = joinTables;
 		let search = req.query.search;
 		if(search){
 			let searchFields = Stocks.searchFields();
@@ -138,24 +122,7 @@ router.get(['/view/:recid'], async (req, res) => {
 		let recid = req.params.recid || null;
 		let query = {}
 		let where = {}
-		let joinTables = []; // hold list of join tables
-		joinTables.push({
-			model: models.Action_Types,
-			required: false,
-			as: 'action_types',
-			attributes: [], //already set on the query attributes using sequelize literal
-		})
-		joinTables.push({
-			model: models.Items,
-			required: false,
-			as: 'items',
-			attributes: [], //already set on the query attributes using sequelize literal
-		})
-		query['include'] = joinTables;
-		where[Op.and] = sequelize.literal('stocks.id = :recid');
-		query.replacements = {
-			recid
-		}
+		where['id'] = recid;
 		query.raw = true;
 		query.where = where;
 		query.attributes = Stocks.viewFields();
@@ -184,8 +151,8 @@ router.post('/add/' ,
 		body('item_id').not().isEmpty().isNumeric(),
 		body('qty').not().isEmpty().isNumeric(),
 		body('expiry').optional(),
-		body('remarks').optional(),
 		body('department_id').not().isEmpty().isNumeric(),
+		body('remarks').optional(),
 	]
 , async function (req, res) {
 	try{
@@ -264,8 +231,8 @@ router.post('/edit/:recid' ,
 		body('item_id').optional({nullable: true}).not().isEmpty().isNumeric(),
 		body('qty').optional({nullable: true}).not().isEmpty().isNumeric(),
 		body('expiry').optional(),
-		body('remarks').optional(),
 		body('department_id').optional({nullable: true}).not().isEmpty().isNumeric(),
+		body('remarks').optional(),
 	]
 , async (req, res) => {
 	try{
