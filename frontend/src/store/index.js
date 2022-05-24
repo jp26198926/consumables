@@ -6,8 +6,6 @@ import { auth } from "./auth.js"
 import { action_types } from "./action_types.js"
 import { audits } from "./audits.js"
 import { departments } from "./departments.js"
-import { dv_created } from "./dv_created.js"
-import { dv_updated } from "./dv_updated.js"
 import { items } from "./items.js"
 import { measurements } from "./measurements.js"
 import { permissions } from "./permissions.js"
@@ -30,8 +28,6 @@ export default function (/* { ssrContext } */) {
 		action_types,
 		audits,
 		departments,
-		dv_created,
-		dv_updated,
 		items,
 		measurements,
 		permissions,

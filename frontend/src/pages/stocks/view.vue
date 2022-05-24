@@ -29,6 +29,13 @@
                                             <div class="col">
                                                 <q-item>
                                                     <q-item-section>
+                                                        <q-item-label caption>Action: </q-item-label>
+                                                        <q-item-label class="text-bold">{{ item.action_types_action_type }}</q-item-label>
+                                                    </q-item-section>
+                                                </q-item>
+                                                <q-separator></q-separator>
+                                                <q-item>
+                                                    <q-item-section>
                                                         <q-item-label caption>Date: </q-item-label>
                                                         <q-item-label class="text-bold">{{ item.date }}</q-item-label>
                                                     </q-item-section>
@@ -43,6 +50,27 @@
                                                 <q-separator></q-separator>
                                                 <q-item>
                                                     <q-item-section>
+                                                        <q-item-label caption>UOM: </q-item-label>
+                                                        <q-item-label class="text-bold">{{ item.measurements_name }}</q-item-label>
+                                                    </q-item-section>
+                                                </q-item>
+                                                <q-separator></q-separator>
+                                                <q-item>
+                                                    <q-item-section>
+                                                        <q-item-label caption>Barcode: </q-item-label>
+                                                        <q-item-label class="text-bold">{{ item.items_barcode }}</q-item-label>
+                                                    </q-item-section>
+                                                </q-item>
+                                                <q-separator></q-separator>
+                                                <q-item>
+                                                    <q-item-section>
+                                                        <q-item-label caption>Item: </q-item-label>
+                                                        <q-item-label class="text-bold">{{ item.items_name }}</q-item-label>
+                                                    </q-item-section>
+                                                </q-item>
+                                                <q-separator></q-separator>
+                                                <q-item>
+                                                    <q-item-section>
                                                         <q-item-label caption>Expiry: </q-item-label>
                                                         <q-item-label class="text-bold">{{ item.expiry }}</q-item-label>
                                                     </q-item-section>
@@ -52,6 +80,13 @@
                                                     <q-item-section>
                                                         <q-item-label caption>Remarks: </q-item-label>
                                                         <q-item-label class="text-bold">{{ item.remarks }}</q-item-label>
+                                                    </q-item-section>
+                                                </q-item>
+                                                <q-separator></q-separator>
+                                                <q-item>
+                                                    <q-item-section>
+                                                        <q-item-label caption>Department: </q-item-label>
+                                                        <q-item-label class="text-bold">{{ item.departments_department }}</q-item-label>
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>
@@ -108,8 +143,25 @@
                                                 <q-separator></q-separator>
                                                 <q-item>
                                                     <q-item-section>
-                                                        <q-item-label caption>Measurement Id: </q-item-label>
-                                                        <q-item-label class="text-bold">{{ item.measurement_id }}</q-item-label>
+                                                        <q-item-label caption>Users Name: </q-item-label>
+                                                        <q-item-label class="text-bold">{{ item.users_name }}</q-item-label>
+                                                    </q-item-section>
+                                                </q-item>
+                                                <q-separator></q-separator>
+                                                <q-item>
+                                                    <q-item-section>
+                                                        <q-item-label caption>Measurements Date Updated: </q-item-label>
+                                                        <q-item-label class="text-bold">
+                                                            <q-chip v-if="item.measurements_date_updated" dense size="13px" :label="item.measurements_date_updated | relativeDate">
+                                                            <q-tooltip
+                                                            content-class="bg-accent"
+                                                            transition-show="scale"
+                                                            transition-hide="scale"
+                                                            >
+                                                            {{ item.measurements_date_updated | humanDatetime}}
+                                                            </q-tooltip>
+                                                            </q-chip>
+                                                        </q-item-label>
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>

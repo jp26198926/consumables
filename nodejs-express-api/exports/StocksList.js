@@ -16,7 +16,28 @@ module.exports =  {
 				{header: "Created By", key: "created_by"},
 				{header: "Updated By", key: "updated_by"},
 				{header: "Department Id", key: "department_id"},
-				{header: "UOM", key: "measurement_id"}
+				{header: "UOM", key: "measurement_id"},
+				{header: "Items Id", key: "items_id"},
+				{header: "Items Barcode", key: "items_barcode"},
+				{header: "Items Name", key: "items_name"},
+				{header: "Items Type Id", key: "items_type_id"},
+				{header: "Items Measurement Id", key: "items_measurement_id"},
+				{header: "Items Date Created", key: "items_date_created"},
+				{header: "Items Date Updated", key: "items_date_updated"},
+				{header: "Action Types Id", key: "action_types_id"},
+				{header: "Action Types Action Type", key: "action_types_action_type"},
+				{header: "Action Types Date Created", key: "action_types_date_created"},
+				{header: "Action Types Date Updated", key: "action_types_date_updated"},
+				{header: "Departments Id", key: "departments_id"},
+				{header: "Departments Department", key: "departments_department"},
+				{header: "Users Id", key: "users_id"},
+				{header: "Users Username", key: "users_username"},
+				{header: "Users Email", key: "users_email"},
+				{header: "Users Telelphone", key: "users_telelphone"},
+				{header: "Users Photo", key: "users_photo"},
+				{header: "Users Name", key: "users_name"},
+				{header: "Users User Role Id", key: "users_user_role_id"},
+				{header: "UOM", key: "measurements_name"}
 			]
 			let filename = "stockslist-report";
 			if(format == "excel"){

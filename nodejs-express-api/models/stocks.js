@@ -36,54 +36,94 @@ class Stocks extends BaseModel {
 	static listFields() {
 		let sequelize = this.sequelize;
 		return [
-			'id', 
-			'date', 
-			'qty', 
-			'expiry', 
-			'remarks', 
-			'measurement_id'
+			sequelize.literal('stocks.id AS id'), 
+			sequelize.literal("action_types.action_type AS action_types_action_type"), 
+			sequelize.literal('stocks.date AS date'), 
+			sequelize.literal('stocks.qty AS qty'), 
+			sequelize.literal("measurements.name AS measurements_name"), 
+			sequelize.literal("items.barcode AS items_barcode"), 
+			sequelize.literal("items.name AS items_name"), 
+			sequelize.literal('stocks.expiry AS expiry'), 
+			sequelize.literal('stocks.remarks AS remarks'), 
+			sequelize.literal("departments.department AS departments_department"), 
+			sequelize.literal("items.id AS items_id"), 
+			sequelize.literal("action_types.id AS action_types_id"), 
+			sequelize.literal("departments.id AS departments_id"), 
+			sequelize.literal("users.id AS users_id"), 
+			sequelize.literal("measurements.id AS measurements_id")
 		];
 	}
 
 	static exportListFields() {
 		let sequelize = this.sequelize;
 		return [
-			'id', 
-			'date', 
-			'qty', 
-			'expiry', 
-			'remarks', 
-			'measurement_id'
+			sequelize.literal('stocks.id AS id'), 
+			sequelize.literal("action_types.action_type AS action_types_action_type"), 
+			sequelize.literal('stocks.date AS date'), 
+			sequelize.literal('stocks.qty AS qty'), 
+			sequelize.literal("measurements.name AS measurements_name"), 
+			sequelize.literal("items.barcode AS items_barcode"), 
+			sequelize.literal("items.name AS items_name"), 
+			sequelize.literal('stocks.expiry AS expiry'), 
+			sequelize.literal('stocks.remarks AS remarks'), 
+			sequelize.literal("departments.department AS departments_department"), 
+			sequelize.literal("items.id AS items_id"), 
+			sequelize.literal("action_types.id AS action_types_id"), 
+			sequelize.literal("departments.id AS departments_id"), 
+			sequelize.literal("users.id AS users_id"), 
+			sequelize.literal("measurements.id AS measurements_id")
 		];
 	}
 
 	static viewFields() {
 		let sequelize = this.sequelize;
 		return [
-			'id', 
-			'date', 
-			'qty', 
-			'expiry', 
-			'remarks', 
-			'date_created', 
-			'date_updated', 
-			'date_deleted', 
-			'measurement_id'
+			sequelize.literal('stocks.id AS id'), 
+			sequelize.literal("action_types.action_type AS action_types_action_type"), 
+			sequelize.literal('stocks.date AS date'), 
+			sequelize.literal('stocks.qty AS qty'), 
+			sequelize.literal("measurements.name AS measurements_name"), 
+			sequelize.literal("items.barcode AS items_barcode"), 
+			sequelize.literal("items.name AS items_name"), 
+			sequelize.literal('stocks.expiry AS expiry'), 
+			sequelize.literal('stocks.remarks AS remarks'), 
+			sequelize.literal("departments.department AS departments_department"), 
+			sequelize.literal('stocks.date_created AS date_created'), 
+			sequelize.literal('stocks.date_updated AS date_updated'), 
+			sequelize.literal('stocks.date_deleted AS date_deleted'), 
+			sequelize.literal("users.name AS users_name"), 
+			sequelize.literal("items.id AS items_id"), 
+			sequelize.literal("action_types.id AS action_types_id"), 
+			sequelize.literal("departments.id AS departments_id"), 
+			sequelize.literal("users.id AS users_id"), 
+			sequelize.literal("measurements.id AS measurements_id"), 
+			sequelize.literal("measurements.date_updated AS measurements_date_updated")
 		];
 	}
 
 	static exportViewFields() {
 		let sequelize = this.sequelize;
 		return [
-			'id', 
-			'date', 
-			'qty', 
-			'expiry', 
-			'remarks', 
-			'date_created', 
-			'date_updated', 
-			'date_deleted', 
-			'measurement_id'
+			sequelize.literal('stocks.id AS id'), 
+			sequelize.literal("action_types.action_type AS action_types_action_type"), 
+			sequelize.literal('stocks.date AS date'), 
+			sequelize.literal('stocks.qty AS qty'), 
+			sequelize.literal("measurements.name AS measurements_name"), 
+			sequelize.literal("items.barcode AS items_barcode"), 
+			sequelize.literal("items.name AS items_name"), 
+			sequelize.literal('stocks.expiry AS expiry'), 
+			sequelize.literal('stocks.remarks AS remarks'), 
+			sequelize.literal("departments.department AS departments_department"), 
+			sequelize.literal('stocks.date_created AS date_created'), 
+			sequelize.literal('stocks.date_updated AS date_updated'), 
+			sequelize.literal('stocks.date_deleted AS date_deleted'), 
+			sequelize.literal("users.name AS users_name"), 
+			sequelize.literal("items.id AS items_id"), 
+			sequelize.literal("action_types.id AS action_types_id"), 
+			sequelize.literal("departments.id AS departments_id"), 
+			sequelize.literal("users.id AS users_id"), 
+			sequelize.literal("measurements.id AS measurements_id"), 
+			sequelize.literal("measurements.date_updated AS measurements_date_updated")
 		];
 	}
 
@@ -106,10 +146,15 @@ class Stocks extends BaseModel {
 	static searchFields(){
 		let sequelize = this.sequelize;
 		return [
-			sequelize.literal("date LIKE :search"), 
-			sequelize.literal("qty LIKE :search"), 
-			sequelize.literal("expiry LIKE :search"), 
-			sequelize.literal("remarks LIKE :search"),
+			sequelize.literal("Action_Types.action_type LIKE :search"), 
+			sequelize.literal("Stocks.date LIKE :search"), 
+			sequelize.literal("Stocks.qty LIKE :search"), 
+			sequelize.literal("Measurements.name LIKE :search"), 
+			sequelize.literal("Items.barcode LIKE :search"), 
+			sequelize.literal("Items.name LIKE :search"), 
+			sequelize.literal("Stocks.expiry LIKE :search"), 
+			sequelize.literal("Stocks.remarks LIKE :search"), 
+			sequelize.literal("Departments.department LIKE :search"),
 		];
 	}
 

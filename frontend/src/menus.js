@@ -206,29 +206,6 @@ export const AppMenus = {
     "field": ""
   }
 ],
-	Dv_CreatedTableHeaderItems: [
-  {
-    "label": "Id",
-    "align": "left",
-    "sortable": false,
-    "name": "id",
-    "field": "id"
-  },
-  {
-    "label": "Name",
-    "align": "left",
-    "sortable": false,
-    "name": "name",
-    "field": "name"
-  },
-  {
-    "label": "Action",
-    "align": "right",
-    "sortable": false,
-    "name": "btnactions",
-    "field": ""
-  }
-],
 	ItemsTableHeaderItems: [
   {
     "label": "Barcode",
@@ -344,6 +321,13 @@ export const AppMenus = {
 ],
 	StocksTableHeaderItems: [
   {
+    "label": "Action",
+    "align": "left",
+    "sortable": false,
+    "name": "action_types_action_type",
+    "field": "action_types_action_type"
+  },
+  {
     "label": "Date",
     "align": "left",
     "sortable": false,
@@ -356,6 +340,27 @@ export const AppMenus = {
     "sortable": false,
     "name": "qty",
     "field": "qty"
+  },
+  {
+    "label": "UOM",
+    "align": "left",
+    "sortable": false,
+    "name": "measurements_name",
+    "field": "measurements_name"
+  },
+  {
+    "label": "Barcode",
+    "align": "left",
+    "sortable": false,
+    "name": "items_barcode",
+    "field": "items_barcode"
+  },
+  {
+    "label": "Item",
+    "align": "left",
+    "sortable": false,
+    "name": "items_name",
+    "field": "items_name"
   },
   {
     "label": "Expiry",
@@ -372,11 +377,11 @@ export const AppMenus = {
     "field": "remarks"
   },
   {
-    "label": "UOM",
+    "label": "Department",
     "align": "left",
     "sortable": false,
-    "name": "measurement_id",
-    "field": "measurement_id"
+    "name": "departments_department",
+    "field": "departments_department"
   },
   {
     "label": "Action",

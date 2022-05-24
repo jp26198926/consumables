@@ -60,6 +60,11 @@ const AuditLog = require('../helpers/auditlog.js');
 let oldValues = null;
 let newValues = null;
 const StocksListExport = require('../exports/StocksList')
+Stocks.belongsTo(models.Items, {foreignKey: 'item_id', as: 'items' });
+Stocks.belongsTo(models.Action_Types, {foreignKey: 'action_id', as: 'action_types' });
+Stocks.belongsTo(models.Departments, {foreignKey: 'department_id', as: 'departments' });
+Stocks.belongsTo(models.Users, {foreignKey: 'created_by', as: 'users' });
+Stocks.belongsTo(models.Measurements, {foreignKey: 'measurement_id', as: 'measurements' });
 
 
 /**
@@ -82,6 +87,38 @@ router.get(['/', '/index/:fieldname?/:fieldvalue?'], async (req, res) => {
 			];
 			replacements.fieldvalue = fieldvalue;
 		}
+		let joinTables = []; // hold list of join tables
+		joinTables.push({
+			model: models.Items,
+			required: false,
+			as: 'items',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		joinTables.push({
+			model: models.Action_Types,
+			required: false,
+			as: 'action_types',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		joinTables.push({
+			model: models.Departments,
+			required: false,
+			as: 'departments',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		joinTables.push({
+			model: models.Users,
+			required: false,
+			as: 'users',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		joinTables.push({
+			model: models.Measurements,
+			required: false,
+			as: 'measurements',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		query['include'] = joinTables;
 		let search = req.query.search;
 		if(search){
 			let searchFields = Stocks.searchFields();
@@ -122,7 +159,42 @@ router.get(['/view/:recid'], async (req, res) => {
 		let recid = req.params.recid || null;
 		let query = {}
 		let where = {}
-		where['id'] = recid;
+		let joinTables = []; // hold list of join tables
+		joinTables.push({
+			model: models.Items,
+			required: false,
+			as: 'items',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		joinTables.push({
+			model: models.Action_Types,
+			required: false,
+			as: 'action_types',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		joinTables.push({
+			model: models.Departments,
+			required: false,
+			as: 'departments',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		joinTables.push({
+			model: models.Users,
+			required: false,
+			as: 'users',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		joinTables.push({
+			model: models.Measurements,
+			required: false,
+			as: 'measurements',
+			attributes: [], //already set on the query attributes using sequelize literal
+		})
+		query['include'] = joinTables;
+		where[Op.and] = sequelize.literal('stocks.id = :recid');
+		query.replacements = {
+			recid
+		}
 		query.raw = true;
 		query.where = where;
 		query.attributes = Stocks.viewFields();

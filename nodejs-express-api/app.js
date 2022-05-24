@@ -84,8 +84,6 @@ app.use('/api/account', require('./controllers/account.js'));
 app.use('/api/action_types', require('./controllers/action_types.js'))
 app.use('/api/audits', require('./controllers/audits.js'))
 app.use('/api/departments', require('./controllers/departments.js'))
-app.use('/api/dv_created', require('./controllers/dv_created.js'))
-app.use('/api/dv_updated', require('./controllers/dv_updated.js'))
 app.use('/api/items', require('./controllers/items.js'))
 app.use('/api/measurements', require('./controllers/measurements.js'))
 app.use('/api/permissions', require('./controllers/permissions.js'))
