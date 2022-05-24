@@ -17,7 +17,8 @@ class Stocks extends BaseModel {
 				expiry: {name: 'expiry', type:Sequelize.DATEONLY},
 				created_by: {name: 'created_by', type:Sequelize.INTEGER},
 				updated_by: {name: 'updated_by', type:Sequelize.INTEGER},
-				department_id: {name: 'department_id', type:Sequelize.INTEGER}
+				department_id: {name: 'department_id', type:Sequelize.INTEGER},
+				measurement_id: {name: 'measurement_id', type:Sequelize.INTEGER}
 			}, 
 			{ 
 				sequelize,
@@ -39,7 +40,8 @@ class Stocks extends BaseModel {
 			'date', 
 			'qty', 
 			'expiry', 
-			'remarks'
+			'remarks', 
+			'measurement_id'
 		];
 	}
 
@@ -50,7 +52,8 @@ class Stocks extends BaseModel {
 			'date', 
 			'qty', 
 			'expiry', 
-			'remarks'
+			'remarks', 
+			'measurement_id'
 		];
 	}
 
@@ -64,7 +67,8 @@ class Stocks extends BaseModel {
 			'remarks', 
 			'date_created', 
 			'date_updated', 
-			'date_deleted'
+			'date_deleted', 
+			'measurement_id'
 		];
 	}
 
@@ -78,7 +82,8 @@ class Stocks extends BaseModel {
 			'remarks', 
 			'date_created', 
 			'date_updated', 
-			'date_deleted'
+			'date_deleted', 
+			'measurement_id'
 		];
 	}
 

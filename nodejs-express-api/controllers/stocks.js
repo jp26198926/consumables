@@ -188,6 +188,11 @@ async function beforeAdd(postdata, req){
         //get absolute value of qty then add negative sign
         postdata.qty = -(Math.abs(Number(postdata.qty)));
     }
+    //get measurement id from item_id
+    let tableModel = models.Items;
+    let where = {'id': postdata.item_id};
+    let temp_record = await tableModel.findOne({where: where});
+    postdata.measurement_id = temp_record.measurement_id;
 }
 
 

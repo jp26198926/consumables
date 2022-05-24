@@ -106,6 +106,13 @@
                                                     </q-item-section>
                                                 </q-item>
                                                 <q-separator></q-separator>
+                                                <q-item>
+                                                    <q-item-section>
+                                                        <q-item-label caption>Measurement Id: </q-item-label>
+                                                        <q-item-label class="text-bold">{{ item.measurement_id }}</q-item-label>
+                                                    </q-item-section>
+                                                </q-item>
+                                                <q-separator></q-separator>
                                                 <q-card-actions class="row q-col-gutter-xs justify-end">
                                                     <q-btn icon="menu" padding="xs" round flat color="grey">
                                                         <q-menu auto-close transition-show="flip-right"  transition-hide="flip-left" self="center middle" anchor="center middle">

@@ -144,7 +144,9 @@ router.get('/action_id_option_list', async (req, res) => {
 router.get('/item_id_option_list', async (req, res) => {
 	try{
 		let sqltext = `SELECT  DISTINCT id AS value,name AS label,barcode AS caption FROM items ORDER BY name ASC` ;
-		let records = await sequelize.query(sqltext, { type: sequelize.QueryTypes.SELECT });
+		let queryParams = {};
+		queryParams.search = '%' + req.query.search + '%';
+		let records = await sequelize.query(sqltext, {replacements: queryParams, type: sequelize.QueryTypes.SELECT });
 		return res.ok(records);
 	}
 	catch(err){

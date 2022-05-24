@@ -89,6 +89,9 @@
                                                         <q-td  key="remarks" :props="props">
                                                             {{ props.row.remarks }}
                                                         </q-td>
+                                                        <q-td  key="measurement_id" :props="props">
+                                                            {{ props.row.measurement_id }}
+                                                        </q-td>
                                                         <q-td key="btnactions" :props="props">
                                                             <div class="row q-col-gutter-xs justify-end">
                                                                 <q-btn icon="menu" padding="xs" round flat color="grey">
@@ -120,7 +123,7 @@
                                                 <!-- End of Table Layout-->
                                                 <template v-slot:bottom-row>
                                                     <q-tr>
-                                                        <q-td></q-td><q-td>Total Qty : <q-chip square class="text-bold">{{totalQty}}</q-chip></q-td><q-td></q-td><q-td></q-td><q-td></q-td>
+                                                        <q-td></q-td><q-td>Total Qty : <q-chip square class="text-bold">{{totalQty}}</q-chip></q-td><q-td></q-td><q-td></q-td><q-td></q-td><q-td></q-td>
                                                     </q-tr>
                                                 </template>
                                                 </q-table>

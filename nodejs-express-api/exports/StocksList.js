@@ -15,7 +15,8 @@ module.exports =  {
 				{header: "Expiry", key: "expiry"},
 				{header: "Created By", key: "created_by"},
 				{header: "Updated By", key: "updated_by"},
-				{header: "Department Id", key: "department_id"}
+				{header: "Department Id", key: "department_id"},
+				{header: "UOM", key: "measurement_id"}
 			]
 			let filename = "stockslist-report";
 			if(format == "excel"){

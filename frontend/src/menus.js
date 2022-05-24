@@ -333,6 +333,13 @@ export const AppMenus = {
     "field": "remarks"
   },
   {
+    "label": "UOM",
+    "align": "left",
+    "sortable": false,
+    "name": "measurement_id",
+    "field": "measurement_id"
+  },
+  {
     "label": "Action",
     "align": "right",
     "sortable": false,
