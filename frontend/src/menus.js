@@ -345,8 +345,8 @@ export const AppMenus = {
     "label": "UOM",
     "align": "left",
     "sortable": false,
-    "name": "measurements_name",
-    "field": "measurements_name"
+    "name": "measurements_code",
+    "field": "measurements_code"
   },
   {
     "label": "Barcode",

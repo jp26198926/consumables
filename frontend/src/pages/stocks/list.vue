@@ -86,8 +86,8 @@
                                                         <q-td  key="qty" :props="props">
                                                             {{ props.row.qty }}
                                                         </q-td>
-                                                        <q-td  key="measurements_name" :props="props">
-                                                            {{ props.row.measurements_name }}
+                                                        <q-td  key="measurements_code" :props="props">
+                                                            {{ props.row.measurements_code }}
                                                         </q-td>
                                                         <q-td  key="items_barcode" :props="props">
                                                             {{ props.row.items_barcode }}
