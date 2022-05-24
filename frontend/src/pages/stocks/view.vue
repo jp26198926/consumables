@@ -64,6 +64,13 @@
                                                 <q-separator></q-separator>
                                                 <q-item>
                                                     <q-item-section>
+                                                        <q-item-label caption>Expiry: </q-item-label>
+                                                        <q-item-label class="text-bold">{{ item.expiry }}</q-item-label>
+                                                    </q-item-section>
+                                                </q-item>
+                                                <q-separator></q-separator>
+                                                <q-item>
+                                                    <q-item-section>
                                                         <q-item-label caption>Remarks: </q-item-label>
                                                         <q-item-label class="text-bold">{{ item.remarks }}</q-item-label>
                                                     </q-item-section>

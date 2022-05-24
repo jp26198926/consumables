@@ -118,6 +118,26 @@
                                                     <div class="col-12">
                                                         <div class="row">
                                                             <div class="col-sm-3 col-12">
+                                                                Expiry 
+                                                            </div>
+                                                            <div class="col-sm-9 col-12">
+                                                                <ValidationProvider :rules="{}" name="Expiry" v-slot="{ errors, invalid, validated }">
+                                                                    <q-input outlined dense  v-model.trim="formData.expiry" label="Expiry" :error="invalid && validated" :error-message="errors[0]"    >
+                                                                    <template v-slot:append>
+                                                                        <q-icon name="date_range" class="cursor-pointer">
+                                                                        <q-popup-proxy ref="ctrlexpiry" transition-show="scale" transition-hide="scale">
+                                                                        <q-date   mask="YYYY-MM-DD" v-model="formData.expiry" @input="$refs.ctrlexpiry.hide()" />
+                                                                        </q-popup-proxy>
+                                                                        </q-icon>
+                                                                    </template>
+                                                                    </q-input>      
+                                                                </ValidationProvider>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-12">
                                                                 Remarks 
                                                             </div>
                                                             <div class="col-sm-9 col-12">
@@ -187,9 +207,9 @@
 		data() {
             return {
 				formData: {
-					action_id: "", date: "", item_id: "", qty: "", remarks: "", 
+					action_id: "", date: "", item_id: "", qty: "", expiry: "", remarks: "", 
 				},
-				datePicker:false,
+				datePicker:false,expiryPicker:false,
         	}
 		},
 		computed: {
@@ -243,7 +263,7 @@
             },
 			resetForm (){
 				//reset form fields value
-				this.formData = {action_id: "", date: "", item_id: "", qty: "", remarks: "", };
+				this.formData = {action_id: "", date: "", item_id: "", qty: "", expiry: "", remarks: "", };
 				requestAnimationFrame(() => {
 					this.$refs.observer.reset();
 				});

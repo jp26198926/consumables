@@ -14,7 +14,8 @@ module.exports =  {
 				{header: "Qty", key: "qty"},
 				{header: "Barcode", key: "items_barcode"},
 				{header: "Item", key: "items_name"},
-				{header: "Remarks", key: "remarks"}
+				{header: "Remarks", key: "remarks"},
+				{header: "Expiry", key: "expiry"}
 			]
 			let filename = "stockslist-report";
 			if(format == "excel"){

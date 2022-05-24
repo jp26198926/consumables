@@ -13,7 +13,8 @@ class Stocks extends BaseModel {
 				action_id: {name: 'action_id', type:Sequelize.INTEGER},
 				date_created: {name: 'date_created', type:Sequelize.DATE},
 				date_updated: {name: 'date_updated', type:Sequelize.DATE},
-				date_deleted: {name: 'date_deleted', type:Sequelize.DATE}
+				date_deleted: {name: 'date_deleted', type:Sequelize.DATE},
+				expiry: {name: 'expiry', type:Sequelize.DATEONLY}
 			}, 
 			{ 
 				sequelize,
@@ -37,6 +38,7 @@ class Stocks extends BaseModel {
 			sequelize.literal('stocks.qty AS qty'), 
 			sequelize.literal("items.barcode AS items_barcode"), 
 			sequelize.literal("items.name AS items_name"), 
+			sequelize.literal('stocks.expiry AS expiry'), 
 			sequelize.literal('stocks.remarks AS remarks'), 
 			sequelize.literal("action_types.id AS action_types_id"), 
 			sequelize.literal("items.id AS items_id")
@@ -52,6 +54,7 @@ class Stocks extends BaseModel {
 			sequelize.literal('stocks.qty AS qty'), 
 			sequelize.literal("items.barcode AS items_barcode"), 
 			sequelize.literal("items.name AS items_name"), 
+			sequelize.literal('stocks.expiry AS expiry'), 
 			sequelize.literal('stocks.remarks AS remarks'), 
 			sequelize.literal("action_types.id AS action_types_id"), 
 			sequelize.literal("items.id AS items_id")
@@ -67,6 +70,7 @@ class Stocks extends BaseModel {
 			sequelize.literal('stocks.qty AS qty'), 
 			sequelize.literal("items.barcode AS items_barcode"), 
 			sequelize.literal("items.name AS items_name"), 
+			sequelize.literal('stocks.expiry AS expiry'), 
 			sequelize.literal('stocks.remarks AS remarks'), 
 			sequelize.literal("action_types.id AS action_types_id"), 
 			sequelize.literal("items.id AS items_id"), 
@@ -84,6 +88,7 @@ class Stocks extends BaseModel {
 			sequelize.literal('stocks.qty AS qty'), 
 			sequelize.literal("items.barcode AS items_barcode"), 
 			sequelize.literal("items.name AS items_name"), 
+			sequelize.literal('stocks.expiry AS expiry'), 
 			sequelize.literal('stocks.remarks AS remarks'), 
 			sequelize.literal("action_types.id AS action_types_id"), 
 			sequelize.literal("items.id AS items_id"), 
@@ -100,6 +105,7 @@ class Stocks extends BaseModel {
 			'date', 
 			'item_id', 
 			'qty', 
+			'expiry', 
 			'remarks'
 		];
 	}

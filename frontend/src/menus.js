@@ -316,6 +316,13 @@ export const AppMenus = {
     "field": "items_name"
   },
   {
+    "label": "Expiry",
+    "align": "left",
+    "sortable": false,
+    "name": "expiry",
+    "field": "expiry"
+  },
+  {
     "label": "Remarks",
     "align": "left",
     "sortable": false,

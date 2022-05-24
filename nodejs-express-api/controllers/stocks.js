@@ -183,6 +183,7 @@ router.post('/add/' ,
 		body('date').not().isEmpty(),
 		body('item_id').not().isEmpty().isNumeric(),
 		body('qty').not().isEmpty().isNumeric(),
+		body('expiry').optional(),
 		body('remarks').optional(),
 	]
 , async function (req, res) {
@@ -260,6 +261,7 @@ router.post('/edit/:recid' ,
 		body('date').optional({nullable: true}).not().isEmpty(),
 		body('item_id').optional({nullable: true}).not().isEmpty().isNumeric(),
 		body('qty').optional({nullable: true}).not().isEmpty().isNumeric(),
+		body('expiry').optional(),
 		body('remarks').optional(),
 	]
 , async (req, res) => {

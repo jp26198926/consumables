@@ -92,6 +92,9 @@
                                                         <q-td  key="items_name" :props="props">
                                                             {{ props.row.items_name }}
                                                         </q-td>
+                                                        <q-td  key="expiry" :props="props">
+                                                            {{ props.row.expiry }}
+                                                        </q-td>
                                                         <q-td  key="remarks" :props="props">
                                                             {{ props.row.remarks }}
                                                         </q-td>
@@ -126,7 +129,7 @@
                                                 <!-- End of Table Layout-->
                                                 <template v-slot:bottom-row>
                                                     <q-tr>
-                                                        <q-td></q-td><q-td></q-td><q-td>Total Qty : <q-chip square class="text-bold">{{totalQty}}</q-chip></q-td><q-td></q-td><q-td></q-td><q-td></q-td><q-td></q-td>
+                                                        <q-td></q-td><q-td></q-td><q-td>Total Qty : <q-chip square class="text-bold">{{totalQty}}</q-chip></q-td><q-td></q-td><q-td></q-td><q-td></q-td><q-td></q-td><q-td></q-td>
                                                     </q-tr>
                                                 </template>
                                                 </q-table>
