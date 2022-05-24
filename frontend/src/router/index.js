@@ -107,6 +107,50 @@ let routes = [
 			},
 		
 
+//dv_created routes
+			{ 
+				path: '/dv_created/', 
+				name: 'dv_createdlist', 
+				component: () => import('pages/dv_created/list.vue'), 
+				props: true
+			},
+			{ 
+				path: '/dv_created/(list|index)/:fieldName?/:fieldValue?', 
+				name: 'dv_createdlistfilter', 
+				component: () => import('pages/dv_created/list.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/dv_created/view/:id', 
+				name: 'dv_createdview', 
+				component: () => import('pages/dv_created/view.vue'), 
+				props: true
+			},
+	
+
+//dv_updated routes
+			{ 
+				path: '/dv_updated/', 
+				name: 'dv_updatedlist', 
+				component: () => import('pages/dv_updated/list.vue'), 
+				props: true
+			},
+			{ 
+				path: '/dv_updated/(list|index)/:fieldName?/:fieldValue?', 
+				name: 'dv_updatedlistfilter', 
+				component: () => import('pages/dv_updated/list.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/dv_updated/view/:id', 
+				name: 'dv_updatedview', 
+				component: () => import('pages/dv_updated/view.vue'), 
+				props: true
+			},
+	
+
 //items routes
 			{ 
 				path: '/items/', 

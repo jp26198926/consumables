@@ -91,6 +91,22 @@ export const AppMenus = {
     "iconcolor": "",
     "target": "",
     "submenu": []
+  },
+  {
+    "path": "/dv_created",
+    "label": "Dv Created",
+    "icon": "extension",
+    "iconcolor": "",
+    "target": "",
+    "submenu": []
+  },
+  {
+    "path": "/dv_updated",
+    "label": "Dv Updated",
+    "icon": "extension",
+    "iconcolor": "",
+    "target": "",
+    "submenu": []
   }
 ],
 	Action_TypesTableHeaderItems: [
@@ -181,6 +197,29 @@ export const AppMenus = {
     "sortable": false,
     "name": "department",
     "field": "department"
+  },
+  {
+    "label": "Action",
+    "align": "right",
+    "sortable": false,
+    "name": "btnactions",
+    "field": ""
+  }
+],
+	Dv_CreatedTableHeaderItems: [
+  {
+    "label": "Id",
+    "align": "left",
+    "sortable": false,
+    "name": "id",
+    "field": "id"
+  },
+  {
+    "label": "Name",
+    "align": "left",
+    "sortable": false,
+    "name": "name",
+    "field": "name"
   },
   {
     "label": "Action",
