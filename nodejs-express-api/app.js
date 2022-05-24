@@ -83,6 +83,7 @@ app.use('/api', async (req, res, next) => {
 app.use('/api/account', require('./controllers/account.js'));
 app.use('/api/action_types', require('./controllers/action_types.js'))
 app.use('/api/audits', require('./controllers/audits.js'))
+app.use('/api/departments', require('./controllers/departments.js'))
 app.use('/api/items', require('./controllers/items.js'))
 app.use('/api/measurements', require('./controllers/measurements.js'))
 app.use('/api/permissions', require('./controllers/permissions.js'))

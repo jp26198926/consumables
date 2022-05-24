@@ -14,7 +14,10 @@ class Stocks extends BaseModel {
 				date_created: {name: 'date_created', type:Sequelize.DATE},
 				date_updated: {name: 'date_updated', type:Sequelize.DATE},
 				date_deleted: {name: 'date_deleted', type:Sequelize.DATE},
-				expiry: {name: 'expiry', type:Sequelize.DATEONLY}
+				expiry: {name: 'expiry', type:Sequelize.DATEONLY},
+				created_by: {name: 'created_by', type:Sequelize.INTEGER},
+				updated_by: {name: 'updated_by', type:Sequelize.INTEGER},
+				department_id: {name: 'department_id', type:Sequelize.INTEGER}
 			}, 
 			{ 
 				sequelize,
@@ -41,7 +44,8 @@ class Stocks extends BaseModel {
 			sequelize.literal('stocks.expiry AS expiry'), 
 			sequelize.literal('stocks.remarks AS remarks'), 
 			sequelize.literal("action_types.id AS action_types_id"), 
-			sequelize.literal("items.id AS items_id")
+			sequelize.literal("items.id AS items_id"), 
+			sequelize.literal('stocks.department_id AS department_id')
 		];
 	}
 
@@ -57,7 +61,8 @@ class Stocks extends BaseModel {
 			sequelize.literal('stocks.expiry AS expiry'), 
 			sequelize.literal('stocks.remarks AS remarks'), 
 			sequelize.literal("action_types.id AS action_types_id"), 
-			sequelize.literal("items.id AS items_id")
+			sequelize.literal("items.id AS items_id"), 
+			sequelize.literal('stocks.department_id AS department_id')
 		];
 	}
 
@@ -75,7 +80,10 @@ class Stocks extends BaseModel {
 			sequelize.literal("action_types.id AS action_types_id"), 
 			sequelize.literal("items.id AS items_id"), 
 			sequelize.literal('stocks.date_created AS date_created'), 
-			sequelize.literal('stocks.date_updated AS date_updated')
+			sequelize.literal('stocks.date_updated AS date_updated'), 
+			sequelize.literal('stocks.created_by AS created_by'), 
+			sequelize.literal('stocks.updated_by AS updated_by'), 
+			sequelize.literal('stocks.department_id AS department_id')
 		];
 	}
 
@@ -93,7 +101,10 @@ class Stocks extends BaseModel {
 			sequelize.literal("action_types.id AS action_types_id"), 
 			sequelize.literal("items.id AS items_id"), 
 			sequelize.literal('stocks.date_created AS date_created'), 
-			sequelize.literal('stocks.date_updated AS date_updated')
+			sequelize.literal('stocks.date_updated AS date_updated'), 
+			sequelize.literal('stocks.created_by AS created_by'), 
+			sequelize.literal('stocks.updated_by AS updated_by'), 
+			sequelize.literal('stocks.department_id AS department_id')
 		];
 	}
 
@@ -106,7 +117,9 @@ class Stocks extends BaseModel {
 			'item_id', 
 			'qty', 
 			'expiry', 
-			'remarks'
+			'remarks', 
+			'updated_by', 
+			'department_id'
 		];
 	}
 

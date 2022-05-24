@@ -83,6 +83,14 @@ export const AppMenus = {
     "iconcolor": "",
     "target": "",
     "submenu": []
+  },
+  {
+    "path": "/departments",
+    "label": "Departments",
+    "icon": "extension",
+    "iconcolor": "",
+    "target": "",
+    "submenu": []
   }
 ],
 	Action_TypesTableHeaderItems: [
@@ -157,6 +165,22 @@ export const AppMenus = {
     "sortable": false,
     "name": "users_name",
     "field": "users_name"
+  },
+  {
+    "label": "Action",
+    "align": "right",
+    "sortable": false,
+    "name": "btnactions",
+    "field": ""
+  }
+],
+	DepartmentsTableHeaderItems: [
+  {
+    "label": "Department",
+    "align": "left",
+    "sortable": false,
+    "name": "department",
+    "field": "department"
   },
   {
     "label": "Action",
@@ -328,6 +352,13 @@ export const AppMenus = {
     "sortable": false,
     "name": "remarks",
     "field": "remarks"
+  },
+  {
+    "label": "Department Id",
+    "align": "left",
+    "sortable": false,
+    "name": "department_id",
+    "field": "department_id"
   },
   {
     "label": "Action",

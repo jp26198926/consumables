@@ -148,6 +148,20 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-12">
+                                                        <div class="row">
+                                                            <div class="col-sm-3 col-12">
+                                                                Department Id *
+                                                            </div>
+                                                            <div class="col-sm-9 col-12">
+                                                                <ValidationProvider :rules="{required:true}" name="Department Id" v-slot="{ errors, invalid, validated }">
+                                                                    <q-input outlined dense  ref="ctrldepartment_id" v-model.trim="formData.department_id"  label="Department Id" type="number" placeholder="Enter Department Id"   step="any"    
+                                                                    class="" :error="invalid && validated" :error-message="errors[0]">
+                                                                    </q-input>
+                                                                </ValidationProvider>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <!--[form-content-end]-->
                                                 <div v-if="showSubmitButton" class="text-center q-my-md">
@@ -207,7 +221,7 @@
 		data() {
             return {
 				formData: {
-					action_id: "", date: "", item_id: "", qty: "", expiry: "", remarks: "", 
+					action_id: "", date: "", item_id: "", qty: "", expiry: "", remarks: "", department_id: "0", 
 				},
 				datePicker:false,expiryPicker:false,
         	}
@@ -263,7 +277,7 @@
             },
 			resetForm (){
 				//reset form fields value
-				this.formData = {action_id: "", date: "", item_id: "", qty: "", expiry: "", remarks: "", };
+				this.formData = {action_id: "", date: "", item_id: "", qty: "", expiry: "", remarks: "", department_id: "0", };
 				requestAnimationFrame(() => {
 					this.$refs.observer.reset();
 				});

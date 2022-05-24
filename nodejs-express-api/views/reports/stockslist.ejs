@@ -10,6 +10,9 @@
             <th>Item</th>
             <th>Remarks</th>
             <th>Expiry</th>
+            <th>Created By</th>
+            <th>Updated By</th>
+            <th>Department Id</th>
         </tr>
     </thead>
     <tbody>
@@ -22,6 +25,9 @@
             <td><%= record.items_name %></td>
             <td><%= record.remarks %></td>
             <td><%= record.expiry %></td>
+            <td><%= record.created_by %></td>
+            <td><%= record.updated_by %></td>
+            <td><%= record.department_id %></td>
         </tr>
         <% }); %>
     </tbody>

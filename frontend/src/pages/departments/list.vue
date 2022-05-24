@@ -8,16 +8,16 @@
                             <div class="" >
                                 <div class="row  items-center q-col-gutter-sm q-px-sm">
                                     <div class="col">
-                                        <div class="text-h6 text-primary">Stocks</div>
+                                        <div class="text-h6 text-primary">Departments</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-auto col-12 " >
-                            <template v-if="$can.view('/stocks/add')">
-                                <q-btn       :rounded="false"  size=""  color="primary" no-caps  unelevated   :to="`/stocks/add`" class="full-width" >
+                            <template v-if="$can.view('/departments/add')">
+                                <q-btn       :rounded="false"  size=""  color="primary" no-caps  unelevated   :to="`/departments/add`" class="full-width" >
                                     <q-icon name="add"></q-icon>                                
-                                    Add New Stocks 
+                                    Add New Departments 
                                 </q-btn>
                             </template>
                         </div>
@@ -45,7 +45,7 @@
                             <div >
                                 <template v-if="showBreadcrumbs && $route.query.tag">
                                     <q-breadcrumbs class="q-pa-md">
-                                        <q-breadcrumbs-el icon="arrow_back" class="text-capitalize" :label="$route.query.tag" to="/stocks"></q-breadcrumbs-el>
+                                        <q-breadcrumbs-el icon="arrow_back" class="text-capitalize" :label="$route.query.tag" to="/departments"></q-breadcrumbs-el>
                                         <q-breadcrumbs-el :label="$route.query.label"></q-breadcrumbs-el>
                                     </q-breadcrumbs>
                                 </template>
@@ -59,7 +59,7 @@
                                                 :flat="true"
                                                 table-header-class="text-h4 "
                                                 :bordered="false"
-                                                :columns="$menus.StocksTableHeaderItems" 
+                                                :columns="$menus.DepartmentsTableHeaderItems" 
                                                 :data="records"
                                                 binary-state-sort
                                                 separator="horizontal"
@@ -77,44 +77,31 @@
                                                         <q-td auto-width>
                                                             <q-checkbox dense v-model="props.selected"></q-checkbox>
                                                         </q-td>
-                                                        <q-td  key="action_types_action_type" :props="props">
-                                                            {{ props.row.action_types_action_type }}
-                                                        </q-td>
-                                                        <q-td  key="date" :props="props">
-                                                            {{ props.row.date }}
-                                                        </q-td>
-                                                        <q-td  key="qty" :props="props">
-                                                            {{ props.row.qty }}
-                                                        </q-td>
-                                                        <q-td  key="items_barcode" :props="props">
-                                                            {{ props.row.items_barcode }}
-                                                        </q-td>
-                                                        <q-td  key="items_name" :props="props">
-                                                            {{ props.row.items_name }}
-                                                        </q-td>
-                                                        <q-td  key="expiry" :props="props">
-                                                            {{ props.row.expiry }}
-                                                        </q-td>
-                                                        <q-td  key="remarks" :props="props">
-                                                            {{ props.row.remarks }}
-                                                        </q-td>
-                                                        <q-td  key="department_id" :props="props">
-                                                            {{ props.row.department_id }}
+                                                        <q-td  key="department" :props="props">
+                                                            {{ props.row.department }}
                                                         </q-td>
                                                         <q-td key="btnactions" :props="props">
                                                             <div class="row q-col-gutter-xs justify-end">
                                                                 <q-btn icon="menu" padding="xs" round flat color="grey">
                                                                     <q-menu auto-close transition-show="flip-right"  transition-hide="flip-left" self="center middle" anchor="center middle">
                                                                         <q-list dense rounded nav>
-                                                                            <template v-if="$can.view('stocks/view')">
-                                                                                <q-item link clickable v-ripple :to="`/stocks/view/${props.row.id}`">
+                                                                            <template v-if="$can.view('departments/view')">
+                                                                                <q-item link clickable v-ripple :to="`/departments/view/${props.row.id}`">
                                                                                     <q-item-section>
                                                                                         <q-icon color="primary"  size="sm" name="visibility"></q-icon>
                                                                                     </q-item-section>
                                                                                     <q-item-section>View</q-item-section>
                                                                                 </q-item>
                                                                             </template>
-                                                                            <template v-if="$can.view('stocks/delete')">
+                                                                            <template v-if="$can.view('departments/edit')">
+                                                                                <q-item link clickable v-ripple :to="`/departments/edit/${props.row.id}`">
+                                                                                    <q-item-section>
+                                                                                        <q-icon color="positive"  size="sm" name="edit"></q-icon>
+                                                                                    </q-item-section>
+                                                                                    <q-item-section>Edit</q-item-section>
+                                                                                </q-item>
+                                                                            </template>
+                                                                            <template v-if="$can.view('departments/delete')">
                                                                                 <q-item link clickable v-ripple @click="deleteItem(props.row.id)">
                                                                                     <q-item-section>
                                                                                         <q-icon color="negative"  size="sm" name="clear"></q-icon>
@@ -130,11 +117,6 @@
                                                     </q-tr>
                                                 </template>
                                                 <!-- End of Table Layout-->
-                                                <template v-slot:bottom-row>
-                                                    <q-tr>
-                                                        <q-td></q-td><q-td></q-td><q-td>Total Qty : <q-chip square class="text-bold">{{totalQty}}</q-chip></q-td><q-td></q-td><q-td></q-td><q-td></q-td><q-td></q-td><q-td></q-td><q-td></q-td>
-                                                    </q-tr>
-                                                </template>
                                                 </q-table>
                                             </template>
                                             <!-- page loading indicator template -->
@@ -160,15 +142,11 @@
                                                     <div class="q-pa-sm" v-show="!loading">
                                                         <div class="row justify-between">
                                                             <div class="row q-col-gutter-md">
-                                                                <template v-if="$can.view('stocks/delete')">
+                                                                <template v-if="$can.view('departments/delete')">
                                                                     <div>
                                                                         <q-btn    :rounded="false"  no-caps  unelevated   color="negative" padding="xs" @click="deleteItem(selectedItems)" v-if="selectedItems.length" icon="delete_sweep" class="q-my-xs" title="Delete Selected"></q-btn>
                                                                     </div>
                                                                 </template>
-                                                                <div>
-                                                                    <q-btn v-if="exportButton"    :rounded="false"  no-caps  unelevated   color="accent" class="q-my-xs" padding="xs" @click="openExportPage()" label="Export"  title="Export" icon="print">
-                                                                    </q-btn>
-                                                                </div>
                                                             </div>
                                                             <div v-if="paginate && totalRecords > 0" class="row q-col-gutter-md justify-center">
                                                                 <div class="col-auto">
@@ -198,7 +176,7 @@
 	import { ListPageMixin } from "../../mixins/listpage.js";
 	import { mapActions, mapGetters, mapState } from "vuex";
 	export default {
-		name: 'listStocksPage',
+		name: 'listDepartmentsPage',
 		components: {
         },
 		mixins: [PageMixin, ListPageMixin ],
@@ -209,15 +187,15 @@
 			},
 			pageName : {
 				type : String,
-				default : 'stocks',
+				default : 'departments',
 			},
 			routeName : {
 				type : String,
-				default : 'stockslist',
+				default : 'departmentslist',
 			},
 			apiPath : {
 				type : String,
-				default : 'stocks/index',
+				default : 'departments/index',
 			},
 			multiCheckbox: {
 				type: Boolean,
@@ -226,10 +204,6 @@
 			msgBeforeDelete: {
 				type: String,
 				default: "Are you sure you want to delete this record?",
-			},
-			exportFormats: {
-				type: Array,
-				default: function () { return ['pdf','excel','csv'] },
 			},
 		},
 		data() {
@@ -240,27 +214,24 @@
 			pageTitle:{
 				get: function () {
 					//set browser page title
-					return "Stocks"
+					return "Departments"
 				}
 			},
 			records: {
 				get: function () {
-					return this.$store.getters["stocks/records"];
+					return this.$store.getters["departments/records"];
 				},
 				set: function (value) {
-					this.$store.commit("stocks/setRecords", value);
+					this.$store.commit("departments/setRecords", value);
 				},
 			},
 			currentRecord: {
 				get: function () {
-					return this.$store.getters["stocks/currentRecord"];
+					return this.$store.getters["departments/currentRecord"];
 				},
 				set: function (value) {
-					this.$store.commit("stocks/setCurrentRecord", value);
+					this.$store.commit("departments/setCurrentRecord", value);
 				},
-			},
-			totalQty: function(){
-				return this.records.sum("qty"); 
 			},
 		},
 		meta () {
@@ -280,7 +251,7 @@
 			},
 		},
 		methods: {
-			...mapActions("stocks", ["fetchRecords", "deleteRecord"]),
+			...mapActions("departments", ["fetchRecords", "deleteRecord"]),
 			load: function() {
 				if (!this.loading) {
 					this.loading = true;

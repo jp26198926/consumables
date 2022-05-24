@@ -1,5 +1,5 @@
-/** Express router providing Stocks related routes
- * @module routers/Stocks
+/** Express router providing Departments related routes
+ * @module routers/Departments
  * @requires express
  * @requires config - app config
  * @requires utils - app utils functions
@@ -45,11 +45,11 @@ const { body, validationResult } = require('express-validator');
 
 
 /**
- * Stocks models
+ * Departments models
  * @const
  */
 const models = require('../models/index.js');
-const Stocks = models.Stocks;
+const Departments = models.Departments;
 
 
 const sequelize = models.sequelize; // sequelize functions and operations
@@ -59,14 +59,11 @@ const Op = models.Op; // sequelize query operators
 const AuditLog = require('../helpers/auditlog.js');
 let oldValues = null;
 let newValues = null;
-const StocksListExport = require('../exports/StocksList')
-Stocks.belongsTo(models.Action_Types, {foreignKey: 'action_id', as: 'action_types' });
-Stocks.belongsTo(models.Items, {foreignKey: 'item_id', as: 'items' });
 
 
 /**
- * Route to list stocks records
- * @route {GET} /stocks/index/{fieldname}/{fieldvalue}
+ * Route to list departments records
+ * @route {GET} /departments/index/{fieldname}/{fieldvalue}
  * @param {array} path - Array of express paths
  * @param {callback} middleware - Express middleware.
  */
@@ -84,23 +81,9 @@ router.get(['/', '/index/:fieldname?/:fieldvalue?'], async (req, res) => {
 			];
 			replacements.fieldvalue = fieldvalue;
 		}
-		let joinTables = []; // hold list of join tables
-		joinTables.push({
-			model: models.Action_Types,
-			required: false,
-			as: 'action_types',
-			attributes: [], //already set on the query attributes using sequelize literal
-		})
-		joinTables.push({
-			model: models.Items,
-			required: false,
-			as: 'items',
-			attributes: [], //already set on the query attributes using sequelize literal
-		})
-		query['include'] = joinTables;
 		let search = req.query.search;
 		if(search){
-			let searchFields = Stocks.searchFields();
+			let searchFields = Departments.searchFields();
 			where[Op.or] = searchFields;
 			replacements.search = `%${search}%`;
 		}
@@ -109,16 +92,11 @@ router.get(['/', '/index/:fieldname?/:fieldvalue?'], async (req, res) => {
 		query.raw = true;
 		query.where = where;
 		query.replacements = replacements;
-		query.order = Stocks.getOrderBy(req);
-		if(req.query.export){
-			query.attributes = Stocks.exportListFields(sequelize);
-			let records = await Stocks.findAll(query);
-			return StocksListExport.export(records, req, res)
-		}
-		query.attributes = Stocks.listFields();
+		query.order = Departments.getOrderBy(req);
+		query.attributes = Departments.listFields();
 		let page = parseInt(req.query.page) || 1;
 		let limit = parseInt(req.query.limit) || 20;
-		let result = await Stocks.paginate(query, page, limit);
+		let result = await Departments.paginate(query, page, limit);
 		return res.ok(result);
 	}
 	catch(err) {
@@ -128,8 +106,8 @@ router.get(['/', '/index/:fieldname?/:fieldvalue?'], async (req, res) => {
 
 
 /**
- * Route to view Stocks record
- * @route {GET} /stocks/view/{recid}
+ * Route to view Departments record
+ * @route {GET} /departments/view/{recid}
  * @param {array} path - Array of express paths
  * @param {callback} middleware - Express middleware.
  */
@@ -138,28 +116,11 @@ router.get(['/view/:recid'], async (req, res) => {
 		let recid = req.params.recid || null;
 		let query = {}
 		let where = {}
-		let joinTables = []; // hold list of join tables
-		joinTables.push({
-			model: models.Action_Types,
-			required: false,
-			as: 'action_types',
-			attributes: [], //already set on the query attributes using sequelize literal
-		})
-		joinTables.push({
-			model: models.Items,
-			required: false,
-			as: 'items',
-			attributes: [], //already set on the query attributes using sequelize literal
-		})
-		query['include'] = joinTables;
-		where[Op.and] = sequelize.literal('stocks.id = :recid');
-		query.replacements = {
-			recid
-		}
+		where['id'] = recid;
 		query.raw = true;
 		query.where = where;
-		query.attributes = Stocks.viewFields();
-		let record = await Stocks.findOne(query);
+		query.attributes = Departments.viewFields();
+		let record = await Departments.findOne(query);
 		if(!record){
 			return res.notFound();
 		}
@@ -172,20 +133,14 @@ router.get(['/view/:recid'], async (req, res) => {
 
 
 /**
- * Route to insert Stocks record
- * @route {POST} /stocks/add
+ * Route to insert Departments record
+ * @route {POST} /departments/add
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware.
  */
 router.post('/add/' , 
 	[
-		body('action_id').optional().isNumeric(),
-		body('date').not().isEmpty(),
-		body('item_id').not().isEmpty().isNumeric(),
-		body('qty').not().isEmpty().isNumeric(),
-		body('expiry').optional(),
-		body('remarks').optional(),
-		body('department_id').not().isEmpty().isNumeric(),
+		body('department').not().isEmpty(),
 	]
 , async function (req, res) {
 	try{
@@ -195,38 +150,22 @@ router.post('/add/' ,
 			return res.badRequest(errorMsg);
 		}
 		let modeldata = req.body;
-		modeldata['created_by'] = req.user.id;
-		await beforeAdd(modeldata, req);
 		
-		//save Stocks record
-		let record = await Stocks.create(modeldata);
+		//save Departments record
+		let record = await Departments.create(modeldata);
 		//await record.reload(); //reload the record from database
 		let recid =  record['id'];
-		newValues = JSON.stringify(record); 
-		AuditLog.writeToLog(req, {recid, oldValues, newValues});
 		
 		return res.ok(record);
 	} catch(err){
 		return res.serverError(err);
 	}
 });
-/**
-    * Before create new record
-    * @param {object} postdata // validated form data used to create new record
-    */
-async function beforeAdd(postdata, req){
-    //enter statement here
-    //check if action is release, 1-receive, 2-release, 3-adjustment
-    if (postdata.action_id == 2){
-        //get absolute value of qty then add negative sign
-        postdata.qty = -(Math.abs(Number(postdata.qty)));
-    }
-}
 
 
 /**
- * Route to get  Stocks record for edit
- * @route {GET} /stocks/edit/{recid}
+ * Route to get  Departments record for edit
+ * @route {GET} /departments/edit/{recid}
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware.
  */
@@ -238,8 +177,8 @@ router.get('/edit/:recid', async (req, res) => {
 		where['id'] = recid;
 		query.raw = true;
 		query.where = where;
-		query.attributes = Stocks.editFields();
-		let record = await Stocks.findOne(query);
+		query.attributes = Departments.editFields();
+		let record = await Departments.findOne(query);
 		if(!record){
 			return res.notFound();
 		}
@@ -252,20 +191,14 @@ router.get('/edit/:recid', async (req, res) => {
 
 
 /**
- * Route to update  Stocks record
- * @route {POST} /stocks/edit/{recid}
+ * Route to update  Departments record
+ * @route {POST} /departments/edit/{recid}
  * @param {string} path - Express path
  * @param {callback} middleware - Express middleware.
  */
 router.post('/edit/:recid' , 
 	[
-		body('action_id').optional().isNumeric(),
-		body('date').optional({nullable: true}).not().isEmpty(),
-		body('item_id').optional({nullable: true}).not().isEmpty().isNumeric(),
-		body('qty').optional({nullable: true}).not().isEmpty().isNumeric(),
-		body('expiry').optional(),
-		body('remarks').optional(),
-		body('department_id').optional({nullable: true}).not().isEmpty().isNumeric(),
+		body('department').optional({nullable: true}).not().isEmpty(),
 	]
 , async (req, res) => {
 	try{
@@ -281,16 +214,12 @@ router.post('/edit/:recid' ,
 		where['id'] = recid;
 		query.raw = true;
 		query.where = where;
-		query.attributes = Stocks.editFields();
-		let record = await Stocks.findOne(query);
+		query.attributes = Departments.editFields();
+		let record = await Departments.findOne(query);
 		if(!record){
 			return res.notFound();
 		}
-		oldValues = JSON.stringify(record); //for audit trail
-		await Stocks.update(modeldata, {where: where});
-		record = await Stocks.findOne(query);//for audit trail
-		newValues = JSON.stringify(record); 
-		AuditLog.writeToLog(req, {recid, oldValues, newValues});
+		await Departments.update(modeldata, {where: where});
 		return res.ok(modeldata);
 	}
 	catch(err){
@@ -300,9 +229,9 @@ router.post('/edit/:recid' ,
 
 
 /**
- * Route to delete Stocks record by table primary key
+ * Route to delete Departments record by table primary key
  * Multi delete supported by recid separated by comma(,)
- * @route {GET} /stocks/delete/{recid}
+ * @route {GET} /departments/delete/{recid}
  * @param {array} path - Array of express paths
  * @param {callback} middleware - Express middleware.
  */
@@ -315,13 +244,11 @@ router.get('/delete/:recid', async (req, res) => {
 		where['id'] = recid;
 		query.raw = true;
 		query.where = where;
-		let records = await Stocks.findAll(query);
+		let records = await Departments.findAll(query);
 		records.forEach(async (record) => { 
 			//perform action on each record before delete
-			oldValues = JSON.stringify(record); //for audit trail
-			AuditLog.writeToLog(req, { recid: record['id'], oldValues });
 		});
-		await Stocks.destroy(query);
+		await Departments.destroy(query);
 		return res.ok(recid);
 	}
 	catch(err){

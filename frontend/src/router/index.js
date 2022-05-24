@@ -71,6 +71,42 @@ let routes = [
 			},
 	
 
+//departments routes
+			{ 
+				path: '/departments/', 
+				name: 'departmentslist', 
+				component: () => import('pages/departments/list.vue'), 
+				props: true
+			},
+			{ 
+				path: '/departments/(list|index)/:fieldName?/:fieldValue?', 
+				name: 'departmentslistfilter', 
+				component: () => import('pages/departments/list.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/departments/view/:id', 
+				name: 'departmentsview', 
+				component: () => import('pages/departments/view.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/departments/add', 
+				name: 'departmentsadd', 
+				component: () => import('pages/departments/add.vue'), 
+				props: true
+			},
+	
+			{ 
+				path: '/departments/edit/:id', 
+				name: 'departmentsedit', 
+				component: () => import('pages/departments/edit.vue'), 
+				props: true
+			},
+		
+
 //items routes
 			{ 
 				path: '/items/', 
